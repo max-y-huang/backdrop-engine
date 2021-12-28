@@ -1,7 +1,4 @@
-#include "core/EventListener.hh"
-#include "core/Game.hh"
-#include "core/Observer.hh"
-#include "core/objects/Object.hh"
+#include "engine/engine.hh"
 
 using namespace PonchoEngine;
 

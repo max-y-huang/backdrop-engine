@@ -6,8 +6,8 @@
 #include <queue>
 #include <utility>
 
-#include "../Observer.hh"
 #include "../controllers/Clock.hh"
+#include "../core/Observer.hh"
 
 using std::pair;
 using std::priority_queue;

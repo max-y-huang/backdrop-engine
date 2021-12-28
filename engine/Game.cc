@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-#include "Observer.hh"
 #include "controllers/Clock.hh"
+#include "core/Observer.hh"
 #include "views/EraseView.hh"
 #include "views/GameView.hh"
 #include "views/RefreshView.hh"

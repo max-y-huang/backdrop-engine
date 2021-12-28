@@ -4,7 +4,7 @@
 #include <SFML/System.hpp>
 #include <memory>
 
-#include "../Observer.hh"
+#include "../core/Observer.hh"
 
 namespace PonchoEngine {
 
