@@ -13,7 +13,7 @@ using std::function;
 using std::shared_ptr;
 using std::vector;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 class Object : public Observer {
  public:
@@ -34,6 +34,6 @@ class Object : public Observer {
   void removeEventListener(int id);
 };
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop
 
 #endif

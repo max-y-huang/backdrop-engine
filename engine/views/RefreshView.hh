@@ -7,7 +7,7 @@
 #include "../controllers/Clock.hh"
 #include "View.hh"
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 class RefreshView final : public View {
   void render(shared_ptr<Clock::State> state);
@@ -16,6 +16,6 @@ class RefreshView final : public View {
   RefreshView(shared_ptr<sf::RenderWindow> _window);
 };
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop
 
 #endif

@@ -7,7 +7,7 @@
 
 using std::vector;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 GameView::GameView(shared_ptr<sf::RenderWindow> _window, vector<shared_ptr<Object>>& objects) : objects{objects} {
   window = _window;
@@ -22,4 +22,4 @@ void GameView::render(shared_ptr<Clock::State> state) {
   }
 }
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop

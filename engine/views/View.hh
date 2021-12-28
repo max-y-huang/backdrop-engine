@@ -13,7 +13,7 @@ using std::pair;
 using std::priority_queue;
 using std::shared_ptr;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 class View : public Observer {
  protected:
@@ -25,6 +25,6 @@ class View : public Observer {
   virtual ~View() = default;
 };
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop
 
 #endif

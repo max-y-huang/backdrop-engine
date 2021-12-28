@@ -1,12 +1,13 @@
 #include "Clock.hh"
 
+#include <SFML/System.hpp>
 #include <memory>
 
 #include "../core/Observer.hh"
 
 using std::shared_ptr;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 Clock::Clock(int fps) : frameCount{0}, tickLength{1000 / fps} {
   clock.restart();
@@ -25,4 +26,4 @@ void Clock::update() {
   }
 }
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop

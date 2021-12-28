@@ -9,7 +9,7 @@
 using std::function;
 using std::shared_ptr;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 class EventListener {
   int id;
@@ -17,7 +17,8 @@ class EventListener {
 
  public:
   enum Type {
-    Tick
+    _None,
+    Tick,
   };
   static int idCounter;
   EventListener(int id, function<void(shared_ptr<Observer::State>)> func) : id{id}, func{func} {}
@@ -25,6 +26,6 @@ class EventListener {
   void run(shared_ptr<Observer::State> state);
 };
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop
 
 #endif

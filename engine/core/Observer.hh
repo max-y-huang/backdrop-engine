@@ -9,7 +9,7 @@ using std::pair;
 using std::priority_queue;
 using std::shared_ptr;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 class Observer {
  public:
@@ -34,6 +34,6 @@ class Observer {
   virtual void onNotify(shared_ptr<Observer::State> state) = 0;
 };
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop
 
 #endif

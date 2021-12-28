@@ -5,18 +5,34 @@
 #include <vector>
 
 #include "../controllers/Clock.hh"
+#include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
 
 using std::function;
 using std::shared_ptr;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 void Object::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
+  auto keyboardState = std::dynamic_pointer_cast<Keyboard::State>(state);
   if (clockState) {
     runOnTickFunctions(clockState);
+  }
+  if (keyboardState) {
+    if (keyboardState->action == Keyboard::Action::MoveUp) {
+      --position.y;
+    }
+    if (keyboardState->action == Keyboard::Action::MoveDown) {
+      ++position.y;
+    }
+    if (keyboardState->action == Keyboard::Action::MoveLeft) {
+      --position.x;
+    }
+    if (keyboardState->action == Keyboard::Action::MoveRight) {
+      ++position.x;
+    }
   }
 }
 
@@ -43,4 +59,4 @@ void Object::removeEventListener(int id) {
   }
 }
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop

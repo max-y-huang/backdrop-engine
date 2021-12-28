@@ -6,7 +6,7 @@
 
 #include "../core/Observer.hh"
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 class Clock final : public Observer::Subject {
  public:
@@ -26,6 +26,6 @@ class Clock final : public Observer::Subject {
   void update();
 };
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop
 
 #endif

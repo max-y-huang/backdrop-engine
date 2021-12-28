@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "controllers/Clock.hh"
+#include "controllers/Keyboard.hh"
 #include "objects/Object.hh"
 #include "views/EraseView.hh"
 #include "views/GameView.hh"
@@ -14,11 +15,12 @@
 using std::shared_ptr;
 using std::vector;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 class Game {
   shared_ptr<sf::RenderWindow> window;  // Leaks 5,419 bytes.
   shared_ptr<Clock> clock;
+  shared_ptr<Keyboard> keyboard;
   shared_ptr<EraseView> eraseView;
   shared_ptr<RefreshView> refreshView;
   shared_ptr<GameView> gameView;
@@ -32,6 +34,6 @@ class Game {
   void addObject(shared_ptr<Object> object);
 };
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop
 
 #endif

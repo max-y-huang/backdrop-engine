@@ -9,7 +9,7 @@
 using std::function;
 using std::shared_ptr;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 int EventListener::idCounter = 0;
 
@@ -21,4 +21,4 @@ void EventListener::run(shared_ptr<Observer::State> state) {
   func(state);
 }
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop

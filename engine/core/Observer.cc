@@ -8,7 +8,7 @@ using std::pair;
 using std::priority_queue;
 using std::shared_ptr;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 void Observer::Subject::notifyObservers(shared_ptr<Observer::State> state) {
   auto _observers = observers;
@@ -27,4 +27,4 @@ void Observer::Subject::attach(shared_ptr<Observer> observer, int priority) {
   observers.push({priority, observer});
 }
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop

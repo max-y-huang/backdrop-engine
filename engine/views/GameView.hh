@@ -11,7 +11,7 @@
 
 using std::vector;
 
-namespace PonchoEngine {
+namespace Backdrop {
 
 class GameView final : public View {
   vector<shared_ptr<Object>>& objects;
@@ -21,6 +21,6 @@ class GameView final : public View {
   GameView(shared_ptr<sf::RenderWindow> _window, vector<shared_ptr<Object>>& objects);
 };
 
-}  // namespace PonchoEngine
+}  // namespace Backdrop
 
 #endif
