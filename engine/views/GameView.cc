@@ -17,7 +17,7 @@ void GameView::render(shared_ptr<Clock::State> state) {
   for (auto object : objects) {
     sf::RectangleShape shape{sf::Vector2f{32, 32}};
     shape.setFillColor(sf::Color::Red);
-    shape.setPosition(object->position.x * 32, object->position.y * 32);
+    shape.setPosition(object->position.getX() * 32, object->position.getY() * 32);
     window->draw(shape);
   }
 }

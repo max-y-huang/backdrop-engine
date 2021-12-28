@@ -11,19 +11,13 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
+template <typename State>
 class EventListener {
-  int id;
-  function<void(shared_ptr<Observer::State>)> func;
+  function<void(shared_ptr<State>)> func;
 
  public:
-  enum Type {
-    _None,
-    Tick,
-  };
-  static int idCounter;
-  EventListener(int id, function<void(shared_ptr<Observer::State>)> func) : id{id}, func{func} {}
-  bool matchesId(int _id);
-  void run(shared_ptr<Observer::State> state);
+  EventListener(function<void(shared_ptr<State>)> func) : func{func} {}
+  void run(shared_ptr<State> state) { func(state); };
 };
 
 }  // namespace Backdrop

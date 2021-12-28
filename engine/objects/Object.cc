@@ -21,18 +21,7 @@ void Object::onNotify(shared_ptr<Observer::State> state) {
     runOnTickFunctions(clockState);
   }
   if (keyboardState) {
-    if (keyboardState->action == Keyboard::Action::MoveUp) {
-      --position.y;
-    }
-    if (keyboardState->action == Keyboard::Action::MoveDown) {
-      ++position.y;
-    }
-    if (keyboardState->action == Keyboard::Action::MoveLeft) {
-      --position.x;
-    }
-    if (keyboardState->action == Keyboard::Action::MoveRight) {
-      ++position.x;
-    }
+    runOnActionKeyFunctions(keyboardState);
   }
 }
 
@@ -42,21 +31,38 @@ void Object::runOnTickFunctions(shared_ptr<Clock::State> state) {
   }
 }
 
-int Object::addEventListener(EventListener::Type type, function<void(shared_ptr<Observer::State>)> func) {
-  int id = ++EventListener::idCounter;
-  if (type == EventListener::Tick) {
-    onTickFunctions.push_back({id, func});
+void Object::runOnActionKeyFunctions(shared_ptr<Keyboard::State> state) {
+  for (auto listener : onActionKeyFunctions) {
+    listener.run(state);
   }
-  return id;
 }
 
-void Object::removeEventListener(int id) {
-  for (size_t i = 0; i < onTickFunctions.size(); i++) {
-    if (onTickFunctions[i].matchesId(id)) {
-      onTickFunctions.erase(onTickFunctions.begin() + i);
-      return;
-    }
-  }
+void Object::onTick(function<void(shared_ptr<Clock::State>)> func) {
+  onTickFunctions.push_back({func});
+}
+
+void Object::onActionKey(function<void(shared_ptr<Keyboard::State>)> func) {
+  onActionKeyFunctions.push_back({func});
+}
+
+float Object::Position::getX() {
+  return x;
+}
+float Object::Position::getY() {
+  return y;
+}
+
+void Object::Position::moveUp() {
+  y -= 0.25;
+}
+void Object::Position::moveDown() {
+  y += 0.25;
+}
+void Object::Position::moveLeft() {
+  x -= 0.25;
+}
+void Object::Position::moveRight() {
+  x += 0.25;
 }
 
 }  // namespace Backdrop

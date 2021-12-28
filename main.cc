@@ -8,15 +8,37 @@ int main() {
   Game game;
 
   auto player = std::make_shared<Object>(Object::Position{1, 10});
+  auto _player = weak_ptr<Object>(player);
   game.addObject(player);
 
-  // player->addEventListener(EventListener::Tick, [_player = weak_ptr<Object>(player)](shared_ptr<Observer::State> state) {
-  //   auto player = _player.lock();
-  //   if (!player) {
-  //     return;
-  //   }
-  //   player->position.x += 1;
-  // });
+  player->onTick([_player](shared_ptr<Clock::State> state) {
+    auto player = _player.lock();
+    if (!player) {
+      return;
+    }
+    if (state->frameCount % 3 == 0) {
+      player->position.moveDown();
+    }
+  });
+
+  player->onActionKey([_player](shared_ptr<Keyboard::State> state) {
+    auto player = _player.lock();
+    if (!player) {
+      return;
+    }
+    if (state->action == Keyboard::Action::MoveUp) {
+      player->position.moveUp();
+    }
+    if (state->action == Keyboard::Action::MoveDown) {
+      player->position.moveDown();
+    }
+    if (state->action == Keyboard::Action::MoveLeft) {
+      player->position.moveLeft();
+    }
+    if (state->action == Keyboard::Action::MoveRight) {
+      player->position.moveRight();
+    }
+  });
 
   game.run();
 

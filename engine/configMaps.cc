@@ -4,7 +4,7 @@
 
 namespace Backdrop::ConfigMap {
 
-map<string, Keyboard::Action> KeyboardAction::bindings{
+map<string, Keyboard::Action> KeyboardAction::enumMap{
     {"MoveUp", Keyboard::Action::MoveUp},
     {"MoveDown", Keyboard::Action::MoveDown},
     {"MoveLeft", Keyboard::Action::MoveLeft},
@@ -12,7 +12,7 @@ map<string, Keyboard::Action> KeyboardAction::bindings{
 };
 
 Keyboard::Action KeyboardAction::getAction(string code) {
-  return bindings.count(code) ? bindings[code] : Keyboard::Action::_None;
+  return enumMap.count(code) ? enumMap[code] : Keyboard::Action::_None;
 }
 
 }  // namespace Backdrop::ConfigMap

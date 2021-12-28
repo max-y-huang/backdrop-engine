@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "../controllers/Clock.hh"
+#include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
 
@@ -17,20 +18,31 @@ namespace Backdrop {
 
 class Object : public Observer {
  public:
-  struct Position {
-    int x, y;
+  class Position {
+    float x, y;
+
+   public:
+    Position(float x, float y) : x{x}, y{y} {}
+    float getX();
+    float getY();
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
   };
 
  private:
-  vector<EventListener> onTickFunctions;
-  // Position position;
+  vector<EventListener<Clock::State>> onTickFunctions;
+  vector<EventListener<Keyboard::State>> onActionKeyFunctions;
   void onNotify(shared_ptr<Observer::State> state);
   void runOnTickFunctions(shared_ptr<Clock::State> state);
+  void runOnActionKeyFunctions(shared_ptr<Keyboard::State> state);
 
  public:
   Position position;
   Object(Position position) : position{position} {}
-  int addEventListener(EventListener::Type type, function<void(shared_ptr<Observer::State>)> func);
+  void onTick(function<void(shared_ptr<Clock::State>)> func);
+  void onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
   void removeEventListener(int id);
 };
 

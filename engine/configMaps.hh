@@ -12,7 +12,7 @@ using std::string;
 namespace Backdrop::ConfigMap {
 
 class KeyboardAction {
-  static map<string, Keyboard::Action> bindings;
+  static map<string, Keyboard::Action> enumMap;
 
  public:
   KeyboardAction(KeyboardAction &other) = delete;        // Disallow instances of this class.

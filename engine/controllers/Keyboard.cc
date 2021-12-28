@@ -2,7 +2,6 @@
 
 #include <SFML/Window.hpp>
 #include <fstream>
-#include <iostream>
 #include <memory>
 
 #include "../../lib/nlohmann/json.hpp"
@@ -24,7 +23,7 @@ void Keyboard::createActionMap() {
   json data;
   file >> data;
   for (auto pair : data.items()) {
-    actionMap[pair.value()] = ConfigMap::KeyboardAction::getAction(pair.key());
+    actionBindings[pair.value()] = ConfigMap::KeyboardAction::getAction(pair.key());
   }
 }
 
@@ -35,7 +34,7 @@ shared_ptr<Observer::State> Keyboard::getState() {
 void Keyboard::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
   if (clockState) {
-    for (auto actionPair : actionMap) {
+    for (auto actionPair : actionBindings) {
       if (keysPressed[actionPair.first]) {
         notifyObservers(std::make_shared<Keyboard::State>(actionPair.second));
       }

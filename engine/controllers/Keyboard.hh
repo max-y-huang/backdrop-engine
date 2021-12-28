@@ -28,7 +28,7 @@ class Keyboard final : public Observer::Subject, public Observer {
 
  private:
   map<string, bool> keysPressed;
-  map<string, Keyboard::Action> actionMap;
+  map<string, Keyboard::Action> actionBindings;
   void onNotify(shared_ptr<Observer::State> state);
   shared_ptr<Observer::State> getState();
   void createActionMap();
