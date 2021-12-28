@@ -1,10 +1,10 @@
-#ifndef MAPS_HH
-#define MAPS_hh
+#ifndef CONFIG_MAPS_HH
+#define CONFIG_MAPS_HH
 
 #include <map>
 #include <string>
 
-#include "../controllers/Keyboard.hh"
+#include "controllers/Keyboard.hh"
 
 using std::map;
 using std::string;

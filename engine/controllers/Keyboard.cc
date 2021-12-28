@@ -5,9 +5,9 @@
 #include <iostream>
 #include <memory>
 
-#include "../config/maps.hh"
+#include "../../lib/nlohmann/json.hpp"
+#include "../configMaps.hh"
 #include "../core/Observer.hh"
-#include "../nlohmann/json.hpp"
 #include "Clock.hh"
 
 using nlohmann::json;
@@ -20,7 +20,7 @@ Keyboard::Keyboard() {
 }
 
 void Keyboard::createActionMap() {
-  std::ifstream file{"engine/config/controls.json"};
+  std::ifstream file{"config/controls.json"};
   json data;
   file >> data;
   for (auto pair : data.items()) {
