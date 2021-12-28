@@ -5,8 +5,8 @@
 #include <memory>
 #include <vector>
 
-#include "../Clock.hh"
-#include "../object/Object.hh"
+#include "../controllers/Clock.hh"
+#include "../objects/Object.hh"
 #include "View.hh"
 
 using std::vector;

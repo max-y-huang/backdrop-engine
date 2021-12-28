@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Clock.hh"
+#include "../controllers/Clock.hh"
 
 namespace PonchoEngine {
 

@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "Observer.hh"
+#include "../Observer.hh"
 
 using std::shared_ptr;
 

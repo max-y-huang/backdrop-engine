@@ -2,10 +2,9 @@
 #define CLOCK_HH
 
 #include <SFML/System.hpp>
-#include <chrono>
 #include <memory>
 
-#include "Observer.hh"
+#include "../Observer.hh"
 
 namespace PonchoEngine {
 

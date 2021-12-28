@@ -3,11 +3,11 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-#include "Clock.hh"
 #include "Observer.hh"
-#include "view/EraseView.hh"
-#include "view/GameView.hh"
-#include "view/RefreshView.hh"
+#include "controllers/Clock.hh"
+#include "views/EraseView.hh"
+#include "views/GameView.hh"
+#include "views/RefreshView.hh"
 
 #define FPS 2
 #define WINDOW_WIDTH 1080

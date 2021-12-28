@@ -5,11 +5,11 @@
 #include <memory>
 #include <vector>
 
-#include "Clock.hh"
-#include "object/Object.hh"
-#include "view/EraseView.hh"
-#include "view/GameView.hh"
-#include "view/RefreshView.hh"
+#include "controllers/Clock.hh"
+#include "objects/Object.hh"
+#include "views/EraseView.hh"
+#include "views/GameView.hh"
+#include "views/RefreshView.hh"
 
 using std::shared_ptr;
 using std::vector;

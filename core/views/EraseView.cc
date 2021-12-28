@@ -1,6 +1,6 @@
 #include "EraseView.hh"
 
-#include "../Clock.hh"
+#include "../controllers/Clock.hh"
 
 namespace PonchoEngine {
 

@@ -5,9 +5,9 @@
 #include <memory>
 #include <vector>
 
-#include "../Clock.hh"
 #include "../EventListener.hh"
 #include "../Observer.hh"
+#include "../controllers/Clock.hh"
 
 using std::function;
 using std::shared_ptr;
