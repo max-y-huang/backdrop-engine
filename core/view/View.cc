@@ -10,7 +10,6 @@ void View::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
   if (clockState) {
     render(clockState);
-    window->display();
   }
 }
 
