@@ -37,12 +37,31 @@ void Object::runOnActionKeyFunctions(shared_ptr<Keyboard::State> state) {
   }
 }
 
-void Object::onTick(function<void(shared_ptr<Clock::State>)> func) {
+int Object::onTick(function<void(shared_ptr<Clock::State>)> func) {
   onTickFunctions.push_back({func});
+  return EventListenerCounter::counter;
 }
 
-void Object::onActionKey(function<void(shared_ptr<Keyboard::State>)> func) {
+int Object::onActionKey(function<void(shared_ptr<Keyboard::State>)> func) {
   onActionKeyFunctions.push_back({func});
+  return EventListenerCounter::counter;
+}
+
+void Object::removeEventListener(int id) {
+  // Remove from onTickFunctions.
+  for (size_t i = 0; i < onTickFunctions.size(); ++i) {
+    if (onTickFunctions[i].matchesId(id)) {
+      onTickFunctions.erase(onTickFunctions.begin() + i);
+      return;
+    }
+  }
+  // Remove from onActionKeyFunctions.
+  for (size_t i = 0; i < onActionKeyFunctions.size(); ++i) {
+    if (onActionKeyFunctions[i].matchesId(id)) {
+      onActionKeyFunctions.erase(onActionKeyFunctions.begin() + i);
+      return;
+    }
+  }
 }
 
 float Object::Position::getX() {

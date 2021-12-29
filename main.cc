@@ -1,7 +1,12 @@
+#include <iostream>
+#include <memory>
+
 #include "engine/engine.hh"
 
 using namespace Backdrop;
 
+using std::cout;
+using std::endl;
 using std::weak_ptr;
 
 int main() {
@@ -10,16 +15,6 @@ int main() {
   auto player = std::make_shared<Object>(Object::Position{1, 10});
   auto _player = weak_ptr<Object>(player);
   game.addObject(player);
-
-  player->onTick([_player](shared_ptr<Clock::State> state) {
-    auto player = _player.lock();
-    if (!player) {
-      return;
-    }
-    if (state->frameCount % 3 == 0) {
-      player->position.moveDown();
-    }
-  });
 
   player->onActionKey([_player](shared_ptr<Keyboard::State> state) {
     auto player = _player.lock();

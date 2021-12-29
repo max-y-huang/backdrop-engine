@@ -1,6 +1,7 @@
 #ifndef KEYBOARD_HH
 #define KEYBOARD_HH
 
+#include <SFML/Window.hpp>
 #include <map>
 #include <memory>
 #include <string>
@@ -20,6 +21,7 @@ class Keyboard final : public Observer::Subject, public Observer {
     MoveDown,
     MoveLeft,
     MoveRight,
+    Attack,
   };
   struct State final : public Observer::State {
     Keyboard::Action action;
@@ -27,8 +29,8 @@ class Keyboard final : public Observer::Subject, public Observer {
   };
 
  private:
-  map<string, bool> keysPressed;
-  map<string, Keyboard::Action> actionBindings;
+  map<sf::Keyboard::Key, bool> keysPressed;
+  map<sf::Keyboard::Key, Keyboard::Action> actionBindings;
   void onNotify(shared_ptr<Observer::State> state);
   shared_ptr<Observer::State> getState();
   void createActionMap();

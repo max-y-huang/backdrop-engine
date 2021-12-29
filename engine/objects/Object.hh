@@ -41,8 +41,8 @@ class Object : public Observer {
  public:
   Position position;
   Object(Position position) : position{position} {}
-  void onTick(function<void(shared_ptr<Clock::State>)> func);
-  void onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
+  int onTick(function<void(shared_ptr<Clock::State>)> func);
+  int onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
   void removeEventListener(int id);
 };
 

@@ -23,7 +23,9 @@ void Keyboard::createActionMap() {
   json data;
   file >> data;
   for (auto pair : data.items()) {
-    actionBindings[pair.value()] = ConfigMap::KeyboardAction::getAction(pair.key());
+    auto key = static_cast<sf::Keyboard::Key>(pair.value());
+    auto action = pair.key();
+    actionBindings[key] = ConfigMap::KeyboardAction::getAction(action);
   }
 }
 
@@ -44,17 +46,11 @@ void Keyboard::onNotify(shared_ptr<Observer::State> state) {
 }
 
 void Keyboard::update() {
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    keysPressed["UP"] = true;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    keysPressed["DOWN"] = true;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-    keysPressed["LEFT"] = true;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    keysPressed["RIGHT"] = true;
+  for (int i = 0; i < sf::Keyboard::Key::KeyCount; ++i) {  // sf::Keyboard::Key::KeyCount comes after all key codes.
+    auto key = static_cast<sf::Keyboard::Key>(i);
+    if (sf::Keyboard::isKeyPressed(key)) {
+      keysPressed[key] = true;
+    }
   }
 }
 

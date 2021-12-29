@@ -9,6 +9,7 @@ map<string, Keyboard::Action> KeyboardAction::enumMap{
     {"MoveDown", Keyboard::Action::MoveDown},
     {"MoveLeft", Keyboard::Action::MoveLeft},
     {"MoveRight", Keyboard::Action::MoveRight},
+    {"Attack", Keyboard::Action::Attack},
 };
 
 Keyboard::Action KeyboardAction::getAction(string code) {
