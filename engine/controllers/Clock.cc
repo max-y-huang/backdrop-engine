@@ -1,6 +1,6 @@
 #include "Clock.hh"
 
-#include <SFML/System.hpp>
+#include <SFML/System/Clock.hpp>
 #include <memory>
 
 #include "../core/Observer.hh"

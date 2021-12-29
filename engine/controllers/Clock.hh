@@ -1,7 +1,7 @@
 #ifndef CLOCK_HH
 #define CLOCK_HH
 
-#include <SFML/System.hpp>
+#include <SFML/System/Clock.hpp>
 #include <memory>
 
 #include "../core/Observer.hh"

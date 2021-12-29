@@ -1,7 +1,7 @@
 {
-  "MoveUp": 73,
-  "MoveDown": 74,
-  "MoveLeft": 71,
-  "MoveRight": 72,
+  "MoveUp": 22,
+  "MoveDown": 18,
+  "MoveLeft": 0,
+  "MoveRight": 3,
   "Attack": 57
 }

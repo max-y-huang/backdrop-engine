@@ -1,7 +1,7 @@
 #ifndef KEYBOARD_HH
 #define KEYBOARD_HH
 
-#include <SFML/Window.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <map>
 #include <memory>
 #include <string>

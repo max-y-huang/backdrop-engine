@@ -1,6 +1,6 @@
 #include "Keyboard.hh"
 
-#include <SFML/Window.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <fstream>
 #include <memory>
 
