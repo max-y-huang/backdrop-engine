@@ -36,12 +36,16 @@ shared_ptr<Observer::State> Keyboard::getState() {
 void Keyboard::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
   if (clockState) {
-    for (auto actionPair : actionBindings) {
-      if (keysPressed[actionPair.first]) {
-        notifyObservers(std::make_shared<Keyboard::State>(actionPair.second));
-      }
-    }
+    notifyActions();
     keysPressed.clear();
+  }
+}
+
+void Keyboard::notifyActions() {
+  for (auto actionPair : actionBindings) {
+    if (keysPressed[actionPair.first]) {
+      notifyObservers(std::make_shared<Keyboard::State>(actionPair.second));
+    }
   }
 }
 

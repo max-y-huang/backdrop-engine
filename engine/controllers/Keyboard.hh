@@ -34,6 +34,7 @@ class Keyboard final : public Observer::Subject, public Observer {
   void onNotify(shared_ptr<Observer::State> state);
   shared_ptr<Observer::State> getState();
   void createActionMap();
+  void notifyActions();
 
  public:
   Keyboard();
