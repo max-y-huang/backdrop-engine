@@ -9,6 +9,7 @@
 #include "controllers/Keyboard.hh"
 #include "objects/Object.hh"
 #include "views/EraseView.hh"
+#include "views/FrameRateView.hh"
 #include "views/GameView.hh"
 #include "views/RefreshView.hh"
 
@@ -23,6 +24,7 @@ class Game {
   shared_ptr<Keyboard> keyboard;
   shared_ptr<EraseView> eraseView;
   shared_ptr<RefreshView> refreshView;
+  shared_ptr<FrameRateView> frameRateView;
   shared_ptr<GameView> gameView;
   vector<shared_ptr<Object>> objects;
   void handleClose();

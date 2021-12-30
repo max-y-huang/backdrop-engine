@@ -9,20 +9,16 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
-Clock::Clock(int fps) : frameCount{0}, tickLength{1000 / fps} {
+Clock::Clock(int fps) : frameCount{0}, tickLength{1000000.0 / fps} {
   clock.restart();
-}
-
-shared_ptr<Observer::State> Clock::getState() {
-  return std::make_shared<Clock::State>(frameCount);
 }
 
 void Clock::update() {
   sf::Time elapsed = clock.getElapsedTime();
-  if (elapsed.asMilliseconds() >= tickLength) {
+  if (elapsed.asMicroseconds() >= tickLength) {
     clock.restart();
     ++frameCount;
-    notifyObservers();
+    notifyObservers(std::make_shared<Clock::State>(frameCount, elapsed.asMicroseconds()));
   }
 }
 

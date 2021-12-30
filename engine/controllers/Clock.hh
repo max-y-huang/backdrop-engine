@@ -12,14 +12,14 @@ class Clock final : public Observer::Subject {
  public:
   struct State final : public Observer::State {
     int frameCount;
-    State(int frameCount) : frameCount{frameCount} {};
+    sf::Int64 tickLength;
+    State(int frameCount, sf::Int64 tickLength) : frameCount{frameCount}, tickLength{tickLength} {};
   };
 
  private:
   int frameCount;
-  int tickLength;
+  double tickLength;
   sf::Clock clock;
-  shared_ptr<Observer::State> getState();
 
  public:
   Clock(int fps);

@@ -18,7 +18,7 @@ namespace Backdrop {
 class View : public Observer {
  protected:
   shared_ptr<sf::RenderWindow> window;
-  void onNotify(shared_ptr<Observer::State> state);
+  virtual void onNotify(shared_ptr<Observer::State> state);
   virtual void render(shared_ptr<Clock::State> state) = 0;
 
  public:
