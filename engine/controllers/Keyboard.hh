@@ -1,7 +1,6 @@
 #ifndef KEYBOARD_HH
 #define KEYBOARD_HH
 
-#include <SFML/Window/Keyboard.hpp>
 #include <map>
 #include <memory>
 #include <string>
@@ -14,6 +13,8 @@ using std::string;
 
 namespace Backdrop {
 
+// NOTE: Mouse buttons are stored as keyboard keys (with an offset of +100).
+
 class Keyboard final : public Observer::Subject, public Observer {
  public:
   struct State final : public Observer::State {
@@ -23,8 +24,8 @@ class Keyboard final : public Observer::Subject, public Observer {
   };
 
  private:
-  map<sf::Keyboard::Key, bool> keysPressed;
-  map<sf::Keyboard::Key, Action> actionBindings;
+  map<int, bool> keysPressed;
+  map<int, Action> actionBindings;
   void onNotify(shared_ptr<Observer::State> state);
   void createActionMap();
   void notifyActions();

@@ -1,6 +1,7 @@
 #include "Keyboard.hh"
 
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
 #include <fstream>
 #include <memory>
 
@@ -23,9 +24,7 @@ void Keyboard::createActionMap() {
   json data;
   file >> data;
   for (auto pair : data.items()) {
-    auto key = static_cast<sf::Keyboard::Key>(pair.value());
-    auto action = pair.key();
-    actionBindings[key] = ConfigMap::Action::getAction(action);
+    actionBindings[pair.value()] = ConfigMap::Action::getAction(pair.key());
   }
 }
 
@@ -46,8 +45,19 @@ void Keyboard::notifyActions() {
 
 void Keyboard::update() {
   for (auto actionPair : actionBindings) {
-    if (sf::Keyboard::isKeyPressed(actionPair.first)) {
-      keysPressed[actionPair.first] = true;
+    // Handle keyboard keys.
+    if (actionPair.first < 100) {
+      auto key = static_cast<sf::Keyboard::Key>(actionPair.first);
+      if (sf::Keyboard::isKeyPressed(key)) {
+        keysPressed[actionPair.first] = true;
+      }
+    }
+    // Handle mouse buttons.
+    else {
+      auto button = static_cast<sf::Mouse::Button>(actionPair.first - 100);
+      if (sf::Mouse::isButtonPressed(button)) {
+        keysPressed[actionPair.first] = true;
+      }
     }
   }
 }

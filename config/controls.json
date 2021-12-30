@@ -4,5 +4,5 @@
   "MoveLeft": 0,
   "MoveRight": 3,
   "Dash": 38,
-  "Attack": 57
+  "Attack": 100
 }

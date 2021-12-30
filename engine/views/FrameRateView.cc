@@ -33,7 +33,7 @@ void FrameRateView::render(shared_ptr<Clock::State> state) {
   text.setString(std::to_string(int(round(frameRate))) + " FPS");
   text.setCharacterSize(14);
   text.setFillColor(sf::Color::Red);
-  text.setPosition(1080 - text.getLocalBounds().width - 8, 8);
+  text.setPosition(window->getSize().x - text.getLocalBounds().width - 8, 8);
   window->draw(text);
 }
 
