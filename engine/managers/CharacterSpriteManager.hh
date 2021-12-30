@@ -1,5 +1,5 @@
-#ifndef FIELD_SPRITE_MANAGER_HH
-#define FIELD_SPRITE_MANAGER_HH
+#ifndef CHARACTER_SPRITE_MANAGER_HH
+#define CHARACTER_SPRITE_MANAGER_HH
 
 #include <SFML/Graphics.hpp>
 #include <map>
@@ -7,13 +7,14 @@
 
 #include "../core/Observer.hh"
 #include "../enums.h"
+#include "SpriteManager.hh"
 
 using std::map;
 using std::shared_ptr;
 
 namespace Backdrop {
 
-class FieldSpriteManager : public Observer {
+class CharacterSpriteManager : public SpriteManager {
   sf::Texture walkTexture;
   sf::Texture damageTexture;
   bool moved = false;
@@ -36,7 +37,7 @@ class FieldSpriteManager : public Observer {
   void onNotify(shared_ptr<Observer::State> state);
 
  public:
-  FieldSpriteManager();
+  CharacterSpriteManager();
   sf::Sprite getSprite();
 };
 

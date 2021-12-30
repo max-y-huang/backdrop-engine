@@ -6,6 +6,8 @@
 #include "controllers/Clock.hh"
 #include "controllers/Keyboard.hh"
 #include "core/Observer.hh"
+#include "objects/Character.hh"
+#include "objects/Object.hh"
 #include "views/EraseView.hh"
 #include "views/GameView.hh"
 #include "views/RefreshView.hh"
@@ -57,7 +59,7 @@ void Game::addObject(shared_ptr<Object> object) {
   objects.push_back(object);
   clock->attach(object, 100);
   keyboard->attach(object, 100);
-  clock->attach(object->fieldSpriteManager, 200);
+  clock->attach(object->spriteManager, 200);
 }
 
 }  // namespace Backdrop

@@ -1,4 +1,4 @@
-#include "FieldSpriteManager.hh"
+#include "CharacterSpriteManager.hh"
 
 #include <SFML/Graphics.hpp>
 
@@ -9,11 +9,11 @@
 
 namespace Backdrop {
 
-FieldSpriteManager::FieldSpriteManager() {
+CharacterSpriteManager::CharacterSpriteManager() {
   walkTexture.loadFromFile("assets/images/topdowns/male_walk.png");
 }
 
-void FieldSpriteManager::onNotify(shared_ptr<Observer::State> state) {
+void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
   auto objectState = std::dynamic_pointer_cast<Object::State>(state);
   if (clockState) {
@@ -37,7 +37,7 @@ void FieldSpriteManager::onNotify(shared_ptr<Observer::State> state) {
   }
 }
 
-sf::Sprite FieldSpriteManager::getSprite() {
+sf::Sprite CharacterSpriteManager::getSprite() {
   int x = 48 * walkAnimationFrameColumn[walkAnimationFrame];
   int y = 48 * directionOrder[direction];
   sf::Sprite sprite{walkTexture, sf::IntRect(x, y, 48, 48)};

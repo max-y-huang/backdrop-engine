@@ -10,7 +10,7 @@
 #include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
-#include "../managers/FieldSpriteManager.hh"
+#include "../managers/CharacterSpriteManager.hh"
 
 using std::function;
 using std::shared_ptr;
@@ -19,16 +19,18 @@ using std::vector;
 
 namespace Backdrop {
 
-class FieldSpriteManager;
+class Character;
 
-class Object : public Observer, public Observer::Subject, public std::enable_shared_from_this<Object> {
+class Object : public Observer, public Observer::Subject {
  public:
   class Position {
     friend class Object;
+    friend class Character;
     float x, y;
     Direction direction;
 
    public:
+    Position() {}
     Position(float x, float y, Direction direction) : x{x}, y{y}, direction{direction} {}
     float getX();
     float getY();
@@ -45,8 +47,6 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
   };
 
  private:
-  float walkSpeed = 1 / 16.0;
-  float dashSpeed = 1 / 6.0;
   vector<EventListener<Clock::State>> onTickFunctions;
   vector<EventListener<Keyboard::State>> onActionKeyFunctions;
   void onNotify(shared_ptr<Observer::State> state);
@@ -55,17 +55,11 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
 
  public:
   Position position;
-  shared_ptr<FieldSpriteManager> fieldSpriteManager;
-  bool dashing = false;
-  Object(Position position);
+  shared_ptr<SpriteManager> spriteManager;
+  virtual ~Object() = default;
   int onTick(function<void(shared_ptr<Clock::State>)> func);
   int onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
   void removeEventListener(int id);
-  void moveUp();
-  void moveDown();
-  void moveLeft();
-  void moveRight();
-  void setDash(bool _dashing);
 };
 
 }  // namespace Backdrop

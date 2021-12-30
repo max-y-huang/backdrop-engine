@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "../controllers/Clock.hh"
-#include "../managers/FieldSpriteManager.hh"
 #include "../objects/Object.hh"
 
 using std::vector;
@@ -17,7 +16,7 @@ GameView::GameView(shared_ptr<sf::RenderWindow> _window, vector<shared_ptr<Objec
 
 void GameView::render(shared_ptr<Clock::State> state) {
   for (auto object : objects) {
-    sf::Sprite sprite = object->fieldSpriteManager->getSprite();
+    sf::Sprite sprite = object->spriteManager->getSprite();
     sprite.setPosition(object->position.getX() * 48, object->position.getY() * 48);
     window->draw(sprite);
   }

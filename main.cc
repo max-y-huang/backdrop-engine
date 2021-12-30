@@ -12,8 +12,8 @@ using std::weak_ptr;
 int main() {
   Game game;
 
-  auto player = std::make_shared<Object>(Object::Position{1, 10, Direction::Down});
-  auto _player = weak_ptr<Object>(player);
+  auto player = std::make_shared<Character>(Object::Position{1, 10, Direction::Down});
+  auto _player = weak_ptr<Character>(player);
   game.addObject(player);
 
   player->onActionKey([_player](shared_ptr<Keyboard::State> state) {
