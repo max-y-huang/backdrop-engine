@@ -19,7 +19,7 @@ void FieldSpriteManager::onNotify(shared_ptr<Observer::State> state) {
   if (clockState) {
     if (!moved) {
       walkAnimationFrame = 0;
-      walkFrameCount = 0;
+      walkFrameCount = -1;
     }
     moved = false;
   }

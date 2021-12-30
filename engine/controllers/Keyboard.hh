@@ -21,11 +21,13 @@ class Keyboard final : public Observer::Subject, public Observer {
     MoveDown,
     MoveLeft,
     MoveRight,
+    Dash,
     Attack,
   };
   struct State final : public Observer::State {
     Keyboard::Action action;
-    State(Keyboard::Action action) : action{action} {};
+    bool active;
+    State(Keyboard::Action action, bool active) : action{action}, active{active} {};
   };
 
  private:

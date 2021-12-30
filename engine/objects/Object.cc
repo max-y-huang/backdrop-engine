@@ -82,32 +82,36 @@ Direction Object::Position::getDirection() {
 }
 
 void Object::moveUp() {
-  position.y -= 0.25;
+  position.y -= dashing ? dashSpeed : walkSpeed;
   position.direction = Direction::Up;
   auto state = std::make_shared<Object::State>("move");
   state->direction = Direction::Up;
   notifyObservers(state);
 }
 void Object::moveDown() {
-  position.y += 0.25;
+  position.y += dashing ? dashSpeed : walkSpeed;
   position.direction = Direction::Down;
   auto state = std::make_shared<Object::State>("move");
   state->direction = Direction::Down;
   notifyObservers(state);
 }
 void Object::moveLeft() {
-  position.x -= 0.25;
+  position.x -= dashing ? dashSpeed : walkSpeed;
   position.direction = Direction::Left;
   auto state = std::make_shared<Object::State>("move");
   state->direction = Direction::Left;
   notifyObservers(state);
 }
 void Object::moveRight() {
-  position.x += 0.25;
+  position.x += dashing ? dashSpeed : walkSpeed;
   position.direction = Direction::Right;
   auto state = std::make_shared<Object::State>("move");
   state->direction = Direction::Right;
   notifyObservers(state);
+}
+
+void Object::setDash(bool _dashing) {
+  dashing = _dashing;
 }
 
 }  // namespace Backdrop

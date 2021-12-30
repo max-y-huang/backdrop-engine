@@ -18,7 +18,7 @@ class FieldSpriteManager : public Observer {
   sf::Texture damageTexture;
   bool moved = false;
   Direction direction = Direction::Up;
-  int walkFrameCount = 0;
+  int walkFrameCount = -1;
   int walkAnimationFrame = 0;
   int walkAnimationSpeed = 8;
   map<Direction, int> directionOrder{

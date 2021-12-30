@@ -45,6 +45,8 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
   };
 
  private:
+  float walkSpeed = 1 / 16.0;
+  float dashSpeed = 1 / 6.0;
   vector<EventListener<Clock::State>> onTickFunctions;
   vector<EventListener<Keyboard::State>> onActionKeyFunctions;
   void onNotify(shared_ptr<Observer::State> state);
@@ -54,7 +56,7 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
  public:
   Position position;
   shared_ptr<FieldSpriteManager> fieldSpriteManager;
-  bool walking = false;
+  bool dashing = false;
   Object(Position position);
   int onTick(function<void(shared_ptr<Clock::State>)> func);
   int onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
@@ -63,6 +65,7 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
   void moveDown();
   void moveLeft();
   void moveRight();
+  void setDash(bool _dashing);
 };
 
 }  // namespace Backdrop

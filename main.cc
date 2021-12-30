@@ -21,14 +21,24 @@ int main() {
     if (!player) {
       return;
     }
-    if (state->action == Keyboard::Action::MoveUp) {
-      player->moveUp();
-    } else if (state->action == Keyboard::Action::MoveDown) {
-      player->moveDown();
-    } else if (state->action == Keyboard::Action::MoveLeft) {
-      player->moveLeft();
-    } else if (state->action == Keyboard::Action::MoveRight) {
-      player->moveRight();
+    // Handle move.
+    if (state->active) {
+      if (state->action == Keyboard::Action::MoveUp) {
+        player->moveUp();
+      }
+      if (state->action == Keyboard::Action::MoveDown) {
+        player->moveDown();
+      }
+      if (state->action == Keyboard::Action::MoveLeft) {
+        player->moveLeft();
+      }
+      if (state->action == Keyboard::Action::MoveRight) {
+        player->moveRight();
+      }
+    }
+    // Handle dash.
+    if (state->action == Keyboard::Action::Dash) {
+      player->setDash(state->active);
     }
   });
 

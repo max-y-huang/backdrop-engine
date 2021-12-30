@@ -39,9 +39,8 @@ void Keyboard::onNotify(shared_ptr<Observer::State> state) {
 
 void Keyboard::notifyActions() {
   for (auto actionPair : actionBindings) {
-    if (keysPressed[actionPair.first]) {
-      notifyObservers(std::make_shared<Keyboard::State>(actionPair.second));
-    }
+    bool active = keysPressed.count(actionPair.first) ? keysPressed[actionPair.first] : false;
+    notifyObservers(std::make_shared<Keyboard::State>(actionPair.second, active));
   }
 }
 
