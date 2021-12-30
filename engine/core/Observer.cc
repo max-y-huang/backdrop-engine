@@ -23,6 +23,10 @@ void Observer::Subject::notifyObservers() {
   notifyObservers(getState());
 }
 
+shared_ptr<Observer::State> Observer::Subject::getState() {
+  return std::make_shared<Observer::State>();
+}
+
 void Observer::Subject::attach(shared_ptr<Observer> observer, int priority) {
   observers.push({priority, observer});
 }

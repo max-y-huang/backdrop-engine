@@ -23,7 +23,7 @@ class Observer {
     virtual ~Subject() = default;
     void notifyObservers(shared_ptr<Observer::State> state);
     void notifyObservers();
-    virtual shared_ptr<Observer::State> getState() = 0;
+    virtual shared_ptr<Observer::State> getState();
 
    public:
     void attach(shared_ptr<Observer> observer, int priority);

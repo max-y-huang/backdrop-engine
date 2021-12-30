@@ -8,11 +8,18 @@
 #include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
+#include "../enums.h"
 
 using std::function;
 using std::shared_ptr;
+using std::weak_ptr;
 
 namespace Backdrop {
+
+Object::Object(Position position) : position{position} {
+  fieldSpriteManager = std::make_shared<FieldSpriteManager>();
+  attach(fieldSpriteManager, 200);
+}
 
 void Object::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
@@ -70,18 +77,37 @@ float Object::Position::getX() {
 float Object::Position::getY() {
   return y;
 }
+Direction Object::Position::getDirection() {
+  return direction;
+}
 
-void Object::Position::moveUp() {
-  y -= 0.25;
+void Object::moveUp() {
+  position.y -= 0.25;
+  position.direction = Direction::Up;
+  auto state = std::make_shared<Object::State>("move");
+  state->direction = Direction::Up;
+  notifyObservers(state);
 }
-void Object::Position::moveDown() {
-  y += 0.25;
+void Object::moveDown() {
+  position.y += 0.25;
+  position.direction = Direction::Down;
+  auto state = std::make_shared<Object::State>("move");
+  state->direction = Direction::Down;
+  notifyObservers(state);
 }
-void Object::Position::moveLeft() {
-  x -= 0.25;
+void Object::moveLeft() {
+  position.x -= 0.25;
+  position.direction = Direction::Left;
+  auto state = std::make_shared<Object::State>("move");
+  state->direction = Direction::Left;
+  notifyObservers(state);
 }
-void Object::Position::moveRight() {
-  x += 0.25;
+void Object::moveRight() {
+  position.x += 0.25;
+  position.direction = Direction::Right;
+  auto state = std::make_shared<Object::State>("move");
+  state->direction = Direction::Right;
+  notifyObservers(state);
 }
 
 }  // namespace Backdrop

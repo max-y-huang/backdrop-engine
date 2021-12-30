@@ -57,6 +57,7 @@ void Game::addObject(shared_ptr<Object> object) {
   objects.push_back(object);
   clock->attach(object, 100);
   keyboard->attach(object, 100);
+  clock->attach(object->fieldSpriteManager, 200);
 }
 
 }  // namespace Backdrop

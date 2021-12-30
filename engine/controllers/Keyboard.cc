@@ -29,10 +29,6 @@ void Keyboard::createActionMap() {
   }
 }
 
-shared_ptr<Observer::State> Keyboard::getState() {
-  return std::make_shared<Keyboard::State>(Keyboard::Action::MoveUp);
-}
-
 void Keyboard::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
   if (clockState) {

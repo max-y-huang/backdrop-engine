@@ -12,7 +12,7 @@ using std::weak_ptr;
 int main() {
   Game game;
 
-  auto player = std::make_shared<Object>(Object::Position{1, 10});
+  auto player = std::make_shared<Object>(Object::Position{1, 10, Direction::Down});
   auto _player = weak_ptr<Object>(player);
   game.addObject(player);
 
@@ -22,16 +22,13 @@ int main() {
       return;
     }
     if (state->action == Keyboard::Action::MoveUp) {
-      player->position.moveUp();
-    }
-    if (state->action == Keyboard::Action::MoveDown) {
-      player->position.moveDown();
-    }
-    if (state->action == Keyboard::Action::MoveLeft) {
-      player->position.moveLeft();
-    }
-    if (state->action == Keyboard::Action::MoveRight) {
-      player->position.moveRight();
+      player->moveUp();
+    } else if (state->action == Keyboard::Action::MoveDown) {
+      player->moveDown();
+    } else if (state->action == Keyboard::Action::MoveLeft) {
+      player->moveLeft();
+    } else if (state->action == Keyboard::Action::MoveRight) {
+      player->moveRight();
     }
   });
 

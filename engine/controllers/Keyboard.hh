@@ -32,7 +32,6 @@ class Keyboard final : public Observer::Subject, public Observer {
   map<sf::Keyboard::Key, bool> keysPressed;
   map<sf::Keyboard::Key, Keyboard::Action> actionBindings;
   void onNotify(shared_ptr<Observer::State> state);
-  shared_ptr<Observer::State> getState();
   void createActionMap();
   void notifyActions();
 
