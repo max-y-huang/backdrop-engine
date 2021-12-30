@@ -44,10 +44,10 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
 int main() {
   Game game;
 
-  auto male = std::make_shared<Character>(Object::Position{1, 1, Direction::Down}, "assets/images/topdowns/male_walk.png");
+  auto male = std::make_shared<Character>(Object::Position{1, 1, Direction::Down}, "assets/images/characters/topdowns/male_walk.png");
   addKeyboardControl(game, male);
 
-  auto female = std::make_shared<Character>(Object::Position{2, 2, Direction::Down}, "assets/images/topdowns/female_walk.png");
+  auto female = std::make_shared<Character>(Object::Position{2, 2, Direction::Down}, "assets/images/characters/topdowns/female_walk.png");
   addKeyboardControl(game, female);
 
   game.addObject(male);
