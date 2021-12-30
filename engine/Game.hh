@@ -32,6 +32,7 @@ class Game {
   ~Game();
   void run();
   void addObject(shared_ptr<Object> object);
+  void removeObject(shared_ptr<Object> object);
 };
 
 }  // namespace Backdrop

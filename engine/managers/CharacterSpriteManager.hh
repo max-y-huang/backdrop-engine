@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <memory>
+#include <string>
 
 #include "../core/Observer.hh"
 #include "../enums.h"
@@ -11,6 +12,7 @@
 
 using std::map;
 using std::shared_ptr;
+using std::string;
 
 namespace Backdrop {
 
@@ -37,7 +39,7 @@ class CharacterSpriteManager : public SpriteManager {
   void onNotify(shared_ptr<Observer::State> state);
 
  public:
-  CharacterSpriteManager();
+  CharacterSpriteManager(string spritesheetSrc);
   sf::Sprite getSprite();
 };
 

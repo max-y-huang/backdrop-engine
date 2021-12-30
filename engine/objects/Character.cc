@@ -1,7 +1,9 @@
 #include "Character.hh"
 
 #include <functional>
+#include <iostream>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "../controllers/Clock.hh"
@@ -14,13 +16,27 @@
 
 using std::function;
 using std::shared_ptr;
+using std::string;
 
 namespace Backdrop {
 
-Character::Character(Object::Position _position) {
-  position = _position;
-  spriteManager = std::make_shared<CharacterSpriteManager>();
+Character::Character(Object::Position _position, string spritesheetSrc) {
+  spriteManager = std::make_shared<CharacterSpriteManager>(spritesheetSrc);
   attach(spriteManager, 200);
+  moveTo(_position);
+}
+
+void Character::moveTo(Position _position) {
+  position = _position;
+  auto state = std::make_shared<Object::State>("move");
+  state->direction = position.direction;
+  notifyObservers(state);
+}
+void Character::moveTo(float x, float y, Direction direction) {
+  moveTo({x, y, direction});
+}
+void Character::moveTo(float x, float y) {
+  moveTo(x, y, position.direction);
 }
 
 void Character::moveUp() {

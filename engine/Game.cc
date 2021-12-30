@@ -58,8 +58,20 @@ void Game::handleClose() {
 void Game::addObject(shared_ptr<Object> object) {
   objects.push_back(object);
   clock->attach(object, 100);
-  keyboard->attach(object, 100);
   clock->attach(object->spriteManager, 200);
+  keyboard->attach(object, 100);
+}
+
+void Game::removeObject(shared_ptr<Object> object) {
+  for (size_t i = 0; i < objects.size(); ++i) {
+    if (object == objects[i]) {
+      clock->detach(object);
+      clock->detach(object->spriteManager);
+      keyboard->detach(object);
+      objects.erase(objects.begin() + i);
+      --i;
+    }
+  }
 }
 
 }  // namespace Backdrop

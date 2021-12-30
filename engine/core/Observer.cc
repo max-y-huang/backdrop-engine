@@ -31,4 +31,15 @@ void Observer::Subject::attach(shared_ptr<Observer> observer, int priority) {
   observers.push({priority, observer});
 }
 
+void Observer::Subject::detach(shared_ptr<Observer> observer) {
+  priority_queue<pair<int, shared_ptr<Observer>>> _observers;
+  while (!observers.empty()) {
+    if (observers.top().second != observer) {
+      _observers.push(observers.top());
+    }
+    observers.pop();
+  }
+  observers = _observers;
+}
+
 }  // namespace Backdrop

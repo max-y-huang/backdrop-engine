@@ -2,24 +2,26 @@
 #define CHARACTER_HH
 
 #include <memory>
+#include <string>
 
-// #include "../managers/CharacterSpriteManager.hh"
+#include "../enums.h"
 #include "Object.hh"
 
 using std::shared_ptr;
+using std::string;
 
 namespace Backdrop {
-
-// class CharacterSpriteManager;
 
 class Character : public Object {
   float walkSpeed = 1 / 16.0;
   float dashSpeed = 1 / 6.0;
 
  public:
-  // shared_ptr<CharacterSpriteManager> fieldSpriteManager;
   bool dashing = false;
-  Character(Object::Position _position);
+  Character(Object::Position _position, string spritesheetSrc);
+  void moveTo(Position _position);
+  void moveTo(float x, float y, Direction direction);
+  void moveTo(float x, float y);
   void moveUp();
   void moveDown();
   void moveLeft();

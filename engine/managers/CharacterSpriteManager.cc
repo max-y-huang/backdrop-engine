@@ -1,16 +1,19 @@
 #include "CharacterSpriteManager.hh"
 
 #include <SFML/Graphics.hpp>
+#include <string>
 
 #include "../controllers/Clock.hh"
 #include "../core/Observer.hh"
 #include "../enums.h"
 #include "../objects/Object.hh"
 
+using std::string;
+
 namespace Backdrop {
 
-CharacterSpriteManager::CharacterSpriteManager() {
-  walkTexture.loadFromFile("assets/images/topdowns/male_walk.png");
+CharacterSpriteManager::CharacterSpriteManager(string spritesheetSrc) {
+  walkTexture.loadFromFile(spritesheetSrc);
 }
 
 void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {

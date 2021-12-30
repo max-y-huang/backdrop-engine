@@ -27,6 +27,7 @@ class Observer {
 
    public:
     void attach(shared_ptr<Observer> observer, int priority);
+    void detach(shared_ptr<Observer> observer);
   };
 
  protected:
