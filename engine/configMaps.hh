@@ -4,20 +4,20 @@
 #include <map>
 #include <string>
 
-#include "controllers/Keyboard.hh"
+#include "enums.h"
 
 using std::map;
 using std::string;
 
 namespace Backdrop::ConfigMap {
 
-class KeyboardAction {
-  static map<string, Keyboard::Action> enumMap;
+class Action {
+  static map<string, Backdrop::Action> enumMap;
 
  public:
-  KeyboardAction(KeyboardAction &other) = delete;        // Disallow instances of this class.
-  void operator=(const KeyboardAction &other) = delete;  // Disallow instances of this class.
-  static Keyboard::Action getAction(string code);
+  Action(Action &other) = delete;                // Disallow instances of this class.
+  void operator=(const Action &other) = delete;  // Disallow instances of this class.
+  static Backdrop::Action getAction(string code);
 };
 
 }  // namespace Backdrop::ConfigMap

@@ -25,7 +25,7 @@ void Keyboard::createActionMap() {
   for (auto pair : data.items()) {
     auto key = static_cast<sf::Keyboard::Key>(pair.value());
     auto action = pair.key();
-    actionBindings[key] = ConfigMap::KeyboardAction::getAction(action);
+    actionBindings[key] = ConfigMap::Action::getAction(action);
   }
 }
 

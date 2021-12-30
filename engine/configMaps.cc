@@ -2,19 +2,21 @@
 
 #include <string>
 
+#include "enums.h"
+
 namespace Backdrop::ConfigMap {
 
-map<string, Keyboard::Action> KeyboardAction::enumMap{
-    {"MoveUp", Keyboard::Action::MoveUp},
-    {"MoveDown", Keyboard::Action::MoveDown},
-    {"MoveLeft", Keyboard::Action::MoveLeft},
-    {"MoveRight", Keyboard::Action::MoveRight},
-    {"Dash", Keyboard::Action::Dash},
-    {"Attack", Keyboard::Action::Attack},
+map<string, Backdrop::Action> Action::enumMap{
+    {"MoveUp", Backdrop::Action::MoveUp},
+    {"MoveDown", Backdrop::Action::MoveDown},
+    {"MoveLeft", Backdrop::Action::MoveLeft},
+    {"MoveRight", Backdrop::Action::MoveRight},
+    {"Dash", Backdrop::Action::Dash},
+    {"Attack", Backdrop::Action::Attack},
 };
 
-Keyboard::Action KeyboardAction::getAction(string code) {
-  return enumMap.count(code) ? enumMap[code] : Keyboard::Action::_None;
+Backdrop::Action Action::getAction(string code) {
+  return enumMap.count(code) ? enumMap[code] : Backdrop::Action::_None;
 }
 
 }  // namespace Backdrop::ConfigMap
