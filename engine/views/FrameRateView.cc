@@ -24,6 +24,7 @@ void FrameRateView::onNotify(shared_ptr<Observer::State> state) {
 }
 
 void FrameRateView::render(shared_ptr<Clock::State> state) {
+  // TODO: change to time-based.
   if (state->frameCount % 60 == 0) {
     frameRate = FrameRate::getInstance()->getFrameRate();
   }

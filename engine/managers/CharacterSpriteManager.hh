@@ -2,6 +2,7 @@
 #define CHARACTER_SPRITE_MANAGER_HH
 
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Clock.hpp>
 #include <map>
 #include <memory>
 #include <string>
@@ -17,6 +18,7 @@ using std::string;
 namespace Backdrop {
 
 class CharacterSpriteManager final : public SpriteManager {
+  sf::Clock animationClock;
   sf::Texture walkTexture;
   sf::Texture damageTexture;
   bool moved = false;

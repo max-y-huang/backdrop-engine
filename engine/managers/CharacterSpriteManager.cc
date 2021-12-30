@@ -13,6 +13,7 @@ using std::string;
 namespace Backdrop {
 
 CharacterSpriteManager::CharacterSpriteManager(string spritesheetSrc) {
+  animationClock.restart();
   walkTexture.loadFromFile(spritesheetSrc);
 }
 
@@ -32,8 +33,9 @@ void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
     if (objectState->type == "move") {
       ++walkFrameCount;
       direction = objectState->direction;
-      if (walkFrameCount % walkAnimationSpeed == 0) {
+      if (animationClock.getElapsedTime().asMicroseconds() >= 1000000.0 / walkAnimationSpeed) {
         walkAnimationFrame = (walkAnimationFrame + 1) % 4;
+        animationClock.restart();
       }
       moved = true;
     }

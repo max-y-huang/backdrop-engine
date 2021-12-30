@@ -9,6 +9,7 @@
 #include "../controllers/Clock.hh"
 #include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
+#include "../core/FrameRate.hh"
 #include "../core/Observer.hh"
 #include "../enums.h"
 #include "../managers/CharacterSpriteManager.hh"
@@ -39,33 +40,34 @@ void Character::moveTo(float x, float y) {
   moveTo(x, y, position.direction);
 }
 
-void Character::moveUp() {
-  position.y -= dashing ? dashSpeed : walkSpeed;
-  position.direction = Direction::Up;
+void Character::moveInDirection(Direction direction) {
+  float speed = (dashing ? dashSpeed : walkSpeed) / FrameRate::getInstance()->getFrameRate();
+  if (direction == Direction::Up) {
+    position.y -= speed;
+  } else if (direction == Direction::Down) {
+    position.y += speed;
+  } else if (direction == Direction::Left) {
+    position.x -= speed;
+  } else if (direction == Direction::Right) {
+    position.x += speed;
+  }
+  position.direction = direction;
   auto state = std::make_shared<Object::State>("move");
-  state->direction = Direction::Up;
+  state->direction = direction;
   notifyObservers(state);
+}
+
+void Character::moveUp() {
+  moveInDirection(Direction::Up);
 }
 void Character::moveDown() {
-  position.y += dashing ? dashSpeed : walkSpeed;
-  position.direction = Direction::Down;
-  auto state = std::make_shared<Object::State>("move");
-  state->direction = Direction::Down;
-  notifyObservers(state);
+  moveInDirection(Direction::Down);
 }
 void Character::moveLeft() {
-  position.x -= dashing ? dashSpeed : walkSpeed;
-  position.direction = Direction::Left;
-  auto state = std::make_shared<Object::State>("move");
-  state->direction = Direction::Left;
-  notifyObservers(state);
+  moveInDirection(Direction::Left);
 }
 void Character::moveRight() {
-  position.x += dashing ? dashSpeed : walkSpeed;
-  position.direction = Direction::Right;
-  auto state = std::make_shared<Object::State>("move");
-  state->direction = Direction::Right;
-  notifyObservers(state);
+  moveInDirection(Direction::Right);
 }
 
 void Character::setDash(bool _dashing) {

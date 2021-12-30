@@ -13,8 +13,9 @@ using std::string;
 namespace Backdrop {
 
 class Character : public Object {
-  float walkSpeed = 1 / 16.0;
-  float dashSpeed = 1 / 6.0;
+  float walkSpeed = 4;
+  float dashSpeed = 10;
+  void moveInDirection(Direction direction);
 
  public:
   bool dashing = false;
