@@ -9,7 +9,7 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
-class FrameRate : public Observer {
+class FrameRate final : public Observer {
   static shared_ptr<FrameRate> instance;
   double frameRate = 0;
   void onNotify(shared_ptr<Observer::State> state);

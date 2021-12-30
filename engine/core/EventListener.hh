@@ -16,7 +16,7 @@ struct EventListenerCounter {
 };
 
 template <typename State>
-class EventListener {
+class EventListener final {
   int id;
   function<void(shared_ptr<State>)> func;
 

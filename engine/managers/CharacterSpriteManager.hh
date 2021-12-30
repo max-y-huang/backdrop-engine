@@ -16,7 +16,7 @@ using std::string;
 
 namespace Backdrop {
 
-class CharacterSpriteManager : public SpriteManager {
+class CharacterSpriteManager final : public SpriteManager {
   sf::Texture walkTexture;
   sf::Texture damageTexture;
   bool moved = false;
