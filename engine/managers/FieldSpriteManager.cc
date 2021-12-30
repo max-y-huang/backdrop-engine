@@ -17,6 +17,7 @@ void FieldSpriteManager::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
   auto objectState = std::dynamic_pointer_cast<Object::State>(state);
   if (clockState) {
+    // Reset walk animation.
     if (!moved) {
       walkAnimationFrame = 0;
       walkFrameCount = -1;
@@ -24,7 +25,7 @@ void FieldSpriteManager::onNotify(shared_ptr<Observer::State> state) {
     moved = false;
   }
   if (objectState) {
-    // Handle walkAnimationFrame.
+    // Handle walk animation.
     if (objectState->type == "move") {
       ++walkFrameCount;
       direction = objectState->direction;
