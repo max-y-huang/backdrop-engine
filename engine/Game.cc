@@ -13,7 +13,7 @@
 #include "views/GameView.hh"
 #include "views/RefreshView.hh"
 
-#define FPS 60
+#define FPS 100
 #define WINDOW_WIDTH 1080
 #define WINDOW_HEIGHT 720
 #define WINDOW_TITLE "Temp game"
@@ -36,9 +36,6 @@ Game::Game() {
 }
 
 Game::~Game() {
-  // for (auto object : objects) {
-  //   object.reset();
-  // }
 }
 
 void Game::run() {

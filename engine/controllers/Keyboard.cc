@@ -39,16 +39,15 @@ void Keyboard::onNotify(shared_ptr<Observer::State> state) {
 
 void Keyboard::notifyActions() {
   for (auto actionPair : actionBindings) {
-    bool active = keysPressed.count(actionPair.first) ? keysPressed[actionPair.first] : false;
+    bool active = keysPressed[actionPair.first];
     notifyObservers(std::make_shared<Keyboard::State>(actionPair.second, active));
   }
 }
 
 void Keyboard::update() {
-  for (int i = 0; i < sf::Keyboard::Key::KeyCount; ++i) {  // sf::Keyboard::Key::KeyCount comes after all key codes.
-    auto key = static_cast<sf::Keyboard::Key>(i);
-    if (sf::Keyboard::isKeyPressed(key)) {
-      keysPressed[key] = true;
+  for (auto actionPair : actionBindings) {
+    if (sf::Keyboard::isKeyPressed(actionPair.first)) {
+      keysPressed[actionPair.first] = true;
     }
   }
 }
