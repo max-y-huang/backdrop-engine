@@ -5,6 +5,7 @@
 
 #include "controllers/Clock.hh"
 #include "controllers/Keyboard.hh"
+#include "core/FrameRate.hh"
 #include "core/Observer.hh"
 #include "objects/Character.hh"
 #include "objects/Object.hh"
@@ -28,6 +29,7 @@ Game::Game() {
   refreshView = std::make_shared<RefreshView>(window);
   frameRateView = std::make_shared<FrameRateView>(window);
   gameView = std::make_shared<GameView>(window, objects);
+  clock->attach(FrameRate::getInstance(), 300);
   clock->attach(keyboard, 200);
   clock->attach(eraseView, 99);
   clock->attach(refreshView, 0);

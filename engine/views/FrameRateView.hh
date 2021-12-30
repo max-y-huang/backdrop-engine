@@ -10,7 +10,7 @@
 namespace Backdrop {
 
 class FrameRateView final : public View {
-  float frameRate = 0;
+  double frameRate = 0;
   void onNotify(shared_ptr<Observer::State> state);
   void render(shared_ptr<Clock::State> state);
 

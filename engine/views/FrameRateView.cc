@@ -6,6 +6,7 @@
 #include <string>
 
 #include "../controllers/Clock.hh"
+#include "../core/FrameRate.hh"
 
 using std::string;
 
@@ -18,14 +19,14 @@ FrameRateView::FrameRateView(shared_ptr<sf::RenderWindow> _window) {
 void FrameRateView::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
   if (clockState) {
-    if (clockState->frameCount % 6 == 0) {
-      frameRate = 1000000.0 / clockState->tickLength;
-    }
     render(clockState);
   }
 }
 
 void FrameRateView::render(shared_ptr<Clock::State> state) {
+  if (state->frameCount % 60 == 0) {
+    frameRate = FrameRate::getInstance()->getFrameRate();
+  }
   sf::Font font;
   font.loadFromFile("assets/fonts/arial.ttf");
   sf::Text text;
