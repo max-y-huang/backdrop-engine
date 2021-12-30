@@ -14,7 +14,6 @@
 
 using std::function;
 using std::shared_ptr;
-using std::weak_ptr;
 
 namespace Backdrop {
 
