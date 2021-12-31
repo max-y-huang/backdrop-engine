@@ -45,14 +45,14 @@ int main() {
   Game game;
   Tileset tileset{"ground"};
 
-  auto male = std::make_shared<Character>(Object::Position{1, 1, Direction::Down}, "male");
-  addKeyboardControl(game, male);
+  auto jack = std::make_shared<Character>(Object::Position{1, 1, Direction::Down}, "jack");
+  addKeyboardControl(game, jack);
 
-  auto female = std::make_shared<Character>(Object::Position{2, 2, Direction::Down}, "female");
-  addKeyboardControl(game, female);
+  auto jill = std::make_shared<Character>(Object::Position{2, 2, Direction::Down}, "jill");
+  addKeyboardControl(game, jill);
 
-  game.addObject(male);
-  game.addObject(female);
+  game.addObject(jack);
+  game.addObject(jill);
 
   game.run();
 

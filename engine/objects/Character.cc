@@ -12,7 +12,7 @@ using std::string;
 namespace Backdrop {
 
 Character::Character(Object::Position _position, string id) {
-  spriteManager = std::make_shared<CharacterSpriteManager>("assets/images/characters/topdowns/" + id + "_walk.png");
+  spriteManager = std::make_shared<CharacterSpriteManager>("assets/images/characters/spritesheets/" + id + "_walk.png");
   attach(spriteManager, 200);
   moveTo(_position);
 }
