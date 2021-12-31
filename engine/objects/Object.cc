@@ -2,7 +2,6 @@
 
 #include <functional>
 #include <memory>
-#include <vector>
 
 #include "../controllers/Clock.hh"
 #include "../controllers/Keyboard.hh"
@@ -63,6 +62,19 @@ void Object::removeEventListener(int id) {
       return;
     }
   }
+}
+
+void Object::moveTo(Position _position) {
+  position = _position;
+  auto state = std::make_shared<Object::State>("move");
+  state->direction = position.direction;
+  notifyObservers(state);
+}
+void Object::moveTo(float x, float y, Direction direction) {
+  moveTo({x, y, direction});
+}
+void Object::moveTo(float x, float y) {
+  moveTo(x, y, position.direction);
 }
 
 float Object::Position::getX() {

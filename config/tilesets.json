@@ -1,0 +1,8 @@
+{
+  "ground": {
+    "width": 8,
+    "height": 4,
+    "autoTiles": true,
+    "animationFrames": 1
+  }
+}

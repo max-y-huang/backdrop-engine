@@ -19,10 +19,7 @@ class Character : public Object {
 
  public:
   bool dashing = false;
-  Character(Object::Position _position, string spritesheetSrc);
-  void moveTo(Position _position);
-  void moveTo(float x, float y, Direction direction);
-  void moveTo(float x, float y);
+  Character(Object::Position _position, string id);
   void moveUp();
   void moveDown();
   void moveLeft();

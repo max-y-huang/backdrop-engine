@@ -10,7 +10,7 @@
 #include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
-#include "../managers/CharacterSpriteManager.hh"
+#include "../managers/SpriteManager.hh"
 
 using std::function;
 using std::shared_ptr;
@@ -60,6 +60,9 @@ class Object : public Observer, public Observer::Subject {
   int onTick(function<void(shared_ptr<Clock::State>)> func);
   int onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
   void removeEventListener(int id);
+  void moveTo(Position _position);
+  void moveTo(float x, float y, Direction direction);
+  void moveTo(float x, float y);
 };
 
 }  // namespace Backdrop

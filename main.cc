@@ -43,11 +43,12 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
 
 int main() {
   Game game;
+  Tileset tileset{"ground"};
 
-  auto male = std::make_shared<Character>(Object::Position{1, 1, Direction::Down}, "assets/images/characters/topdowns/male_walk.png");
+  auto male = std::make_shared<Character>(Object::Position{1, 1, Direction::Down}, "male");
   addKeyboardControl(game, male);
 
-  auto female = std::make_shared<Character>(Object::Position{2, 2, Direction::Down}, "assets/images/characters/topdowns/female_walk.png");
+  auto female = std::make_shared<Character>(Object::Position{2, 2, Direction::Down}, "female");
   addKeyboardControl(game, female);
 
   game.addObject(male);
