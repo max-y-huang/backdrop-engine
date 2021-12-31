@@ -31,7 +31,8 @@ class Object : public Observer, public Observer::Subject {
 
    public:
     Position() {}
-    Position(float x, float y, Direction direction) : x{x}, y{y}, direction{direction} {}
+    Position(float x, float y, Direction direction);
+    Position(float x, float y);
     float getX();
     float getY();
     Direction getDirection();

@@ -13,6 +13,7 @@ using std::string;
 namespace Backdrop {
 
 class Character : public Object {
+  string id;
   float walkSpeed = 4;
   float dashSpeed = 10;
   void moveInDirection(Direction direction);

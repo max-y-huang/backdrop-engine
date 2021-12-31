@@ -8,16 +8,22 @@ using std::string;
 
 namespace Backdrop {
 
-class Tileset {
+class Tileset final {
+  string id;
   sf::Texture texture;
   int width;
   int height;
   bool autoTiles;
   int animationFrames;
-  void initializeParameters(string name);
+  void initializeParameters(string id);
 
  public:
-  Tileset(string name);
+  Tileset(string id);
+  string getId();
+  int getWidth();
+  int getHeight();
+  bool isAutoTiles();
+  int getAnimationFrames();
 };
 
 }  // namespace Backdrop

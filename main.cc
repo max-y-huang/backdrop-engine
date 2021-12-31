@@ -51,6 +51,10 @@ int main() {
   auto jill = std::make_shared<Character>(Object::Position{2, 2, Direction::Down}, "jill");
   addKeyboardControl(game, jill);
 
+  auto bush = std::make_shared<Tile>(Object::Position{1, 1}, tileset, 12);
+
+  game.addObject(bush);
+
   game.addObject(jack);
   game.addObject(jill);
 

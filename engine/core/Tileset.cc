@@ -11,9 +11,9 @@ using std::string;
 
 namespace Backdrop {
 
-Tileset::Tileset(string name) {
-  initializeParameters(name);
-  texture.loadFromFile("assets/images/tilesets/" + name + ".png");
+Tileset::Tileset(string id) : id{id} {
+  initializeParameters(id);
+  texture.loadFromFile("assets/images/tilesets/" + id + ".png");
 }
 
 void Tileset::initializeParameters(string name) {
@@ -32,9 +32,25 @@ void Tileset::initializeParameters(string name) {
     }
   }
 
-  std::cout << "dimensions: " << width << "x" << height << std::endl;
-  std::cout << "auto-tiles: " << (autoTiles ? "true" : "false") << std::endl;
-  std::cout << "animation frames: " << animationFrames << std::endl;
+  // std::cout << "dimensions: " << width << "x" << height << std::endl;
+  // std::cout << "auto-tiles: " << (autoTiles ? "true" : "false") << std::endl;
+  // std::cout << "animation frames: " << animationFrames << std::endl;
+}
+
+string Tileset::getId() {
+  return id;
+}
+int Tileset::getWidth() {
+  return width;
+}
+int Tileset::getHeight() {
+  return height;
+}
+bool Tileset::isAutoTiles() {
+  return autoTiles;
+}
+int Tileset::getAnimationFrames() {
+  return animationFrames;
 }
 
 }  // namespace Backdrop

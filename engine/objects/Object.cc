@@ -14,6 +14,9 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
+Object::Position::Position(float x, float y, Direction direction) : x{x}, y{y}, direction{direction} {}
+Object::Position::Position(float x, float y) : x{x}, y{y}, direction{Direction::Down} {}
+
 void Object::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
   auto keyboardState = std::dynamic_pointer_cast<Keyboard::State>(state);

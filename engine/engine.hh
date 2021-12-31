@@ -2,4 +2,4 @@
 #include "core/Tileset.hh"
 #include "enums.h"
 #include "objects/Character.hh"
-#include "objects/Object.hh"
+#include "objects/Tile.hh"

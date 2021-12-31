@@ -43,9 +43,9 @@ void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
 }
 
 sf::Sprite CharacterSpriteManager::getSprite() {
-  int x = 48 * walkAnimationFrameColumn[walkAnimationFrame];
-  int y = 48 * directionOrder[direction];
-  sf::Sprite sprite{walkTexture, sf::IntRect(x, y, 48, 48)};
+  int x = walkAnimationFrameColumn[walkAnimationFrame];
+  int y = directionOrder[direction];
+  sf::Sprite sprite{walkTexture, sf::IntRect(48 * x, 48 * y, 48, 48)};
   return sprite;
 }
 

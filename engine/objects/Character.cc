@@ -11,7 +11,7 @@ using std::string;
 
 namespace Backdrop {
 
-Character::Character(Object::Position _position, string id) {
+Character::Character(Object::Position _position, string id) : id{id} {
   spriteManager = std::make_shared<CharacterSpriteManager>("assets/images/characters/spritesheets/" + id + "_walk.png");
   attach(spriteManager, 200);
   moveTo(_position);
