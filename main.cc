@@ -51,10 +51,10 @@ int main() {
   map->addTile(1, 0, 1);
   map->addTile(1, 1, 1);
 
-  auto jack = std::make_shared<Character>(Object::Position{1, 1, Direction::Down}, "jack");
+  auto jack = std::make_shared<Character>("jack", Object::Position{1, 1, Direction::Down});
   addKeyboardControl(game, jack);
 
-  auto jill = std::make_shared<Character>(Object::Position{2, 2, Direction::Down}, "jill");
+  auto jill = std::make_shared<Character>("jill", Object::Position{2, 2, Direction::Down});
   addKeyboardControl(game, jill);
 
   game.addObject(jack);

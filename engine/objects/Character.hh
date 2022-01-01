@@ -20,7 +20,7 @@ class Character : public Object {
 
  public:
   bool dashing = false;
-  Character(Object::Position _position, string id);
+  Character(string id, Object::Position _position);
   void moveUp();
   void moveDown();
   void moveLeft();
