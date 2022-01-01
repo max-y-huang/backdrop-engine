@@ -45,11 +45,11 @@ int main() {
   Game game;
   Tileset tileset{"ground"};
 
-  auto map = std::make_shared<Map>(8, 6);
+  auto map = std::make_shared<Map>(tileset, 8, 6);
   game.setMap(map);
-  map->addTile(std::make_shared<Tile>(Object::Position{0, 0}, tileset, 1));
-  map->addTile(std::make_shared<Tile>(Object::Position{0, 1}, tileset, 1));
-  map->addTile(std::make_shared<Tile>(Object::Position{1, 1}, tileset, 1));
+  map->addTile(1, 0, 0);
+  map->addTile(1, 0, 1);
+  map->addTile(1, 1, 1);
 
   auto jack = std::make_shared<Character>(Object::Position{1, 1, Direction::Down}, "jack");
   addKeyboardControl(game, jack);

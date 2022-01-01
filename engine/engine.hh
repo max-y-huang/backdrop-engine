@@ -3,4 +3,3 @@
 #include "maps/Map.hh"
 #include "maps/Tileset.hh"
 #include "objects/Character.hh"
-#include "objects/Tile.hh"

@@ -6,7 +6,6 @@
 
 #include "../controllers/Clock.hh"
 #include "../maps/Map.hh"
-#include "../objects/Object.hh"
 #include "View.hh"
 
 using std::shared_ptr;

@@ -12,13 +12,14 @@ using std::string;
 namespace Backdrop {
 
 class TileSpriteManager final : public SpriteManager {
-  sf::Texture texture;
-  Tileset tileset;
   int index;
+  bool autoTile;
+  int tilesetWidth;
+  sf::Texture texture;
   void onNotify(shared_ptr<Observer::State> state);
 
  public:
-  TileSpriteManager(string spritesheetSrc, Tileset tileset, int index);
+  TileSpriteManager(int index, bool autoTile, int tilesetWidth, string spritesheetSrc);
   sf::Sprite getSprite();
 };
 

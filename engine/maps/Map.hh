@@ -1,31 +1,41 @@
 #ifndef MAP_HH
 #define MAP_HH
 
-#include <map>
 #include <memory>
 #include <vector>
 
-#include "../objects/Object.hh"
-#include "../objects/Tile.hh"
+#include "../managers/TileSpriteManager.hh"
+#include "Tileset.hh"
 
-using std::map;
 using std::shared_ptr;
 using std::vector;
 
 namespace Backdrop {
 
 class Map final {
+ public:
+  class Tile {
+    Tileset tileset;
+    int index;
+
+   public:
+    shared_ptr<TileSpriteManager> spriteManager;
+    Tile(Tileset tileset, int index);
+  };
+
+ private:
+  Tileset tileset;
   int width;
   int height;
-  vector<vector<shared_ptr<Tile>>> tiles;
+  vector<vector<shared_ptr<Map::Tile>>> tiles;
 
  public:
-  Map();
-  Map(int width, int height);
+  Map(Tileset tileset, int width, int height);
+  Tileset getTileset();
   int getWidth();
   int getHeight();
-  shared_ptr<Tile> getTile(int x, int y);
-  void addTile(shared_ptr<Tile> tile);
+  shared_ptr<Map::Tile> getTile(int x, int y);
+  void addTile(int index, int x, int y);
 };
 
 }  // namespace Backdrop

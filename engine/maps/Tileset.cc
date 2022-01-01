@@ -13,7 +13,6 @@ namespace Backdrop {
 
 Tileset::Tileset(string id) : id{id} {
   initializeParameters(id);
-  texture.loadFromFile("assets/images/tilesets/" + id + ".png");
 }
 
 void Tileset::initializeParameters(string name) {

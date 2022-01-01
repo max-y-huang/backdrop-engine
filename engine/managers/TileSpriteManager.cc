@@ -4,7 +4,7 @@
 
 namespace Backdrop {
 
-TileSpriteManager::TileSpriteManager(string spritesheetSrc, Tileset tileset, int index) : tileset{tileset}, index{index} {
+TileSpriteManager::TileSpriteManager(int index, bool autoTile, int tilesetWidth, string spritesheetSrc) : index{index}, autoTile{autoTile}, tilesetWidth{tilesetWidth} {
   texture.loadFromFile(spritesheetSrc);
 }
 
@@ -12,17 +12,16 @@ void TileSpriteManager::onNotify(shared_ptr<Observer::State> state) {
 }
 
 sf::Sprite TileSpriteManager::getSprite() {
-  if (tileset.isAutoTiles()) {
-    int x = 2 * (index % tileset.getWidth());
-    int y = 3 * (index / tileset.getWidth());
-    sf::Sprite sprite{texture, sf::IntRect(48 * x, 48 * y, 48, 48)};
-    return sprite;
-  } else {
-    int x = (index % tileset.getWidth());
-    int y = (index / tileset.getWidth());
+  if (autoTile) {
+    int x = 2 * (index % tilesetWidth);
+    int y = 3 * (index / tilesetWidth);
     sf::Sprite sprite{texture, sf::IntRect(48 * x, 48 * y, 48, 48)};
     return sprite;
   }
+  int x = (index % tilesetWidth);
+  int y = (index / tilesetWidth);
+  sf::Sprite sprite{texture, sf::IntRect(48 * x, 48 * y, 48, 48)};
+  return sprite;
 }
 
 }  // namespace Backdrop

@@ -10,7 +10,6 @@ namespace Backdrop {
 
 class Tileset final {
   string id;
-  sf::Texture texture;
   int width;
   int height;
   bool autoTiles;
