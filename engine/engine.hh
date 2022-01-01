@@ -1,5 +1,6 @@
 #include "Game.hh"
-#include "core/Tileset.hh"
 #include "enums.h"
+#include "maps/Map.hh"
+#include "maps/Tileset.hh"
 #include "objects/Character.hh"
 #include "objects/Tile.hh"

@@ -1,24 +1,24 @@
-#ifndef GAME_VIEW_HH
-#define GAME_VIEW_HH
+#ifndef MAP_VIEW_HH
+#define MAP_VIEW_HH
 
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include <vector>
 
 #include "../controllers/Clock.hh"
+#include "../maps/Map.hh"
 #include "../objects/Object.hh"
 #include "View.hh"
 
-using std::vector;
+using std::shared_ptr;
 
 namespace Backdrop {
 
-class GameView final : public View {
-  vector<shared_ptr<Object>>& objects;
+class MapView final : public View {
+  shared_ptr<Map>& map;
   void render(shared_ptr<Clock::State> state);
 
  public:
-  GameView(shared_ptr<sf::RenderWindow> _window, vector<shared_ptr<Object>>& objects);
+  MapView(shared_ptr<sf::RenderWindow> _window, shared_ptr<Map>& map);
 };
 
 }  // namespace Backdrop

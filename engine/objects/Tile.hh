@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "../core/Tileset.hh"
+#include "../maps/Tileset.hh"
 #include "Object.hh"
 
 using std::shared_ptr;

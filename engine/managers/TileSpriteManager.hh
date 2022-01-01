@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-#include "../core/Tileset.hh"
+#include "../maps/Tileset.hh"
 #include "SpriteManager.hh"
 
 using std::string;

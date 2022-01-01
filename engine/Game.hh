@@ -7,10 +7,12 @@
 
 #include "controllers/Clock.hh"
 #include "controllers/Keyboard.hh"
+#include "maps/Map.hh"
 #include "objects/Object.hh"
 #include "views/EraseView.hh"
 #include "views/FrameRateView.hh"
-#include "views/GameView.hh"
+#include "views/MapView.hh"
+#include "views/ObjectView.hh"
 #include "views/RefreshView.hh"
 
 using std::shared_ptr;
@@ -25,7 +27,9 @@ class Game final {
   shared_ptr<EraseView> eraseView;
   shared_ptr<RefreshView> refreshView;
   shared_ptr<FrameRateView> frameRateView;
-  shared_ptr<GameView> gameView;
+  shared_ptr<MapView> mapView;
+  shared_ptr<ObjectView> objectView;
+  shared_ptr<Map> map;
   vector<shared_ptr<Object>> objects;
   void handleClose();
 
@@ -33,6 +37,7 @@ class Game final {
   Game();
   ~Game();
   void run();
+  void setMap(shared_ptr<Map> _map);
   void addObject(shared_ptr<Object> object);
   void removeObject(shared_ptr<Object> object);
 };

@@ -7,11 +7,13 @@
 #include "controllers/Keyboard.hh"
 #include "core/FrameRate.hh"
 #include "core/Observer.hh"
+#include "maps/Map.hh"
 #include "objects/Character.hh"
 #include "objects/Object.hh"
 #include "views/EraseView.hh"
 #include "views/FrameRateView.hh"
-#include "views/GameView.hh"
+#include "views/MapView.hh"
+#include "views/ObjectView.hh"
 #include "views/RefreshView.hh"
 
 #define FPS 1000  // Set unreasonably high to test maximum FPS.
@@ -28,13 +30,16 @@ Game::Game() {
   eraseView = std::make_shared<EraseView>(window);
   refreshView = std::make_shared<RefreshView>(window);
   frameRateView = std::make_shared<FrameRateView>(window);
-  gameView = std::make_shared<GameView>(window, objects);
+  mapView = std::make_shared<MapView>(window, map);
+  objectView = std::make_shared<ObjectView>(window, objects);
+
   clock->attach(FrameRate::getInstance(), 300);
   clock->attach(keyboard, 200);
   clock->attach(eraseView, 99);
   clock->attach(refreshView, 0);
   clock->attach(frameRateView, 1);
-  clock->attach(gameView, 50);
+  clock->attach(mapView, 51);
+  clock->attach(objectView, 50);
 }
 
 Game::~Game() {
@@ -55,6 +60,10 @@ void Game::handleClose() {
       window->close();
     }
   }
+}
+
+void Game::setMap(shared_ptr<Map> _map) {
+  map = _map;
 }
 
 void Game::addObject(shared_ptr<Object> object) {
