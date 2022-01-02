@@ -17,7 +17,7 @@
 #include "views/RefreshView.hh"
 
 #define FPS 1000  // Set unreasonably high to test maximum FPS.
-#define WINDOW_WIDTH 1080
+#define WINDOW_WIDTH 960
 #define WINDOW_HEIGHT 720
 #define WINDOW_TITLE "Game window"
 

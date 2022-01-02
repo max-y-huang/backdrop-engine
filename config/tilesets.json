@@ -3,6 +3,48 @@
     "width": 8,
     "height": 4,
     "autoTiles": true,
-    "animationFrames": 1
+    "animationFrames": 1,
+    "tileData": [
+      {
+        "layer": 1,
+        "passable": true,
+        "bush": false
+      },
+      {
+        "layer": 1,
+        "passable": true,
+        "bush": false
+      },
+      {
+        "layer": 1,
+        "passable": true,
+        "bush": false
+      },
+      {
+        "layer": 1,
+        "passable": true,
+        "bush": false
+      },
+      {
+        "layer": 2,
+        "passable": true,
+        "bush": true
+      },
+      {
+        "layer": 2,
+        "passable": true,
+        "bush": false
+      },
+      {
+        "layer": 2,
+        "passable": false,
+        "bush": false
+      },
+      {
+        "layer": 2,
+        "passable": false,
+        "bush": false
+      }
+    ]
   }
 }

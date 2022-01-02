@@ -45,20 +45,44 @@ int main() {
   Game game;
   Tileset tileset{"ground"};
 
-  auto map = std::make_shared<Map>(tileset, 8, 6);
+  auto map = std::make_shared<Map>(tileset, 20, 15);
   game.setMap(map);
-  map->addTile(1, 0, 0);
-  map->addTile(1, 0, 1);
-  map->addTile(1, 1, 1);
 
-  auto jack = std::make_shared<Character>("jack", Object::Position{1, 1, Direction::Down});
-  addKeyboardControl(game, jack);
+  for (int y = 0; y < map->getHeight(); ++y) {
+    for (int x = 0; x < map->getWidth(); ++x) {
+      map->addTile(0, x, y);
+    }
+  }
 
-  auto jill = std::make_shared<Character>("jill", Object::Position{2, 2, Direction::Down});
-  addKeyboardControl(game, jill);
+  map->addTile(6, 6, 1);
 
-  game.addObject(jack);
-  game.addObject(jill);
+  map->addTile(4, 3, 1);
+  map->addTile(4, 3, 2);
+  map->addTile(4, 3, 3);
+  map->addTile(4, 4, 1);
+  map->addTile(4, 4, 2);
+  map->addTile(4, 4, 3);
+  map->addTile(4, 5, 1);
+  map->addTile(4, 5, 2);
+  map->addTile(4, 5, 3);
+
+  map->addTile(1, 10, 8);
+  map->addTile(1, 10, 9);
+  map->addTile(1, 11, 9);
+  map->addTile(1, 12, 9);
+  map->addTile(1, 13, 9);
+  map->addTile(1, 10, 10);
+  map->addTile(1, 12, 10);
+  map->addTile(1, 9, 11);
+  map->addTile(1, 10, 11);
+  map->addTile(1, 11, 11);
+  map->addTile(1, 12, 11);
+  map->addTile(1, 12, 12);
+
+  auto magnemite = std::make_shared<Character>("jack", Object::Position{1, 1, Direction::Down});
+  addKeyboardControl(game, magnemite);
+
+  game.addObject(magnemite);
 
   game.run();
 

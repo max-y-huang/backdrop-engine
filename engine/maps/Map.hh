@@ -21,6 +21,7 @@ class Map final {
    public:
     shared_ptr<TileSpriteManager> spriteManager;
     Tile(Tileset tileset, int index);
+    int getIndex();
   };
 
  private:
@@ -28,10 +29,10 @@ class Map final {
   int width;
   int height;
   vector<vector<shared_ptr<Map::Tile>>> tiles;
+  void addTileHelper(int x1, int y1, Direction d1, int x2, int y2, Direction d2);
 
  public:
   Map(Tileset tileset, int width, int height);
-  Tileset getTileset();
   int getWidth();
   int getHeight();
   shared_ptr<Map::Tile> getTile(int x, int y);
