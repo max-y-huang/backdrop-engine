@@ -12,10 +12,10 @@ using std::string;
 namespace Backdrop {
 
 Tileset::Tileset(string id) : id{id} {
-  initializeParameters(id);
+  loadData(id);
 }
 
-void Tileset::initializeParameters(string name) {
+void Tileset::loadData(string name) {
   std::ifstream file{"config/tilesets.json"};
   json data;
   file >> data;
@@ -29,11 +29,22 @@ void Tileset::initializeParameters(string name) {
     } else if (pair.key() == "animationFrames") {
       animationFrames = pair.value();
     }
+    if (pair.key() == "tileData") {
+      for (auto dataJson : pair.value()) {
+        Tileset::TileData data;
+        for (auto pair : dataJson.items()) {
+          if (pair.key() == "layer") {
+            data.layer = pair.value();
+          } else if (pair.key() == "passable") {
+            data.passable = pair.value();
+          } else if (pair.key() == "bush") {
+            data.bush = pair.value();
+          }
+        }
+        tileData.push_back(data);
+      }
+    }
   }
-
-  // std::cout << "dimensions: " << width << "x" << height << std::endl;
-  // std::cout << "auto-tiles: " << (autoTiles ? "true" : "false") << std::endl;
-  // std::cout << "animation frames: " << animationFrames << std::endl;
 }
 
 string Tileset::getId() {
@@ -50,6 +61,10 @@ bool Tileset::isAutoTiles() {
 }
 int Tileset::getAnimationFrames() {
   return animationFrames;
+}
+
+vector<Tileset::TileData> Tileset::getTileData() {
+  return tileData;
 }
 
 }  // namespace Backdrop

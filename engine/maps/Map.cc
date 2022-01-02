@@ -8,8 +8,11 @@ namespace Backdrop {
 
 Map::Map(Tileset tileset, int width, int height) : tileset{tileset}, width{width}, height{height} {
   tiles.resize(height);
-  for (int i = 0; i < height; ++i) {
-    tiles[i].resize(width);
+  for (int y = 0; y < height; ++y) {
+    tiles[y].resize(width);
+    for (int x = 0; x < width; ++x) {
+      tiles[y][x].resize(3);
+    }
   }
 }
 
@@ -27,35 +30,36 @@ int Map::getWidth() {
 int Map::getHeight() {
   return height;
 }
-shared_ptr<Map::Tile> Map::getTile(int x, int y) {
+shared_ptr<Map::Tile> Map::getTile(int x, int y, int layer) {
   if (x < 0 || x >= width) {
     return nullptr;
   }
   if (y < 0 || y >= height) {
     return nullptr;
   }
-  return tiles[y][x];
+  return tiles[y][x][layer];
 }
 
-void Map::addTileHelper(int x1, int y1, Direction d1, int x2, int y2, Direction d2) {
-  if (!getTile(x1, y1) || !getTile(x2, y2)) {
+void Map::addTileHelper(int layer, int x1, int y1, Direction d1, int x2, int y2, Direction d2) {
+  if (!getTile(x1, y1, layer) || !getTile(x2, y2, layer)) {
     return;
   }
-  auto sameTile = (getTile(x1, y1)->getIndex() == getTile(x2, y2)->getIndex());
-  getTile(x1, y1)->spriteManager->updateSameTileMap(d1, sameTile);
-  getTile(x2, y2)->spriteManager->updateSameTileMap(d2, sameTile);
+  auto sameTile = (getTile(x1, y1, layer)->getIndex() == getTile(x2, y2, layer)->getIndex());
+  getTile(x1, y1, layer)->spriteManager->updateSameTileMap(d1, sameTile);
+  getTile(x2, y2, layer)->spriteManager->updateSameTileMap(d2, sameTile);
 }
 
 void Map::addTile(int index, int x, int y) {
-  tiles[y][x] = std::make_shared<Map::Tile>(tileset, index);
-  addTileHelper(x, y, Direction::Up, x, y - 1, Direction::Down);
-  addTileHelper(x, y, Direction::Down, x, y + 1, Direction::Up);
-  addTileHelper(x, y, Direction::Left, x - 1, y, Direction::Right);
-  addTileHelper(x, y, Direction::Right, x + 1, y, Direction::Left);
-  addTileHelper(x, y, Direction::UpLeft, x - 1, y - 1, Direction::DownRight);
-  addTileHelper(x, y, Direction::UpRight, x + 1, y - 1, Direction::DownLeft);
-  addTileHelper(x, y, Direction::DownLeft, x - 1, y + 1, Direction::UpRight);
-  addTileHelper(x, y, Direction::DownRight, x + 1, y + 1, Direction::UpLeft);
+  int layer = tileset.getTileData()[index].layer;
+  tiles[y][x][layer] = std::make_shared<Map::Tile>(tileset, index);
+  addTileHelper(layer, x, y, Direction::Up, x, y - 1, Direction::Down);
+  addTileHelper(layer, x, y, Direction::Down, x, y + 1, Direction::Up);
+  addTileHelper(layer, x, y, Direction::Left, x - 1, y, Direction::Right);
+  addTileHelper(layer, x, y, Direction::Right, x + 1, y, Direction::Left);
+  addTileHelper(layer, x, y, Direction::UpLeft, x - 1, y - 1, Direction::DownRight);
+  addTileHelper(layer, x, y, Direction::UpRight, x + 1, y - 1, Direction::DownLeft);
+  addTileHelper(layer, x, y, Direction::DownLeft, x - 1, y + 1, Direction::UpRight);
+  addTileHelper(layer, x, y, Direction::DownRight, x + 1, y + 1, Direction::UpLeft);
 }
 
 }  // namespace Backdrop

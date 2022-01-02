@@ -21,7 +21,7 @@ using std::vector;
 namespace Backdrop {
 
 class Game final {
-  shared_ptr<sf::RenderWindow> window;  // Leaks 5,419 bytes.
+  shared_ptr<sf::RenderWindow> window;  // Leaks 5,475 + 56 bytes from graphics driver(?).
   shared_ptr<Clock> clock;
   shared_ptr<Keyboard> keyboard;
   shared_ptr<EraseView> eraseView;

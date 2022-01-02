@@ -28,14 +28,14 @@ class Map final {
   Tileset tileset;
   int width;
   int height;
-  vector<vector<shared_ptr<Map::Tile>>> tiles;
-  void addTileHelper(int x1, int y1, Direction d1, int x2, int y2, Direction d2);
+  vector<vector<vector<shared_ptr<Map::Tile>>>> tiles;
+  void addTileHelper(int layer, int x1, int y1, Direction d1, int x2, int y2, Direction d2);
 
  public:
   Map(Tileset tileset, int width, int height);
   int getWidth();
   int getHeight();
-  shared_ptr<Map::Tile> getTile(int x, int y);
+  shared_ptr<Map::Tile> getTile(int x, int y, int layer);
   void addTile(int index, int x, int y);
 };
 

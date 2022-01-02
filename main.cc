@@ -79,10 +79,10 @@ int main() {
   map->addTile(1, 12, 11);
   map->addTile(1, 12, 12);
 
-  auto magnemite = std::make_shared<Character>("jack", Object::Position{1, 1, Direction::Down});
-  addKeyboardControl(game, magnemite);
+  auto player = std::make_shared<Character>("jack", Object::Position{1, 1, Direction::Down});
+  addKeyboardControl(game, player);
 
-  game.addObject(magnemite);
+  game.addObject(player);
 
   game.run();
 
