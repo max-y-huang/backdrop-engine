@@ -3,28 +3,17 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
+#include "../maps/Tile.hh"
+
 using std::shared_ptr;
 
 namespace Backdrop {
 
-MapSpriteManager::MapSpriteManager(int width, int height) {
-  tileSpriteManagers.resize(height);
-  for (int y = 0; y < height; ++y) {
-    tileSpriteManagers[y].resize(width);
-    for (int x = 0; x < width; ++x) {
-      tileSpriteManagers[y][x].resize(3);
-    }
-  }
-};
+MapSpriteManager::MapSpriteManager(vector<vector<vector<shared_ptr<Tile>>>> &tiles) : tiles{tiles} {};
 
-void MapSpriteManager::setTileSpriteManager(shared_ptr<TileSpriteManager> manager, int x, int y, int layer) {
-  tileSpriteManagers[y][x][layer] = manager;
-  updateTexture();
-}
-
-void MapSpriteManager::updateTexture() {
-  int height = tileSpriteManagers.size();
-  int width = tileSpriteManagers[0].size();
+void MapSpriteManager::updateSprite() {
+  int height = tiles.size();
+  int width = tiles[0].size();
   // Create image.
   sf::Image image;
   image.create(48 * width, 48 * height);
@@ -32,8 +21,8 @@ void MapSpriteManager::updateTexture() {
   for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; ++x) {
       for (int layer = 0; layer < 3; ++layer) {
-        if (tileSpriteManagers[y][x][layer]) {
-          sf::Image tileImage = tileSpriteManagers[y][x][layer]->getImage();
+        if (tiles[y][x][layer]) {
+          sf::Image tileImage = tiles[y][x][layer]->spriteManager->getImage();
           image.copy(tileImage, x * 48, y * 48, sf::IntRect{0, 0, 48, 48}, true);
         }
       }

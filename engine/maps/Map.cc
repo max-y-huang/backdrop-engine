@@ -3,12 +3,13 @@
 #include "../enums.h"
 #include "../managers/MapSpriteManager.hh"
 #include "../managers/TileSpriteManager.hh"
+#include "Tile.hh"
 #include "Tileset.hh"
 
 namespace Backdrop {
 
 Map::Map(Tileset tileset, int width, int height) : tileset{tileset}, width{width}, height{height} {
-  spriteManager = std::make_shared<MapSpriteManager>(width, height);
+  spriteManager = std::make_shared<MapSpriteManager>(tiles);
   tiles.resize(height);
   for (int y = 0; y < height; ++y) {
     tiles[y].resize(width);
@@ -18,21 +19,13 @@ Map::Map(Tileset tileset, int width, int height) : tileset{tileset}, width{width
   }
 }
 
-Map::Tile::Tile(Tileset tileset, int index) : tileset{tileset}, index{index} {
-  spriteManager = std::make_shared<TileSpriteManager>(index, tileset.isAutoTiles(), tileset.getWidth(), "assets/images/tilesets/" + tileset.getId() + ".png");
-}
-
-int Map::Tile::getIndex() {
-  return index;
-}
-
 int Map::getWidth() {
   return width;
 }
 int Map::getHeight() {
   return height;
 }
-shared_ptr<Map::Tile> Map::getTile(int x, int y, int layer) {
+shared_ptr<Tile> Map::getTile(int x, int y, int layer) {
   if (x < 0 || x >= width) {
     return nullptr;
   }
@@ -63,11 +56,11 @@ void Map::updateTileSpriteManagers(int x, int y, int layer) {
 }
 
 void Map::addTile(int index, int x, int y) {
-  auto tile = std::make_shared<Map::Tile>(tileset, index);
+  auto tile = std::make_shared<Tile>(tileset, index);
   int layer = tileset.getTileData()[index].layer;
   tiles[y][x][layer] = tile;
   updateTileSpriteManagers(x, y, layer);
-  spriteManager->setTileSpriteManager(tile->spriteManager, x, y, layer);
+  spriteManager->updateSprite();
 }
 
 }  // namespace Backdrop
