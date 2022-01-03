@@ -16,17 +16,8 @@ MapView::MapView(shared_ptr<sf::RenderWindow> _window, shared_ptr<Map>& map) : m
 }
 
 void MapView::render(shared_ptr<Clock::State> state) {
-  for (int y = 0; y < map->getHeight(); ++y) {
-    for (int x = 0; x < map->getWidth(); ++x) {
-      for (int layer = 0; layer < 3; ++layer) {
-        if (map->getTile(x, y, layer)) {
-          sf::Sprite sprite = map->getTile(x, y, layer)->spriteManager->getSprite();
-          sprite.setPosition(x * 48, y * 48);
-          window->draw(sprite);
-        }
-      }
-    }
-  }
+  sf::Sprite sprite = map->spriteManager->getSprite();
+  window->draw(sprite);
 }
 
 }  // namespace Backdrop

@@ -14,8 +14,8 @@ namespace Backdrop {
 
 class Character : public Object {
   string id;
-  float walkSpeed = 4;
-  float dashSpeed = 10;
+  float walkSpeed = 3;
+  float dashSpeed = 7;
   void moveInDirection(Direction direction);
 
  public:

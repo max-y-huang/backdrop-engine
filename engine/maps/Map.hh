@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 
+#include "../managers/MapSpriteManager.hh"
 #include "../managers/TileSpriteManager.hh"
 #include "Tileset.hh"
 
@@ -29,9 +30,11 @@ class Map final {
   int width;
   int height;
   vector<vector<vector<shared_ptr<Map::Tile>>>> tiles;
-  void addTileHelper(int layer, int x1, int y1, Direction d1, int x2, int y2, Direction d2);
+  void updateTileSpriteManagers(int x, int y, int layer);
+  void updateTileSpriteManagers_helper(int layer, int x1, int y1, Direction d1, int x2, int y2, Direction d2);
 
  public:
+  shared_ptr<MapSpriteManager> spriteManager;
   Map(Tileset tileset, int width, int height);
   int getWidth();
   int getHeight();

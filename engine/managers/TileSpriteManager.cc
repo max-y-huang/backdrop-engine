@@ -17,7 +17,7 @@ TileSpriteManager::TileSpriteManager(int index, bool autoTile, int tilesetWidth,
   if (autoTile) {
     createAutoTileCornerImageMap();
   }
-  updateTexture();
+  updateImage();
 }
 
 void TileSpriteManager::createAutoTileCornerImageMap() {
@@ -60,12 +60,13 @@ void TileSpriteManager::onNotify(shared_ptr<Observer::State> state) {
 
 void TileSpriteManager::updateSameTileMap(Direction direction, bool val) {
   sameTileMap[direction] = val;
-  updateTexture();
+  updateImage();
 }
 
-void TileSpriteManager::updateTexture() {
-  sf::Image image;
+void TileSpriteManager::updateImage() {
+  // Reset image.
   image.create(48, 48);
+  // Add corners to image.
   if (autoTile) {
     int x = 2 * (index % tilesetWidth);
     int y = 3 * (index / tilesetWidth);
@@ -82,13 +83,12 @@ void TileSpriteManager::updateTexture() {
     int y = (index / tilesetWidth);
     image.copy(spritesheetImage, 0, 0, sf::IntRect{48 * x, 48 * y, 48, 48});
   }
-  texture.create(48, 48);
-  texture.update(image, 0, 0);
 }
 
-sf::Sprite TileSpriteManager::getSprite() {
-  sf::Sprite sprite{texture};
-  return sprite;
+sf::Sprite TileSpriteManager::getSprite() { return {}; }  // Uses getImage() rather than getSprite().
+
+sf::Image TileSpriteManager::getImage() {
+  return image;
 }
 
 }  // namespace Backdrop
