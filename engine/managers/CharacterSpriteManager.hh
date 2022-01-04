@@ -19,9 +19,7 @@ namespace Backdrop {
 
 class CharacterSpriteManager final : public ObjectSpriteManager {
   sf::Clock animationClock;
-  sf::Image walkImage;
-  sf::Image shadowImage;
-  sf::Texture walkTexture;
+  sf::Texture normalTexture;
   sf::Texture damageTexture;
   bool moved = false;
   Direction direction = Direction::Up;
@@ -41,7 +39,7 @@ class CharacterSpriteManager final : public ObjectSpriteManager {
       {3, 2},
   };
   void onNotify(shared_ptr<Observer::State> state);
-  void loadImages(string spritesheetSrc);
+  void setNormalTexture(string spritesheetSrc);
 
  public:
   CharacterSpriteManager(string spritesheetSrc);

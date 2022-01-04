@@ -14,12 +14,26 @@ namespace Backdrop {
 
 CharacterSpriteManager::CharacterSpriteManager(string spritesheetSrc) {
   animationClock.restart();
-  loadImages(spritesheetSrc);
+  setNormalTexture(spritesheetSrc);
 }
 
-void CharacterSpriteManager::loadImages(string spritesheetSrc) {
-  walkImage.loadFromFile(spritesheetSrc);
+void CharacterSpriteManager::setNormalTexture(string spritesheetSrc) {
+  sf::Image shadowImage;
   shadowImage.loadFromFile("assets/images/system/shadow.png");
+  sf::Image spritesheetImage;
+  spritesheetImage.loadFromFile(spritesheetSrc);
+  // Create texture image.
+  sf::Image image;
+  image.create(3 * 48, 4 * 54);
+  for (int y = 0; y < 4; ++y) {
+    for (int x = 0; x < 3; ++x) {
+      image.copy(shadowImage, x * 48, y * 54, sf::IntRect{0, 0, 48, 54});
+      image.copy(spritesheetImage, x * 48, y * 54, sf::IntRect{x * 48, y * 48, 48, 48}, true);
+    }
+  }
+  // Update texture.
+  normalTexture.create(3 * 48, 4 * 54);
+  normalTexture.update(image, 0, 0);
 }
 
 void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
@@ -50,16 +64,7 @@ void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
 sf::Sprite CharacterSpriteManager::getSprite() {
   int x = walkAnimationFrameColumn[walkAnimationFrame];
   int y = directionOrder[direction];
-  // Create walk image.
-  sf::Image image;
-  image.create(48, 54);
-  image.copy(shadowImage, 0, 0, sf::IntRect{0, 0, 48, 54});
-  image.copy(walkImage, 0, 0, sf::IntRect{48 * x, 48 * y, 48, 48}, true);
-  // Update walk texture.
-  walkTexture.create(48, 54);
-  walkTexture.update(image, 0, 0);
-  // Return current sprite.
-  sf::Sprite sprite{walkTexture};
+  sf::Sprite sprite{normalTexture, sf::IntRect{48 * x, 54 * y, 48, 54}};
   return sprite;
 }
 
