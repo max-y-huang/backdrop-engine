@@ -14,6 +14,12 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
+Object::Object(Position _position) {
+  spriteManager = std::make_shared<ObjectSpriteManager>();
+  attach(spriteManager, 200);
+  moveTo(_position);
+}
+
 Object::Position::Position(float x, float y, Direction direction) : x{x}, y{y}, direction{direction} {}
 Object::Position::Position(float x, float y) : x{x}, y{y}, direction{Direction::Down} {}
 

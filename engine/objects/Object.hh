@@ -57,7 +57,9 @@ class Object : public Observer, public Observer::Subject {
  public:
   Position position;
   shared_ptr<ObjectSpriteManager> spriteManager;
-  virtual ~Object() = default;
+  Object() {}
+  Object(Position _position);
+  // virtual ~Object() = default;
   int onTick(function<void(shared_ptr<Clock::State>)> func);
   int onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
   void removeEventListener(int id);

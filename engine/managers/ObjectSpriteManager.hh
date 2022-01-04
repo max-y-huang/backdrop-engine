@@ -9,11 +9,13 @@ namespace Backdrop {
 
 class ObjectSpriteManager : public Observer {
  protected:
-  virtual void onNotify(shared_ptr<Observer::State> state) = 0;
+  sf::Texture texture;
+  virtual void onNotify(shared_ptr<Observer::State> state){};
 
  public:
+  ObjectSpriteManager();
   virtual ~ObjectSpriteManager() = default;
-  virtual sf::Sprite getSprite() = 0;
+  virtual sf::Sprite getSprite();
 };
 
 }  // namespace Backdrop
