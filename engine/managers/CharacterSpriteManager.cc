@@ -14,7 +14,12 @@ namespace Backdrop {
 
 CharacterSpriteManager::CharacterSpriteManager(string spritesheetSrc) {
   animationClock.restart();
-  walkTexture.loadFromFile(spritesheetSrc);
+  loadImages(spritesheetSrc);
+}
+
+void CharacterSpriteManager::loadImages(string spritesheetSrc) {
+  walkImage.loadFromFile(spritesheetSrc);
+  shadowImage.loadFromFile("assets/images/system/shadow.png");
 }
 
 void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
@@ -45,7 +50,16 @@ void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
 sf::Sprite CharacterSpriteManager::getSprite() {
   int x = walkAnimationFrameColumn[walkAnimationFrame];
   int y = directionOrder[direction];
-  sf::Sprite sprite{walkTexture, sf::IntRect(48 * x, 48 * y, 48, 48)};
+  // Create walk image.
+  sf::Image image;
+  image.create(48, 54);
+  image.copy(shadowImage, 0, 0, sf::IntRect{0, 0, 48, 54});
+  image.copy(walkImage, 0, 0, sf::IntRect{48 * x, 48 * y, 48, 48}, true);
+  // Update walk texture.
+  walkTexture.create(48, 54);
+  walkTexture.update(image, 0, 0);
+  // Return current sprite.
+  sf::Sprite sprite{walkTexture};
   return sprite;
 }
 

@@ -9,7 +9,7 @@
 
 #include "../core/Observer.hh"
 #include "../enums.h"
-#include "SpriteManager.hh"
+#include "ObjectSpriteManager.hh"
 
 using std::map;
 using std::shared_ptr;
@@ -17,8 +17,10 @@ using std::string;
 
 namespace Backdrop {
 
-class CharacterSpriteManager final : public SpriteManager {
+class CharacterSpriteManager final : public ObjectSpriteManager {
   sf::Clock animationClock;
+  sf::Image walkImage;
+  sf::Image shadowImage;
   sf::Texture walkTexture;
   sf::Texture damageTexture;
   bool moved = false;
@@ -39,6 +41,7 @@ class CharacterSpriteManager final : public SpriteManager {
       {3, 2},
   };
   void onNotify(shared_ptr<Observer::State> state);
+  void loadImages(string spritesheetSrc);
 
  public:
   CharacterSpriteManager(string spritesheetSrc);

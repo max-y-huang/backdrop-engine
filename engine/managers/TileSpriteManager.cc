@@ -1,13 +1,11 @@
 #include "TileSpriteManager.hh"
 
 #include <SFML/Graphics.hpp>
+#include <fstream>
 #include <string>
-#include <utility>
 
 #include "../enums.h"
 
-using std::map;
-using std::pair;
 using std::string;
 
 namespace Backdrop {
@@ -15,47 +13,14 @@ namespace Backdrop {
 TileSpriteManager::TileSpriteManager(int index, bool autoTile, int tilesetWidth, string spritesheetSrc) : index{index}, autoTile{autoTile}, tilesetWidth{tilesetWidth} {
   spritesheetImage.loadFromFile(spritesheetSrc);
   if (autoTile) {
-    createAutoTileCornerImageMap();
+    setAutoTileData();
   }
   updateImage();
 }
 
-void TileSpriteManager::createAutoTileCornerImageMap() {
-  autoTileCornerImageMap[Direction::UpLeft][true][true][true] = {2, 4};
-  autoTileCornerImageMap[Direction::UpLeft][true][true][false] = {0, 4};
-  autoTileCornerImageMap[Direction::UpLeft][true][false][true] = {2, 2};
-  autoTileCornerImageMap[Direction::UpLeft][true][false][false] = {0, 2};
-  autoTileCornerImageMap[Direction::UpLeft][false][true][true] = {2, 0};
-  autoTileCornerImageMap[Direction::UpLeft][false][true][false] = {0, 4};
-  autoTileCornerImageMap[Direction::UpLeft][false][false][true] = {2, 2};
-  autoTileCornerImageMap[Direction::UpLeft][false][false][false] = {0, 2};
-  autoTileCornerImageMap[Direction::UpRight][true][true][true] = {1, 4};
-  autoTileCornerImageMap[Direction::UpRight][true][true][false] = {3, 4};
-  autoTileCornerImageMap[Direction::UpRight][true][false][true] = {1, 2};
-  autoTileCornerImageMap[Direction::UpRight][true][false][false] = {3, 2};
-  autoTileCornerImageMap[Direction::UpRight][false][true][true] = {3, 0};
-  autoTileCornerImageMap[Direction::UpRight][false][true][false] = {3, 4};
-  autoTileCornerImageMap[Direction::UpRight][false][false][true] = {1, 2};
-  autoTileCornerImageMap[Direction::UpRight][false][false][false] = {3, 2};
-  autoTileCornerImageMap[Direction::DownLeft][true][true][true] = {2, 3};
-  autoTileCornerImageMap[Direction::DownLeft][true][true][false] = {0, 3};
-  autoTileCornerImageMap[Direction::DownLeft][true][false][true] = {2, 5};
-  autoTileCornerImageMap[Direction::DownLeft][true][false][false] = {0, 5};
-  autoTileCornerImageMap[Direction::DownLeft][false][true][true] = {2, 1};
-  autoTileCornerImageMap[Direction::DownLeft][false][true][false] = {0, 3};
-  autoTileCornerImageMap[Direction::DownLeft][false][false][true] = {2, 5};
-  autoTileCornerImageMap[Direction::DownLeft][false][false][false] = {0, 5};
-  autoTileCornerImageMap[Direction::DownRight][true][true][true] = {1, 3};
-  autoTileCornerImageMap[Direction::DownRight][true][true][false] = {3, 3};
-  autoTileCornerImageMap[Direction::DownRight][true][false][true] = {1, 5};
-  autoTileCornerImageMap[Direction::DownRight][true][false][false] = {3, 5};
-  autoTileCornerImageMap[Direction::DownRight][false][true][true] = {3, 1};
-  autoTileCornerImageMap[Direction::DownRight][false][true][false] = {3, 3};
-  autoTileCornerImageMap[Direction::DownRight][false][false][true] = {1, 5};
-  autoTileCornerImageMap[Direction::DownRight][false][false][false] = {3, 5};
-}
-
-void TileSpriteManager::onNotify(shared_ptr<Observer::State> state) {
+void TileSpriteManager::setAutoTileData() {
+  std::ifstream file{"config/autoTile.json"};
+  file >> autoTileData;
 }
 
 void TileSpriteManager::updateSameTileMap(Direction direction, bool val) {
@@ -63,29 +28,38 @@ void TileSpriteManager::updateSameTileMap(Direction direction, bool val) {
   updateImage();
 }
 
+sf::IntRect TileSpriteManager::getAutoTileCornerImageBounds(int index, string corner, Direction cornerDirection) {
+  Direction yDirection = static_cast<Direction>((cornerDirection - 4) / 2);      // Get Up/Down from corner direction.
+  Direction xDirection = static_cast<Direction>((cornerDirection - 4) % 2 + 2);  // Get Left/Right from corner direction.
+  auto data = autoTileData[corner][!sameTileMap[cornerDirection] * 4 +
+                                   !sameTileMap[yDirection] * 2 +
+                                   !sameTileMap[xDirection]];
+  int ox = 2 * (index % tilesetWidth);
+  int oy = 3 * (index / tilesetWidth);
+  int x = 48 * ox + 24 * int(data["x"]);
+  int y = 48 * oy + 24 * int(data["y"]);
+  return sf::IntRect{x, y, 24, 24};
+}
+
 void TileSpriteManager::updateImage() {
   // Reset image.
   image.create(48, 48);
   // Add corners to image.
   if (autoTile) {
-    int x = 2 * (index % tilesetWidth);
-    int y = 3 * (index / tilesetWidth);
-    auto topLeftCoord = autoTileCornerImageMap[Direction::UpLeft][sameTileMap[Direction::UpLeft]][sameTileMap[Direction::Up]][sameTileMap[Direction::Left]];
-    auto topRightCoord = autoTileCornerImageMap[Direction::UpRight][sameTileMap[Direction::UpRight]][sameTileMap[Direction::Up]][sameTileMap[Direction::Right]];
-    auto bottomLeftCoord = autoTileCornerImageMap[Direction::DownLeft][sameTileMap[Direction::DownLeft]][sameTileMap[Direction::Down]][sameTileMap[Direction::Left]];
-    auto bottomRightCoord = autoTileCornerImageMap[Direction::DownRight][sameTileMap[Direction::DownRight]][sameTileMap[Direction::Down]][sameTileMap[Direction::Right]];
-    image.copy(spritesheetImage, 0, 0, sf::IntRect{48 * x + 24 * topLeftCoord.first, 48 * y + 24 * topLeftCoord.second, 24, 24});
-    image.copy(spritesheetImage, 24, 0, sf::IntRect{48 * x + 24 * topRightCoord.first, 48 * y + 24 * topRightCoord.second, 24, 24});
-    image.copy(spritesheetImage, 0, 24, sf::IntRect{48 * x + 24 * bottomLeftCoord.first, 48 * y + 24 * bottomLeftCoord.second, 24, 24});
-    image.copy(spritesheetImage, 24, 24, sf::IntRect{48 * x + 24 * bottomRightCoord.first, 48 * y + 24 * bottomRightCoord.second, 24, 24});
+    auto topLeftBounds = getAutoTileCornerImageBounds(index, "topLeft", Direction::UpLeft);
+    auto topRightBounds = getAutoTileCornerImageBounds(index, "topRight", Direction::UpRight);
+    auto bottomLeftBounds = getAutoTileCornerImageBounds(index, "bottomLeft", Direction::DownLeft);
+    auto bottomRightBounds = getAutoTileCornerImageBounds(index, "bottomRight", Direction::DownRight);
+    image.copy(spritesheetImage, 0, 0, topLeftBounds);
+    image.copy(spritesheetImage, 24, 0, topRightBounds);
+    image.copy(spritesheetImage, 0, 24, bottomLeftBounds);
+    image.copy(spritesheetImage, 24, 24, bottomRightBounds);
   } else {
     int x = (index % tilesetWidth);
     int y = (index / tilesetWidth);
     image.copy(spritesheetImage, 0, 0, sf::IntRect{48 * x, 48 * y, 48, 48});
   }
 }
-
-sf::Sprite TileSpriteManager::getSprite() { return {}; }  // Uses getImage() rather than getSprite().
 
 sf::Image TileSpriteManager::getImage() {
   return image;

@@ -1,5 +1,5 @@
-#ifndef SPRITE_MANAGER_HH
-#define SPRITE_MANAGER_HH
+#ifndef OBJECT_SPRITE_MANAGER_HH
+#define OBJECT_SPRITE_MANAGER_HH
 
 #include <SFML/Graphics.hpp>
 
@@ -7,12 +7,12 @@
 
 namespace Backdrop {
 
-class SpriteManager : public Observer {
+class ObjectSpriteManager : public Observer {
  protected:
   virtual void onNotify(shared_ptr<Observer::State> state) = 0;
 
  public:
-  virtual ~SpriteManager() = default;
+  virtual ~ObjectSpriteManager() = default;
   virtual sf::Sprite getSprite() = 0;
 };
 

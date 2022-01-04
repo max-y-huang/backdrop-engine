@@ -38,7 +38,4 @@ sf::Sprite MapSpriteManager::getSprite() {
   return sprite;
 }
 
-void MapSpriteManager::onNotify(shared_ptr<Observer::State> state) {
-}
-
 }  // namespace Backdrop

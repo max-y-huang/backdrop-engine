@@ -10,7 +10,7 @@
 #include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
-#include "../managers/SpriteManager.hh"
+#include "../managers/ObjectSpriteManager.hh"
 
 using std::function;
 using std::shared_ptr;
@@ -56,7 +56,7 @@ class Object : public Observer, public Observer::Subject {
 
  public:
   Position position;
-  shared_ptr<SpriteManager> spriteManager;
+  shared_ptr<ObjectSpriteManager> spriteManager;
   virtual ~Object() = default;
   int onTick(function<void(shared_ptr<Clock::State>)> func);
   int onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
