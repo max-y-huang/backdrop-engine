@@ -81,10 +81,9 @@ int main() {
 
   auto player = std::make_shared<Character>("jack", Object::Position{1, 1, Direction::Down});
   addKeyboardControl(game, player);
-
-  game.addObject(std::make_shared<Object>(Object::Position{5, 3}));
-
   game.addObject(player);
+
+  game.addObject(std::make_shared<Object>(Object::Position{6, 1}));
 
   game.run();
 

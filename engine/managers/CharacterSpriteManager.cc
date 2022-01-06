@@ -19,7 +19,7 @@ CharacterSpriteManager::CharacterSpriteManager(string spritesheetSrc) {
 
 void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
-  auto objectState = std::dynamic_pointer_cast<Object::State>(state);
+  auto objectMoveState = std::dynamic_pointer_cast<Object::MoveState>(state);
   if (clockState) {
     // Reset walk animation.
     if (!moved) {
@@ -28,17 +28,15 @@ void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
     }
     moved = false;
   }
-  if (objectState) {
+  if (objectMoveState) {
     // Handle walk animation.
-    if (objectState->type == "move") {
-      ++walkFrameCount;
-      direction = objectState->direction;
-      if (animationClock.getElapsedTime().asMicroseconds() >= 1000000.0 / walkAnimationSpeed) {
-        walkAnimationFrame = (walkAnimationFrame + 1) % 4;
-        animationClock.restart();
-      }
-      moved = true;
+    ++walkFrameCount;
+    direction = objectMoveState->direction;
+    if (animationClock.getElapsedTime().asMicroseconds() >= 1000000.0 / walkAnimationSpeed) {
+      walkAnimationFrame = (walkAnimationFrame + 1) % 4;
+      animationClock.restart();
     }
+    moved = true;
   }
 }
 

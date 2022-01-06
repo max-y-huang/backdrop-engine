@@ -21,7 +21,7 @@ namespace Backdrop {
 
 class Character;
 
-class Object : public Observer, public Observer::Subject {
+class Object : public Observer, public Observer::Subject, public std::enable_shared_from_this<Object> {
  public:
   class Position {
     friend class Object;
@@ -41,10 +41,14 @@ class Object : public Observer, public Observer::Subject {
     void moveLeft();
     void moveRight();
   };
-  struct State final : public Observer::State {
-    string type;
+  struct CollideState final : public Observer::State {
+    shared_ptr<Object> self;
+    Position prevPosition;
+    CollideState(shared_ptr<Object> self, Position prevPosition) : self{self}, prevPosition{prevPosition} {};
+  };
+  struct MoveState final : public Observer::State {
     Direction direction;
-    State(string type) : type{type} {};
+    MoveState(Direction direction) : direction{direction} {};
   };
 
  private:

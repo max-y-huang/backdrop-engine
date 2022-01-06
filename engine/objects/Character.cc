@@ -18,6 +18,7 @@ Character::Character(string id, Object::Position _position) : id{id} {
 }
 
 void Character::moveInDirection(Direction direction) {
+  Position prevPosition = position;
   float speed = (dashing ? dashSpeed : walkSpeed) / FrameRate::getInstance()->getFrameRate();
   if (direction == Direction::Up) {
     position.y -= speed;
@@ -29,9 +30,9 @@ void Character::moveInDirection(Direction direction) {
     position.x += speed;
   }
   position.direction = direction;
-  auto state = std::make_shared<Object::State>("move");
-  state->direction = direction;
-  notifyObservers(state);
+  moveTo(position);
+  auto collideState = std::make_shared<Object::CollideState>(shared_from_this(), prevPosition);
+  notifyObservers(collideState);
 }
 
 void Character::moveUp() {

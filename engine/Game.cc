@@ -7,6 +7,7 @@
 #include "controllers/Keyboard.hh"
 #include "core/FrameRate.hh"
 #include "core/Observer.hh"
+#include "managers/CollisionManager.hh"
 #include "maps/Map.hh"
 #include "objects/Character.hh"
 #include "objects/Object.hh"
@@ -32,6 +33,7 @@ Game::Game() {
   frameRateView = std::make_shared<FrameRateView>(window);
   mapView = std::make_shared<MapView>(window, map);
   objectView = std::make_shared<ObjectView>(window, objects);
+  collisionManager = std::make_shared<CollisionManager>(objects);
 
   clock->attach(FrameRate::getInstance(), 300);
   clock->attach(keyboard, 200);
@@ -71,6 +73,7 @@ void Game::addObject(shared_ptr<Object> object) {
   clock->attach(object, 100);
   clock->attach(object->spriteManager, 200);
   keyboard->attach(object, 100);
+  object->attach(collisionManager, 200);
 }
 
 void Game::removeObject(shared_ptr<Object> object) {

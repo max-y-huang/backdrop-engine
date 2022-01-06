@@ -75,9 +75,8 @@ void Object::removeEventListener(int id) {
 
 void Object::moveTo(Position _position) {
   position = _position;
-  auto state = std::make_shared<Object::State>("move");
-  state->direction = position.direction;
-  notifyObservers(state);
+  auto moveState = std::make_shared<Object::MoveState>(position.direction);
+  notifyObservers(moveState);
 }
 void Object::moveTo(float x, float y, Direction direction) {
   moveTo({x, y, direction});

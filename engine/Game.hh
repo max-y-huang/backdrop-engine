@@ -7,6 +7,7 @@
 
 #include "controllers/Clock.hh"
 #include "controllers/Keyboard.hh"
+#include "managers/CollisionManager.hh"
 #include "maps/Map.hh"
 #include "objects/Object.hh"
 #include "views/EraseView.hh"
@@ -29,6 +30,7 @@ class Game final {
   shared_ptr<FrameRateView> frameRateView;
   shared_ptr<MapView> mapView;
   shared_ptr<ObjectView> objectView;
+  shared_ptr<CollisionManager> collisionManager;
   shared_ptr<Map> map;
   vector<shared_ptr<Object>> objects;
   void handleClose();
