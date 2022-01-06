@@ -20,8 +20,8 @@ Object::Object(Position _position) {
   moveTo(_position);
 }
 
-Object::Position::Position(float x, float y, Direction direction) : x{x}, y{y}, direction{direction} {}
-Object::Position::Position(float x, float y) : x{x}, y{y}, direction{Direction::Down} {}
+Object::Position::Position(float x, float y, Direction direction) : x{48 * x}, y{48 * y}, direction{direction} {}
+Object::Position::Position(float x, float y) : x{48 * x}, y{48 * y}, direction{Direction::Down} {}
 
 void Object::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
@@ -79,10 +79,10 @@ void Object::moveTo(Position _position) {
   notifyObservers(moveState);
 }
 void Object::moveTo(float x, float y, Direction direction) {
-  moveTo({x, y, direction});
+  moveTo({x / 48, y / 48, direction});
 }
 void Object::moveTo(float x, float y) {
-  moveTo(x, y, position.direction);
+  moveTo(x / 48, y / 48, position.direction);
 }
 
 float Object::Position::getX() {

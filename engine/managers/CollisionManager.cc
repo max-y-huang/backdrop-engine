@@ -13,9 +13,11 @@ namespace Backdrop {
 CollisionManager::CollisionManager(vector<shared_ptr<Object>>& objects) : objects{objects} {}
 
 bool CollisionManager::touching(shared_ptr<Object> a, shared_ptr<Object> b) {
-  bool sameX = !abs(int(a->position.getX() - b->position.getX()));
-  bool sameY = !abs(int(a->position.getY() - b->position.getY()));
-  return a != b && sameX && sameY;  // Return false if a and b are the same object.
+  float diffX = a->position.getX() - b->position.getX();
+  float diffY = a->position.getY() - b->position.getY();
+  diffX = (diffX < 0) ? -diffX : diffX;
+  diffY = (diffY < 0) ? -diffY : diffY;
+  return a != b && diffX <= 48 && diffY <= 48;  // Return false if a and b are the same object.
 }
 
 void CollisionManager::onNotify(shared_ptr<Observer::State> state) {

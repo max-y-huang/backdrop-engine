@@ -19,7 +19,7 @@ Character::Character(string id, Object::Position _position) : id{id} {
 
 void Character::moveInDirection(Direction direction) {
   Position prevPosition = position;
-  float speed = (dashing ? dashSpeed : walkSpeed) / FrameRate::getInstance()->getFrameRate();
+  float speed = (dashing ? dashSpeed : walkSpeed) / FrameRate::getInstance()->getFrameRate() * 48;
   if (direction == Direction::Up) {
     position.y -= speed;
   } else if (direction == Direction::Down) {

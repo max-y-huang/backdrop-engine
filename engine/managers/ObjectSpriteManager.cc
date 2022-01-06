@@ -11,6 +11,7 @@ ObjectSpriteManager::ObjectSpriteManager() {
 
 sf::Sprite ObjectSpriteManager::getSprite() {
   sf::Sprite sprite{texture};
+  sprite.setColor(sf::Color(255, 255, 255, 64));
   return sprite;
 }
 

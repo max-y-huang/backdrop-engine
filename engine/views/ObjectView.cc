@@ -4,8 +4,8 @@
 #include <vector>
 
 #include "../controllers/Clock.hh"
-#include "../objects/Object.hh"
 #include "../objects/Character.hh"
+#include "../objects/Object.hh"
 
 using std::vector;
 
@@ -19,8 +19,8 @@ ObjectView::ObjectView(shared_ptr<sf::RenderWindow> _window, vector<shared_ptr<O
 void ObjectView::render(shared_ptr<Clock::State> state) {
   for (auto object : objects) {
     auto character = std::dynamic_pointer_cast<Character>(object);
-    float x = object->position.getX() * 48;
-    float y = object->position.getY() * 48;
+    float x = object->position.getX();
+    float y = object->position.getY();
     // Render shadow if character.
     if (character) {
       sf::Sprite shadowSprite{shadowTexture};
