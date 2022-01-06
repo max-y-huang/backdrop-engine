@@ -14,9 +14,13 @@ using std::vector;
 namespace Backdrop {
 
 class ObjectView final : public View {
+  sf::Texture borderBoxTexture;
   sf::Texture shadowTexture;
   vector<shared_ptr<Object>>& objects;
   void render(shared_ptr<Clock::State> state);
+  void renderBorderBoxes();
+  void renderShadows();
+  void renderObjects();
 
  public:
   ObjectView(shared_ptr<sf::RenderWindow> _window, vector<shared_ptr<Object>>& objects);

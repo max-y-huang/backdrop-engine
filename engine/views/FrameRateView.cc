@@ -6,6 +6,7 @@
 #include <string>
 
 #include "../controllers/Clock.hh"
+#include "../core/Debugger.hh"
 #include "../core/FrameRate.hh"
 
 using std::string;
@@ -24,19 +25,21 @@ void FrameRateView::onNotify(shared_ptr<Observer::State> state) {
 }
 
 void FrameRateView::render(shared_ptr<Clock::State> state) {
-  // TODO: change to time-based.
-  if (state->frameCount % 60 == 0) {
-    frameRate = FrameRate::getInstance()->getFrameRate();
+  if (Debugger::getInstance()->isDebugMode()) {
+    // TODO: change to time-based.
+    if (state->frameCount % 60 == 0) {
+      frameRate = FrameRate::getInstance()->getFrameRate();
+    }
+    sf::Font font;
+    font.loadFromFile("assets/fonts/arial.ttf");
+    sf::Text text;
+    text.setFont(font);
+    text.setString(std::to_string(int(round(frameRate))) + " FPS");
+    text.setCharacterSize(14);
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(window->getSize().x - text.getLocalBounds().width - 8, 8);
+    window->draw(text);
   }
-  sf::Font font;
-  font.loadFromFile("assets/fonts/arial.ttf");
-  sf::Text text;
-  text.setFont(font);
-  text.setString(std::to_string(int(round(frameRate))) + " FPS");
-  text.setCharacterSize(14);
-  text.setFillColor(sf::Color::Red);
-  text.setPosition(window->getSize().x - text.getLocalBounds().width - 8, 8);
-  window->draw(text);
 }
 
 }  // namespace Backdrop

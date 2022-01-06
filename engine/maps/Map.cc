@@ -1,14 +1,16 @@
 #include "Map.hh"
 
+#include "../Game.hh"
 #include "../enums.h"
 #include "../managers/MapSpriteManager.hh"
 #include "../managers/TileSpriteManager.hh"
+#include "../objects/Object.hh"
 #include "Tile.hh"
 #include "Tileset.hh"
 
 namespace Backdrop {
 
-Map::Map(Tileset tileset, int width, int height) : tileset{tileset}, width{width}, height{height} {
+Map::Map(Game &game, Tileset tileset, int width, int height) : game{game}, tileset{tileset}, width{width}, height{height} {
   spriteManager = std::make_shared<MapSpriteManager>(tiles);
   tiles.resize(height);
   for (int y = 0; y < height; ++y) {
@@ -57,7 +59,11 @@ void Map::updateTileSpriteManagers(int x, int y, int layer) {
 
 void Map::addTile(int index, int x, int y) {
   auto tile = std::make_shared<Tile>(tileset, index);
-  int layer = tileset.getTileData()[index].layer;
+  Tileset::TileData data = tileset.getTileData()[index];
+  int layer = data.layer;
+  if (!data.passable) {
+    game.addObject(std::make_shared<Object>(Object::Position{float(x), float(y)}));
+  }
   tiles[y][x][layer] = tile;
   updateTileSpriteManagers(x, y, layer);
   spriteManager->updateSprite();

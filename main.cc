@@ -45,7 +45,7 @@ int main() {
   Game game;
   Tileset tileset{"ground"};
 
-  auto map = std::make_shared<Map>(tileset, 20, 15);
+  auto map = std::make_shared<Map>(game, tileset, 20, 15);
   game.setMap(map);
 
   for (int y = 0; y < map->getHeight(); ++y) {
@@ -82,8 +82,6 @@ int main() {
   auto player = std::make_shared<Character>("jack", Object::Position{1, 1, Direction::Down});
   addKeyboardControl(game, player);
   game.addObject(player);
-
-  game.addObject(std::make_shared<Object>(Object::Position{6, 1}));
 
   game.run();
 

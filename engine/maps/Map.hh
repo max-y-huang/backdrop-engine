@@ -14,7 +14,10 @@ using std::vector;
 
 namespace Backdrop {
 
+class Game;
+
 class Map final {
+  Game &game;
   Tileset tileset;
   int width;
   int height;
@@ -24,7 +27,7 @@ class Map final {
 
  public:
   shared_ptr<MapSpriteManager> spriteManager;
-  Map(Tileset tileset, int width, int height);
+  Map(Game &game, Tileset tileset, int width, int height);
   int getWidth();
   int getHeight();
   shared_ptr<Tile> getTile(int x, int y, int layer);

@@ -10,7 +10,7 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
-class CollisionManager : public Observer, public Observer::Subject {
+class CollisionManager final : public Observer, public Observer::Subject {
   vector<shared_ptr<Object>>& objects;
   bool touching(shared_ptr<Object> a, shared_ptr<Object> b);
   void onNotify(shared_ptr<Observer::State> state);
