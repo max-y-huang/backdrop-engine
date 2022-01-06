@@ -39,7 +39,6 @@ class CharacterSpriteManager final : public ObjectSpriteManager {
       {3, 2},
   };
   void onNotify(shared_ptr<Observer::State> state);
-  void setNormalTexture(string spritesheetSrc);
 
  public:
   CharacterSpriteManager(string spritesheetSrc);

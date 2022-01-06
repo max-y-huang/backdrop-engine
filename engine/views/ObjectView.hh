@@ -14,6 +14,7 @@ using std::vector;
 namespace Backdrop {
 
 class ObjectView final : public View {
+  sf::Texture shadowTexture;
   vector<shared_ptr<Object>>& objects;
   void render(shared_ptr<Clock::State> state);
 
