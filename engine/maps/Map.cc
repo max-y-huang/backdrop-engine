@@ -3,7 +3,7 @@
 #include "../Game.hh"
 #include "../core/CollisionBox.hh"
 #include "../core/Position.hh"
-#include "../enums.h"
+#include "../enums.hh"
 #include "../managers/MapSpriteManager.hh"
 #include "../managers/TileSpriteManager.hh"
 #include "../objects/Object.hh"

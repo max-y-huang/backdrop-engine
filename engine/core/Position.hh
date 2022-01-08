@@ -1,7 +1,7 @@
 #ifndef POSITION_HH
 #define POSITION_HH
 
-#include "../enums.h"
+#include "../enums.hh"
 
 namespace Backdrop {
 

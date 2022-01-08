@@ -7,7 +7,7 @@
 #include "../core/CollisionBox.hh"
 #include "../core/FrameRate.hh"
 #include "../core/Position.hh"
-#include "../enums.h"
+#include "../enums.hh"
 #include "../managers/CharacterSpriteManager.hh"
 #include "Object.hh"
 

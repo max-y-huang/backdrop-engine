@@ -8,7 +8,7 @@
 #include <string>
 
 #include "../core/Observer.hh"
-#include "../enums.h"
+#include "../enums.hh"
 #include "ObjectSpriteManager.hh"
 
 using std::map;

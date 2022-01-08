@@ -6,7 +6,7 @@
 #include <string>
 
 #include "../core/Observer.hh"
-#include "../enums.h"
+#include "../enums.hh"
 
 using std::map;
 using std::string;

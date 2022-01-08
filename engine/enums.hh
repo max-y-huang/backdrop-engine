@@ -1,5 +1,5 @@
-#ifndef ENUMS_H
-#define ENUMS_H
+#ifndef ENUMS_HH
+#define ENUMS_HH
 
 namespace Backdrop {
 

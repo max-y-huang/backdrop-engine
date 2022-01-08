@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "enums.h"
+#include "enums.hh"
 
 namespace Backdrop::ConfigMap {
 

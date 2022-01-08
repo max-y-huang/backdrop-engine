@@ -1,6 +1,6 @@
 #include "Position.hh"
 
-#include "../enums.h"
+#include "../enums.hh"
 
 namespace Backdrop {
 

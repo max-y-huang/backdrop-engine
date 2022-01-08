@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-#include "../enums.h"
+#include "../enums.hh"
 
 using std::string;
 

@@ -6,7 +6,7 @@
 
 #include "../core/CollisionBox.hh"
 #include "../core/Position.hh"
-#include "../enums.h"
+#include "../enums.hh"
 #include "Object.hh"
 
 using std::shared_ptr;

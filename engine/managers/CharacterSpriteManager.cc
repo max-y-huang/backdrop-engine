@@ -5,7 +5,7 @@
 
 #include "../controllers/Clock.hh"
 #include "../core/Observer.hh"
-#include "../enums.h"
+#include "../enums.hh"
 #include "../objects/Object.hh"
 
 using std::string;

@@ -23,8 +23,6 @@ ObjectView::ObjectView(shared_ptr<sf::RenderWindow> _window, vector<shared_ptr<O
 
 void ObjectView::renderCollisionBoxes() {
   for (auto object : objects) {
-    float x = object->position.getX();
-    float y = object->position.getY();
     for (auto collisionBox : object->collisionBoxes) {
       sf::Sprite sprite{collisionBoxTexture};
       sprite.setTextureRect(sf::IntRect{0, 0, collisionBox->width, collisionBox->height});

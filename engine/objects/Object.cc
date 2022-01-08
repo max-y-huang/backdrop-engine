@@ -11,7 +11,7 @@
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
 #include "../core/Position.hh"
-#include "../enums.h"
+#include "../enums.hh"
 
 using std::function;
 using std::shared_ptr;

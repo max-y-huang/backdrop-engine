@@ -6,7 +6,7 @@
 #include <string>
 
 #include "../../lib/nlohmann/json.hpp"
-#include "../enums.h"
+#include "../enums.hh"
 
 using nlohmann::json;
 using std::map;

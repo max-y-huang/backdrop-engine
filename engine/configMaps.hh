@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-#include "enums.h"
+#include "enums.hh"
 
 using std::map;
 using std::string;
