@@ -1,0 +1,13 @@
+{
+  "jack": {
+    "walkSpritesheet": "assets/characters/spritesheets/jack_walk.png",
+    "collisionBoxes": [
+      {
+        "x": 8,
+        "y": 2,
+        "width": 32,
+        "height": 46
+      }
+    ]
+  }
+}

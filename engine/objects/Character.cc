@@ -1,18 +1,30 @@
 #include "Character.hh"
 
+#include <fstream>
 #include <string>
 
+#include "../../lib/nlohmann/json.hpp"
+#include "../core/CollisionBox.hh"
 #include "../core/FrameRate.hh"
 #include "../core/Position.hh"
 #include "../enums.h"
 #include "../managers/CharacterSpriteManager.hh"
 #include "Object.hh"
 
+using nlohmann::json;
 using std::string;
 
 namespace Backdrop {
 
 Character::Character(string id, Position _position) : id{id} {
+  std::ifstream file{"config/characters.json"};
+  json data;
+  file >> data;
+  for (auto item : data[id]["collisionBoxes"].items()) {
+    auto params = item.value();
+    auto temp = std::make_shared<CollisionBox>(position, float(params["x"]), float(params["y"]), float(params["width"]), float(params["height"]));
+    collisionBoxes.push_back(temp);
+  }
   spriteManager = std::make_shared<CharacterSpriteManager>("assets/images/characters/spritesheets/" + id + "_walk.png");
   attach(spriteManager, 200);
   moveTo(_position);

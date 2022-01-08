@@ -1,10 +1,13 @@
 #include "Object.hh"
 
 #include <functional>
+#include <iostream>
 #include <memory>
+#include <vector>
 
 #include "../controllers/Clock.hh"
 #include "../controllers/Keyboard.hh"
+#include "../core/CollisionBox.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
 #include "../core/Position.hh"
@@ -12,10 +15,15 @@
 
 using std::function;
 using std::shared_ptr;
+using std::vector;
 
 namespace Backdrop {
 
-Object::Object(Position _position) {
+Object::Object(Position _position, vector<CollisionBox::InitializerList> _collisionBoxes) {
+  for (auto params : _collisionBoxes) {
+    auto temp = std::make_shared<CollisionBox>(position, params.x, params.y, params.width, params.height);
+    collisionBoxes.push_back(temp);
+  }
   spriteManager = std::make_shared<ObjectSpriteManager>();
   attach(spriteManager, 200);
   moveTo(_position);
@@ -69,6 +77,20 @@ void Object::removeEventListener(int id) {
       return;
     }
   }
+}
+
+bool Object::touching(shared_ptr<Object> other) {
+  if (shared_from_this() == other) {
+    return false;
+  }
+  for (auto a : collisionBoxes) {
+    for (auto b : other->collisionBoxes) {
+      if (a->touching(b)) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 void Object::moveTo(Position _position) {

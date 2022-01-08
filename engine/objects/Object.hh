@@ -8,6 +8,7 @@
 
 #include "../controllers/Clock.hh"
 #include "../controllers/Keyboard.hh"
+#include "../core/CollisionBox.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
 #include "../core/Position.hh"
@@ -43,13 +44,15 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
 
  public:
   Position position;
+  vector<shared_ptr<CollisionBox>> collisionBoxes;
   shared_ptr<ObjectSpriteManager> spriteManager;
   Object() {}
-  Object(Position _position);
+  Object(Position _position, vector<CollisionBox::InitializerList> _collisionBoxes);
   // virtual ~Object() = default;
   int onTick(function<void(shared_ptr<Clock::State>)> func);
   int onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
   void removeEventListener(int id);
+  bool touching(shared_ptr<Object> other);
   void moveTo(Position _position);
   void moveTo(float x, float y, Direction direction);
   void moveTo(float x, float y);

@@ -24,7 +24,7 @@ void CollisionManager::onNotify(shared_ptr<Observer::State> state) {
   auto objectCollideState = std::dynamic_pointer_cast<Object::CollideState>(state);
   if (objectCollideState) {
     for (auto object : objects) {
-      if (touching(objectCollideState->self, object)) {
+      if (objectCollideState->self->touching(object)) {
         objectCollideState->self->position = objectCollideState->prevPosition;
       }
     }

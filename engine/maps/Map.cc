@@ -1,6 +1,7 @@
 #include "Map.hh"
 
 #include "../Game.hh"
+#include "../core/CollisionBox.hh"
 #include "../core/Position.hh"
 #include "../enums.h"
 #include "../managers/MapSpriteManager.hh"
@@ -63,7 +64,8 @@ void Map::addTile(int index, int x, int y) {
   Tileset::TileData data = tileset.getTileData()[index];
   int layer = data.layer;
   if (!data.passable) {
-    game.addObject(std::make_shared<Object>(Position{float(x), float(y)}));
+    vector<CollisionBox::InitializerList> temp = {{0, 0, 48, 48}};
+    game.addObject(std::make_shared<Object>(Position{float(x), float(y)}, temp));
   }
   tiles[y][x][layer] = tile;
   updateTileSpriteManagers(x, y, layer);

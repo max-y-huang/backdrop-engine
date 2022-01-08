@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 
+#include "../core/CollisionBox.hh"
 #include "../core/Position.hh"
 #include "../enums.h"
 #include "Object.hh"
