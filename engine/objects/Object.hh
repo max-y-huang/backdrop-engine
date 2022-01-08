@@ -10,6 +10,7 @@
 #include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
+#include "../core/Position.hh"
 #include "../managers/ObjectSpriteManager.hh"
 
 using std::function;
@@ -23,24 +24,6 @@ class Character;
 
 class Object : public Observer, public Observer::Subject, public std::enable_shared_from_this<Object> {
  public:
-  class Position {
-    friend class Object;
-    friend class Character;
-    float x, y;
-    Direction direction;
-
-   public:
-    Position() {}
-    Position(float x, float y, Direction direction);
-    Position(float x, float y);
-    float getX();
-    float getY();
-    Direction getDirection();
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
-  };
   struct CollideState final : public Observer::State {
     shared_ptr<Object> self;
     Position prevPosition;

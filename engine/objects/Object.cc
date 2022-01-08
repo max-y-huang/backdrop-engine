@@ -7,6 +7,7 @@
 #include "../controllers/Keyboard.hh"
 #include "../core/EventListener.hh"
 #include "../core/Observer.hh"
+#include "../core/Position.hh"
 #include "../enums.h"
 
 using std::function;
@@ -19,9 +20,6 @@ Object::Object(Position _position) {
   attach(spriteManager, 200);
   moveTo(_position);
 }
-
-Object::Position::Position(float x, float y, Direction direction) : x{48 * x}, y{48 * y}, direction{direction} {}
-Object::Position::Position(float x, float y) : x{48 * x}, y{48 * y}, direction{Direction::Down} {}
 
 void Object::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
@@ -83,16 +81,6 @@ void Object::moveTo(float x, float y, Direction direction) {
 }
 void Object::moveTo(float x, float y) {
   moveTo(x / 48, y / 48, position.direction);
-}
-
-float Object::Position::getX() {
-  return x;
-}
-float Object::Position::getY() {
-  return y;
-}
-Direction Object::Position::getDirection() {
-  return direction;
 }
 
 }  // namespace Backdrop

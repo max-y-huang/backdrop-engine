@@ -1,6 +1,7 @@
 #include "Map.hh"
 
 #include "../Game.hh"
+#include "../core/Position.hh"
 #include "../enums.h"
 #include "../managers/MapSpriteManager.hh"
 #include "../managers/TileSpriteManager.hh"
@@ -62,7 +63,7 @@ void Map::addTile(int index, int x, int y) {
   Tileset::TileData data = tileset.getTileData()[index];
   int layer = data.layer;
   if (!data.passable) {
-    game.addObject(std::make_shared<Object>(Object::Position{float(x), float(y)}));
+    game.addObject(std::make_shared<Object>(Position{float(x), float(y)}));
   }
   tiles[y][x][layer] = tile;
   updateTileSpriteManagers(x, y, layer);

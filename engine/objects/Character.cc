@@ -3,6 +3,7 @@
 #include <string>
 
 #include "../core/FrameRate.hh"
+#include "../core/Position.hh"
 #include "../enums.h"
 #include "../managers/CharacterSpriteManager.hh"
 #include "Object.hh"
@@ -11,7 +12,7 @@ using std::string;
 
 namespace Backdrop {
 
-Character::Character(string id, Object::Position _position) : id{id} {
+Character::Character(string id, Position _position) : id{id} {
   spriteManager = std::make_shared<CharacterSpriteManager>("assets/images/characters/spritesheets/" + id + "_walk.png");
   attach(spriteManager, 200);
   moveTo(_position);

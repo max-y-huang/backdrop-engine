@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 
+#include "../core/Position.hh"
 #include "../enums.h"
 #include "Object.hh"
 
@@ -20,7 +21,7 @@ class Character : public Object {
 
  public:
   bool dashing = false;
-  Character(string id, Object::Position _position);
+  Character(string id, Position _position);
   void moveUp();
   void moveDown();
   void moveLeft();
