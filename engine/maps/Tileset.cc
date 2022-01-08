@@ -19,31 +19,16 @@ void Tileset::loadData(string name) {
   std::ifstream file{"config/tilesets.json"};
   json data;
   file >> data;
-  for (auto pair : data[name].items()) {
-    if (pair.key() == "width") {
-      width = pair.value();
-    } else if (pair.key() == "height") {
-      height = pair.value();
-    } else if (pair.key() == "autoTiles") {
-      autoTiles = pair.value();
-    } else if (pair.key() == "animationFrames") {
-      animationFrames = pair.value();
-    }
-    if (pair.key() == "tileData") {
-      for (auto dataJson : pair.value()) {
-        Tileset::TileData data;
-        for (auto pair : dataJson.items()) {
-          if (pair.key() == "layer") {
-            data.layer = pair.value();
-          } else if (pair.key() == "passable") {
-            data.passable = pair.value();
-          } else if (pair.key() == "bush") {
-            data.bush = pair.value();
-          }
-        }
-        tileData.push_back(data);
-      }
-    }
+  width = data[name]["width"];
+  height = data[name]["height"];
+  autoTiles = data[name]["autoTiles"];
+  animationFrames = data[name]["animationFrames"];
+  for (auto itemData : data[name]["tileData"].items()) {
+    Tileset::TileData data;
+    data.layer = itemData.value()["layer"];
+    data.passable = itemData.value()["passable"];
+    data.bush = itemData.value()["bush"];
+    tileData.push_back(data);
   }
 }
 
