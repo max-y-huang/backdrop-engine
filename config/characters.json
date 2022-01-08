@@ -1,6 +1,6 @@
 {
   "jack": {
-    "walkSpritesheetSrc": "assets/images/characters/spritesheets/jack_walk.png",
+    "spritesheetSrc": "assets/images/characters/spritesheets/male1.png",
     "collisionBoxes": [
       {
         "x": 8,

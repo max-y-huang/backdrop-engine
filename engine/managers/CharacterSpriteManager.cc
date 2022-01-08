@@ -14,7 +14,7 @@ namespace Backdrop {
 
 CharacterSpriteManager::CharacterSpriteManager(string spritesheetSrc) {
   animationClock.restart();
-  normalTexture.loadFromFile(spritesheetSrc);
+  texture.loadFromFile(spritesheetSrc);
 }
 
 void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
@@ -43,7 +43,7 @@ void CharacterSpriteManager::onNotify(shared_ptr<Observer::State> state) {
 sf::Sprite CharacterSpriteManager::getSprite() {
   int x = walkAnimationFrameColumn[walkAnimationFrame];
   int y = directionOrder[direction];
-  sf::Sprite sprite{normalTexture, sf::IntRect{48 * x, 48 * y, 48, 48}};
+  sf::Sprite sprite{texture, sf::IntRect{48 * x, 48 * y, 48, 48}};
   return sprite;
 }
 

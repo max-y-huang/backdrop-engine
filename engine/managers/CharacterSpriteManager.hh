@@ -19,8 +19,7 @@ namespace Backdrop {
 
 class CharacterSpriteManager final : public ObjectSpriteManager {
   sf::Clock animationClock;
-  sf::Texture normalTexture;
-  sf::Texture damageTexture;
+  sf::Texture texture;
   bool moved = false;
   Direction direction = Direction::Up;
   int walkFrameCount = -1;

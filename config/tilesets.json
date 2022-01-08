@@ -1,5 +1,6 @@
 {
   "ground": {
+    "spritesheetSrc": "",
     "width": 8,
     "height": 4,
     "autoTiles": true,

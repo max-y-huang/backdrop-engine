@@ -25,7 +25,7 @@ Character::Character(string id, Position _position) : id{id} {
     auto temp = std::make_shared<CollisionBox>(position, float(params["x"]), float(params["y"]), float(params["width"]), float(params["height"]));
     collisionBoxes.push_back(temp);
   }
-  spriteManager = std::make_shared<CharacterSpriteManager>(data[id]["walkSpritesheetSrc"]);
+  spriteManager = std::make_shared<CharacterSpriteManager>(data[id]["spritesheetSrc"]);
   attach(spriteManager, 200);
   moveTo(_position);
 }
