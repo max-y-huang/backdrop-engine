@@ -1,50 +1,24 @@
 {
-  "ground": {
+  "ground_a": {
     "spritesheetSrc": "",
-    "width": 8,
-    "height": 4,
+    "width": 2,
+    "height": 1,
     "autoTiles": true,
-    "animationFrames": 1,
     "tileData": [
       {
-        "layer": 1,
-        "passable": true,
-        "bush": false
-      },
-      {
-        "layer": 1,
-        "passable": true,
-        "bush": false
-      },
-      {
-        "layer": 1,
-        "passable": true,
-        "bush": false
+        "layer": 2,
+        "collisionBoxes": [
+          {
+            "x": 0,
+            "y": 0,
+            "width": 48,
+            "height": 78
+          }
+        ]
       },
       {
         "layer": 1,
-        "passable": true,
-        "bush": false
-      },
-      {
-        "layer": 2,
-        "passable": true,
-        "bush": true
-      },
-      {
-        "layer": 2,
-        "passable": true,
-        "bush": false
-      },
-      {
-        "layer": 2,
-        "passable": false,
-        "bush": false
-      },
-      {
-        "layer": 2,
-        "passable": false,
-        "bush": false
+        "collisionBoxes": []
       }
     ]
   }

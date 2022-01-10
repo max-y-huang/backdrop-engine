@@ -43,7 +43,7 @@ sf::IntRect TileSpriteManager::getAutoTileCornerImageBounds(int index, string co
 
 void TileSpriteManager::updateImage() {
   // Reset image.
-  image.create(48, 48);
+  image.create(48, 96);
   // Add corners to image.
   if (autoTile) {
     auto topLeftBounds = getAutoTileCornerImageBounds(index, "topLeft", Direction::UpLeft);
@@ -54,6 +54,11 @@ void TileSpriteManager::updateImage() {
     image.copy(spritesheetImage, 24, 0, topRightBounds);
     image.copy(spritesheetImage, 0, 24, bottomLeftBounds);
     image.copy(spritesheetImage, 24, 24, bottomRightBounds);
+    if (true) {
+      int x = 2 * (index % tilesetWidth);
+      int y = 3 * (index / tilesetWidth);
+      image.copy(spritesheetImage, 0, 48, sf::IntRect{48 * x, 48 * y, 48, 48});
+    }
   } else {
     int x = (index % tilesetWidth);
     int y = (index / tilesetWidth);

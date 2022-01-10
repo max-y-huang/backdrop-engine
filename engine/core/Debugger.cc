@@ -16,7 +16,7 @@ shared_ptr<Debugger> Debugger::getInstance() {
 }
 
 bool Debugger::isDebugMode() {
-  return true;
+  return false;
 }
 
 }  // namespace Backdrop

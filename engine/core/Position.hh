@@ -18,10 +18,6 @@ class Position {
   float getX();
   float getY();
   Direction getDirection();
-  // void moveUp();
-  // void moveDown();
-  // void moveLeft();
-  // void moveRight();
 };
 
 }  // namespace Backdrop

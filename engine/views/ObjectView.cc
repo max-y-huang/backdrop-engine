@@ -25,7 +25,7 @@ void ObjectView::renderCollisionBoxes() {
   for (auto object : objects) {
     for (auto collisionBox : object->collisionBoxes) {
       sf::Sprite sprite{collisionBoxTexture};
-      sprite.setTextureRect(sf::IntRect{0, 0, collisionBox->width, collisionBox->height});
+      sprite.setTextureRect(sf::IntRect{0, 0, int(collisionBox->width), int(collisionBox->height)});
       sprite.setPosition(collisionBox->getGlobalX(), collisionBox->getGlobalY());
       sprite.setColor(sf::Color{255, 0, 0, 84});
       window->draw(sprite);

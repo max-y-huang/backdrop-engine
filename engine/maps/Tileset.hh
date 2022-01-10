@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+#include "../core/CollisionBox.hh"
+
 using std::string;
 using std::vector;
 
@@ -14,8 +16,7 @@ class Tileset final {
  public:
   struct TileData {
     int layer;
-    bool passable;
-    bool bush;
+    vector<CollisionBox::InitializerList> collisionBoxes;
   };
 
  private:
@@ -23,7 +24,6 @@ class Tileset final {
   int width;
   int height;
   bool autoTiles;
-  int animationFrames;
   vector<Tileset::TileData> tileData;
   void loadData(string id);
 
@@ -33,7 +33,6 @@ class Tileset final {
   int getWidth();
   int getHeight();
   bool isAutoTiles();
-  int getAnimationFrames();
   vector<Tileset::TileData> getTileData();
 };
 

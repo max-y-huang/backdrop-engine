@@ -22,12 +22,12 @@ void Tileset::loadData(string name) {
   width = data[name]["width"];
   height = data[name]["height"];
   autoTiles = data[name]["autoTiles"];
-  animationFrames = data[name]["animationFrames"];
   for (auto itemData : data[name]["tileData"].items()) {
     Tileset::TileData data;
     data.layer = itemData.value()["layer"];
-    data.passable = itemData.value()["passable"];
-    data.bush = itemData.value()["bush"];
+    for (auto params : itemData.value()["collisionBoxes"].items()) {
+      data.collisionBoxes.push_back({float(params.value()["x"]), float(params.value()["y"]), float(params.value()["width"]), float(params.value()["height"])});
+    }
     tileData.push_back(data);
   }
 }
@@ -43,9 +43,6 @@ int Tileset::getHeight() {
 }
 bool Tileset::isAutoTiles() {
   return autoTiles;
-}
-int Tileset::getAnimationFrames() {
-  return animationFrames;
 }
 
 vector<Tileset::TileData> Tileset::getTileData() {
