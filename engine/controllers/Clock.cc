@@ -1,5 +1,6 @@
 #include "Clock.hh"
 
+#include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include <memory>
 
@@ -9,17 +10,16 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
-Clock::Clock(int fps) : frameCount{0}, tickLength{1000000.0 / fps} {
+Clock::Clock(shared_ptr<sf::RenderWindow> window, int fps) : window{window}, frameCount{0} {
+  window->setFramerateLimit(fps);
   clock.restart();
 }
 
 void Clock::update() {
   sf::Time elapsed = clock.getElapsedTime();
-  if (elapsed.asMicroseconds() >= tickLength) {
-    clock.restart();
-    ++frameCount;
-    notifyObservers(std::make_shared<Clock::State>(frameCount, elapsed.asMicroseconds()));
-  }
+  clock.restart();
+  ++frameCount;
+  notifyObservers(std::make_shared<Clock::State>(frameCount, elapsed.asMicroseconds()));
 }
 
 }  // namespace Backdrop

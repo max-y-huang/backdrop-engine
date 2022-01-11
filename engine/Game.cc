@@ -1,6 +1,7 @@
 #include "Game.hh"
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <memory>
 
 #include "controllers/Clock.hh"
@@ -26,7 +27,8 @@ namespace Backdrop {
 
 Game::Game() {
   window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, WINDOW_TITLE);
-  clock = std::make_shared<Clock>(FPS);
+  drawSplashScreen();
+  clock = std::make_shared<Clock>(window, FPS);
   keyboard = std::make_shared<Keyboard>();
   eraseView = std::make_shared<EraseView>(window);
   refreshView = std::make_shared<RefreshView>(window);
@@ -62,6 +64,22 @@ void Game::handleClose() {
       window->close();
     }
   }
+}
+
+void Game::drawSplashScreen() {
+  // sf::Image logoImage;
+  // logoImage.loadFromFile("assets/images/system/backdropLogo.png");
+  // sf::Image image;
+  // image.create(WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color::White);
+  // image.copy(logoImage, 0, 0);
+  std::cout << "DRAW SPLASH SCREEN" << std::endl;
+  window->clear();
+  // sf::Texture texture;
+  // texture.loadFromFile("assets/images/system/backdropLogo.png");
+  // texture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+  // texture.update(image, 0, 0);
+  // sf::Sprite sprite{texture};
+  // window->draw(sprite);
 }
 
 void Game::setMap(shared_ptr<Map> _map) {

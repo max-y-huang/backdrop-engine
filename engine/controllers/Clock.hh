@@ -1,6 +1,7 @@
 #ifndef CLOCK_HH
 #define CLOCK_HH
 
+#include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include <memory>
 
@@ -17,12 +18,12 @@ class Clock final : public Observer::Subject {
   };
 
  private:
+  shared_ptr<sf::RenderWindow> window;
   int frameCount;
-  double tickLength;
   sf::Clock clock;
 
  public:
-  Clock(int fps);
+  Clock(shared_ptr<sf::RenderWindow> window, int fps);
   void update();
 };
 
