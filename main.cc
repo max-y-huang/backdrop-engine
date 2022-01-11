@@ -45,6 +45,8 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
 
 int main() {
   vector<pair<int, int>> lava = {
+      {4, 1},
+      {5, 1},
       {4, 2},
       {5, 2}};
   vector<pair<int, int>> floor = {
@@ -52,8 +54,6 @@ int main() {
       {1, 1},
       {2, 1},
       {3, 1},
-      {4, 1},
-      {5, 1},
       {6, 1},
       {7, 1},
       {0, 2},
