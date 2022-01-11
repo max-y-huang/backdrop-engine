@@ -9,7 +9,7 @@ This repository contains the code for the game engine.
 Install the following dependencies:
 
 * g++ (for C++14)
-* [SFML](https://www.sfml-dev.org/index.php) (the game engine's graphics library)
+* [SFML (2.5.1)](https://www.sfml-dev.org/index.php) (for graphics)
 
 In Ubuntu, this can be done with:
 
