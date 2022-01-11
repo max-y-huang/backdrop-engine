@@ -29,8 +29,7 @@ void MapSpriteManager::updateSprite() {
     }
   }
   // Set texture.
-  texture.create(48 * width, 48 * height + 48);
-  texture.update(image, 0, 0);
+  texture.loadFromImage(image);
 }
 
 sf::Sprite MapSpriteManager::getSprite() {

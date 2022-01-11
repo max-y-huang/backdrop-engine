@@ -17,8 +17,7 @@ ObjectView::ObjectView(shared_ptr<sf::RenderWindow> _window, vector<shared_ptr<O
   shadowTexture.loadFromFile("assets/images/system/shadow.png");
   sf::Image collisionBoxImage;
   collisionBoxImage.create(48, 48, sf::Color::White);
-  collisionBoxTexture.create(48, 48);
-  collisionBoxTexture.update(collisionBoxImage, 0, 0);
+  collisionBoxTexture.loadFromImage(collisionBoxImage);
 }
 
 void ObjectView::renderCollisionBoxes() {

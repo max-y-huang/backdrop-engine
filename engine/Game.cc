@@ -1,7 +1,6 @@
 #include "Game.hh"
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <memory>
 
 #include "controllers/Clock.hh"
@@ -27,6 +26,7 @@ namespace Backdrop {
 
 Game::Game() {
   window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, WINDOW_TITLE);
+  setIcon();
   drawSplashScreen();
   clock = std::make_shared<Clock>(window, FPS);
   keyboard = std::make_shared<Keyboard>();
@@ -66,20 +66,26 @@ void Game::handleClose() {
   }
 }
 
+void Game::setIcon() {
+  sf::Image image;
+  image.loadFromFile("assets/images/system/icon.png");
+  window->setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
+}
+
 void Game::drawSplashScreen() {
-  // sf::Image logoImage;
-  // logoImage.loadFromFile("assets/images/system/backdropLogo.png");
-  // sf::Image image;
-  // image.create(WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color::White);
-  // image.copy(logoImage, 0, 0);
-  std::cout << "DRAW SPLASH SCREEN" << std::endl;
+  sf::Image logoImage;
+  logoImage.loadFromFile("assets/images/system/splashScreen.png");
+  sf::Image image;
+  image.create(WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color::Black);
+  int logoX = (window->getSize().x - logoImage.getSize().x) / 2;
+  int logoY = (window->getSize().y - logoImage.getSize().y) / 2;
+  image.copy(logoImage, logoX, logoY);
+  sf::Texture texture;
+  texture.loadFromImage(image);
+  sf::Sprite sprite{texture};
   window->clear();
-  // sf::Texture texture;
-  // texture.loadFromFile("assets/images/system/backdropLogo.png");
-  // texture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
-  // texture.update(image, 0, 0);
-  // sf::Sprite sprite{texture};
-  // window->draw(sprite);
+  window->draw(sprite);
+  window->display();
 }
 
 void Game::setMap(shared_ptr<Map> _map) {
