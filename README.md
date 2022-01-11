@@ -37,21 +37,13 @@ This creates the executable `main.out`, which can be opened with:
 
 #### Step 1
 
-Get your local IP address with the following command **in Powershell**:
+Run the following commands in WSL2:
 
-```powershell
-(ipconfig | Select-String -Pattern 'WSL' -Context 1, 5).Context.PostContext | Select-String -Pattern 'IPv4'
+```sh
+export DISPLAY=$(ip route | awk '/^default/ {print $3}'):0.0
+sudo -S service ssh start < password.txt
 ```
 
 #### Step 2
-
-Run the following commands **in WSL2**:
-
-```sh
-sudo service ssh start
-export DISPLAY=<IP_ADDRESS_FROM_STEP_1>:0.0
-```
-
-#### Step 3
 
 Open XLaunch with the default settings + no access control.
