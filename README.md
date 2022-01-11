@@ -41,7 +41,7 @@ Run the following commands in WSL2:
 
 ```sh
 export DISPLAY=$(ip route | awk '/^default/ {print $3}'):0.0
-sudo -S service ssh start < password.txt
+sudo service ssh start
 ```
 
 #### Step 2
