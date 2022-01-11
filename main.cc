@@ -44,6 +44,9 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
 }
 
 int main() {
+  vector<pair<int, int>> lava = {
+      {4, 2},
+      {5, 2}};
   vector<pair<int, int>> floor = {
       {0, 1},
       {1, 1},
@@ -56,8 +59,6 @@ int main() {
       {0, 2},
       {1, 2},
       {3, 2},
-      {4, 2},
-      {5, 2},
       {6, 2},
       {7, 2},
       {0, 3},
@@ -110,10 +111,16 @@ int main() {
 
   for (int y = 0; y < map->getHeight(); ++y) {
     for (int x = 0; x < map->getWidth(); ++x) {
-      map->addTile(1, x, y);
       bool temp = false;
       for (pair<int, int> temp2 : floor) {
         if (temp2.first == x && temp2.second == y) {
+          map->addTile(1, x, y);
+          temp = true;
+        }
+      }
+      for (pair<int, int> temp2 : lava) {
+        if (temp2.first == x && temp2.second == y) {
+          map->addTile(2, x, y);
           temp = true;
         }
       }

@@ -11,12 +11,11 @@ using std::shared_ptr;
 namespace Backdrop {
 
 class Tile {
-  Tileset tileset;
   int index;
 
  public:
   shared_ptr<TileSpriteManager> spriteManager;
-  Tile(Tileset tileset, int index);
+  Tile(int index, Tileset::TileData tileData);
   int getIndex();
 };
 

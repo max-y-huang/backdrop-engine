@@ -16,7 +16,17 @@ map<string, Backdrop::Action> Action::enumMap{
 };
 
 Backdrop::Action Action::getAction(string code) {
-  return enumMap.count(code) ? enumMap[code] : Backdrop::Action::_None;
+  return enumMap.count(code) ? enumMap[code] : Backdrop::Action::NoAction;
+}
+
+map<string, Backdrop::AutoTileType> AutoTileType::enumMap{
+    {"none", Backdrop::AutoTileType::NoAutoTile},
+    {"normal", Backdrop::AutoTileType::Normal},
+    {"wall", Backdrop::AutoTileType::Wall},
+};
+
+Backdrop::AutoTileType AutoTileType::getAutoTileType(string code) {
+  return enumMap.count(code) ? enumMap[code] : Backdrop::AutoTileType::NoAutoTile;
 }
 
 }  // namespace Backdrop::ConfigMap

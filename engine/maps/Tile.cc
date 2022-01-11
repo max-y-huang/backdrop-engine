@@ -1,9 +1,12 @@
 #include "Tile.hh"
 
+#include "../managers/TileSpriteManager.hh"
+#include "Tileset.hh"
+
 namespace Backdrop {
 
-Tile::Tile(Tileset tileset, int index) : tileset{tileset}, index{index} {
-  spriteManager = std::make_shared<TileSpriteManager>(index, tileset.isAutoTiles(), tileset.getWidth(), "assets/images/tilesets/" + tileset.getId() + ".png");
+Tile::Tile(int index, Tileset::TileData tileData) : index{index} {
+  spriteManager = std::make_shared<TileSpriteManager>(tileData.autoTileType, tileData.spritesheetSrc);
 }
 
 int Tile::getIndex() {

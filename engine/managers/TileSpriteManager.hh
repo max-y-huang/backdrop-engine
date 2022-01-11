@@ -19,8 +19,7 @@ class TileSpriteManager final {
   sf::Image image;
 
   int index;
-  bool autoTile;
-  int tilesetWidth;
+  AutoTileType autoTileType;
   map<Direction, bool> sameTileMap;
   json autoTileData;
   sf::IntRect getAutoTileCornerImageBounds(int index, string corner, Direction cornerDireciotn);
@@ -28,7 +27,7 @@ class TileSpriteManager final {
   void updateImage();
 
  public:
-  TileSpriteManager(int index, bool autoTile, int tilesetWidth, string spritesheetSrc);
+  TileSpriteManager(AutoTileType autoTileType, string spritesheetSrc);
   virtual ~TileSpriteManager() = default;
   void updateSameTileMap(Direction direction, bool val);
   sf::Image getImage();

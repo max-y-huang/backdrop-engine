@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "../core/CollisionBox.hh"
+#include "../enums.hh"
 
 using std::string;
 using std::vector;
@@ -15,24 +16,20 @@ namespace Backdrop {
 class Tileset final {
  public:
   struct TileData {
+    string spritesheetSrc;
     int layer;
+    AutoTileType autoTileType;
     vector<CollisionBox::InitializerList> collisionBoxes;
   };
 
  private:
   string id;
-  int width;
-  int height;
-  bool autoTiles;
   vector<Tileset::TileData> tileData;
   void loadData(string id);
 
  public:
   Tileset(string id);
   string getId();
-  int getWidth();
-  int getHeight();
-  bool isAutoTiles();
   vector<Tileset::TileData> getTileData();
 };
 

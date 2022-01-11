@@ -5,6 +5,8 @@
 #include <string>
 
 #include "../../lib/nlohmann/json.hpp"
+#include "../configMaps.hh"
+#include "../enums.hh"
 
 using nlohmann::json;
 using std::string;
@@ -19,30 +21,22 @@ void Tileset::loadData(string name) {
   std::ifstream file{"config/tilesets.json"};
   json data;
   file >> data;
-  width = data[name]["width"];
-  height = data[name]["height"];
-  autoTiles = data[name]["autoTiles"];
-  for (auto itemData : data[name]["tileData"].items()) {
-    Tileset::TileData data;
-    data.layer = itemData.value()["layer"];
-    for (auto params : itemData.value()["collisionBoxes"].items()) {
-      data.collisionBoxes.push_back({float(params.value()["x"]), float(params.value()["y"]), float(params.value()["width"]), float(params.value()["height"])});
+  for (auto tile : data[id].items()) {
+    auto params = tile.value();
+    string spritesheetSrc = string(params["spritesheetSrc"]);
+    int layer = int(params["layer"]);
+    AutoTileType autoTileType = ConfigMap::AutoTileType::getAutoTileType(string(params["autoTileType"]));
+    vector<CollisionBox::InitializerList> collisionBoxes;
+    for (auto collisionBox : params["collisionBoxes"].items()) {
+      auto params = collisionBox.value();
+      collisionBoxes.push_back({float(params["x"]), float(params["y"]), float(params["width"]), float(params["height"])});
     }
-    tileData.push_back(data);
+    tileData.push_back({spritesheetSrc, layer, autoTileType, collisionBoxes});
   }
 }
 
 string Tileset::getId() {
   return id;
-}
-int Tileset::getWidth() {
-  return width;
-}
-int Tileset::getHeight() {
-  return height;
-}
-bool Tileset::isAutoTiles() {
-  return autoTiles;
 }
 
 vector<Tileset::TileData> Tileset::getTileData() {

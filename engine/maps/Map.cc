@@ -60,8 +60,8 @@ void Map::updateTileSpriteManagers(int x, int y, int layer) {
 }
 
 void Map::addTile(int index, int x, int y) {
-  auto tile = std::make_shared<Tile>(tileset, index);
   Tileset::TileData data = tileset.getTileData()[index];
+  auto tile = std::make_shared<Tile>(index, data);
   int layer = data.layer;
   if (data.collisionBoxes.size() > 0) {
     game.addObject(std::make_shared<Object>(Position{float(x), float(y)}, data.collisionBoxes));

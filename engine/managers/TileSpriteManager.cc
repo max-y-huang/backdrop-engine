@@ -10,11 +10,9 @@ using std::string;
 
 namespace Backdrop {
 
-TileSpriteManager::TileSpriteManager(int index, bool autoTile, int tilesetWidth, string spritesheetSrc) : index{index}, autoTile{autoTile}, tilesetWidth{tilesetWidth} {
+TileSpriteManager::TileSpriteManager(AutoTileType autoTileType, string spritesheetSrc) : autoTileType{autoTileType} {
   spritesheetImage.loadFromFile(spritesheetSrc);
-  if (autoTile) {
-    setAutoTileData();
-  }
+  setAutoTileData();
   updateImage();
 }
 
@@ -34,18 +32,16 @@ sf::IntRect TileSpriteManager::getAutoTileCornerImageBounds(int index, string co
   auto data = autoTileData[corner][!sameTileMap[cornerDirection] * 4 +
                                    !sameTileMap[yDirection] * 2 +
                                    !sameTileMap[xDirection]];
-  int ox = 2 * (index % tilesetWidth);
-  int oy = 3 * (index / tilesetWidth);
-  int x = 48 * ox + 24 * int(data["x"]);
-  int y = 48 * oy + 24 * int(data["y"]);
-  return sf::IntRect{x, y, 24, 24};
+  return sf::IntRect{24 * int(data["x"]), 24 * int(data["y"]), 24, 24};
 }
 
 void TileSpriteManager::updateImage() {
   // Reset image.
   image.create(48, 96);
   // Add corners to image.
-  if (autoTile) {
+  if (autoTileType == AutoTileType::NoAutoTile) {
+    image.copy(spritesheetImage, 0, 0, sf::IntRect{0, 0, 48, 48});
+  } else {
     auto topLeftBounds = getAutoTileCornerImageBounds(index, "topLeft", Direction::UpLeft);
     auto topRightBounds = getAutoTileCornerImageBounds(index, "topRight", Direction::UpRight);
     auto bottomLeftBounds = getAutoTileCornerImageBounds(index, "bottomLeft", Direction::DownLeft);
@@ -54,15 +50,18 @@ void TileSpriteManager::updateImage() {
     image.copy(spritesheetImage, 24, 0, topRightBounds);
     image.copy(spritesheetImage, 0, 24, bottomLeftBounds);
     image.copy(spritesheetImage, 24, 24, bottomRightBounds);
-    if (true) {
-      int x = 2 * (index % tilesetWidth);
-      int y = 3 * (index / tilesetWidth);
-      image.copy(spritesheetImage, 0, 48, sf::IntRect{48 * x, 48 * y, 48, 48});
+    if (autoTileType == AutoTileType::Wall && !sameTileMap[Direction::Down]) {
+      if (!sameTileMap[Direction::Left]) {
+        image.copy(spritesheetImage, 0, 48, sf::IntRect{0, 144, 24, 48});
+      } else {
+        image.copy(spritesheetImage, 0, 48, sf::IntRect{48, 144, 24, 48});
+      }
+      if (!sameTileMap[Direction::Right]) {
+        image.copy(spritesheetImage, 24, 48, sf::IntRect{72, 144, 24, 48});
+      } else {
+        image.copy(spritesheetImage, 24, 48, sf::IntRect{24, 144, 24, 48});
+      }
     }
-  } else {
-    int x = (index % tilesetWidth);
-    int y = (index / tilesetWidth);
-    image.copy(spritesheetImage, 0, 0, sf::IntRect{48 * x, 48 * y, 48, 48});
   }
 }
 

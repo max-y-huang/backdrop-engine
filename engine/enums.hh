@@ -15,13 +15,19 @@ enum Direction {
 };
 
 enum Action {
-  _None,
+  NoAction,
   MoveUp,
   MoveDown,
   MoveLeft,
   MoveRight,
   Dash,
   Attack,
+};
+
+enum AutoTileType {
+  NoAutoTile,
+  Normal,
+  Wall,
 };
 
 }  // namespace Backdrop
