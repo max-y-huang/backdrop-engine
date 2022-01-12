@@ -1,6 +1,7 @@
 #include "Map.hh"
 
 #include "../Game.hh"
+#include "../controllers/Clock.hh"
 #include "../core/CollisionBox.hh"
 #include "../core/Position.hh"
 #include "../enums.hh"
@@ -14,6 +15,7 @@ namespace Backdrop {
 
 Map::Map(Game &game, Tileset tileset, int width, int height) : game{game}, tileset{tileset}, width{width}, height{height} {
   spriteManager = std::make_shared<MapSpriteManager>(tiles);
+  Clock::getInstance()->attach(spriteManager, 200);
   tiles.resize(height);
   for (int y = 0; y < height; ++y) {
     tiles[y].resize(width);

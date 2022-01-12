@@ -5,7 +5,6 @@
 #include <memory>
 #include <vector>
 
-#include "controllers/Clock.hh"
 #include "controllers/Keyboard.hh"
 #include "managers/CollisionManager.hh"
 #include "maps/Map.hh"
@@ -23,7 +22,6 @@ namespace Backdrop {
 
 class Game final {
   shared_ptr<sf::RenderWindow> window;  // Leaks 5,475 + 56 bytes from graphics driver(?).
-  shared_ptr<Clock> clock;
   shared_ptr<Keyboard> keyboard;
   shared_ptr<EraseView> eraseView;
   shared_ptr<RefreshView> refreshView;

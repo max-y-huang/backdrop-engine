@@ -10,6 +10,8 @@
 namespace Backdrop {
 
 class Clock final : public Observer::Subject {
+  static shared_ptr<Clock> instance;
+
  public:
   struct State final : public Observer::State {
     int frameCount;
@@ -24,6 +26,10 @@ class Clock final : public Observer::Subject {
 
  public:
   Clock(shared_ptr<sf::RenderWindow> window, int fps);
+  Clock(Clock &other) = delete;                 // Disallow instances of this class.
+  void operator=(const Clock &other) = delete;  // Disallow instances of this class.
+  static void makeInstance(shared_ptr<sf::RenderWindow> window, int fps);
+  static shared_ptr<Clock> getInstance();
   void update();
 };
 
