@@ -36,6 +36,7 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
   };
 
  private:
+  bool visible = true;
   vector<EventListener<Clock::State>> onTickFunctions;
   vector<EventListener<Keyboard::State>> onActionKeyFunctions;
   void onNotify(shared_ptr<Observer::State> state);
@@ -48,7 +49,6 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
   shared_ptr<ObjectSpriteManager> spriteManager;
   Object() {}
   Object(Position _position, vector<CollisionBox::InitializerList> _collisionBoxes);
-  // virtual ~Object() = default;
   int onTick(function<void(shared_ptr<Clock::State>)> func);
   int onActionKey(function<void(shared_ptr<Keyboard::State>)> func);
   void removeEventListener(int id);
@@ -56,6 +56,8 @@ class Object : public Observer, public Observer::Subject, public std::enable_sha
   void moveTo(Position _position);
   void moveTo(float x, float y, Direction direction);
   void moveTo(float x, float y);
+  bool isVisible();
+  void setVisible(bool _visible);
 };
 
 }  // namespace Backdrop

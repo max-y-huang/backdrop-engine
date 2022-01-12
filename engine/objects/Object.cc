@@ -105,4 +105,11 @@ void Object::moveTo(float x, float y) {
   moveTo(x / 48, y / 48, position.direction);
 }
 
+bool Object::isVisible() {
+  return visible;
+}
+void Object::setVisible(bool _visible) {
+  visible = _visible;
+}
+
 }  // namespace Backdrop

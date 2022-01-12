@@ -26,7 +26,7 @@ void ObjectView::renderCollisionBoxes() {
       sf::Sprite sprite{collisionBoxTexture};
       sprite.setTextureRect(sf::IntRect{0, 0, int(collisionBox->width), int(collisionBox->height)});
       sprite.setPosition(collisionBox->getGlobalX(), collisionBox->getGlobalY());
-      sprite.setColor(sf::Color{255, 0, 0, 84});
+      sprite.setColor(sf::Color{255, 0, 255, 84});
       window->draw(sprite);
     }
   }
@@ -34,25 +34,29 @@ void ObjectView::renderCollisionBoxes() {
 
 void ObjectView::renderShadows() {
   for (auto object : objects) {
-    auto character = std::dynamic_pointer_cast<Character>(object);
-    float x = object->position.getX();
-    float y = object->position.getY();
-    if (character) {
-      sf::Sprite sprite{shadowTexture};
-      sprite.setPosition(x, y);
-      window->draw(sprite);
+    if (object->isVisible()) {
+      auto character = std::dynamic_pointer_cast<Character>(object);
+      float x = object->position.getX();
+      float y = object->position.getY();
+      if (character) {
+        sf::Sprite sprite{shadowTexture};
+        sprite.setPosition(x, y);
+        window->draw(sprite);
+      }
     }
   }
 }
 
 void ObjectView::renderObjects() {
   for (auto object : objects) {
-    auto character = std::dynamic_pointer_cast<Character>(object);
-    float x = object->position.getX();
-    float y = object->position.getY();
-    sf::Sprite sprite = object->spriteManager->getSprite();
-    sprite.setPosition(x, y);
-    window->draw(sprite);
+    if (object->isVisible()) {
+      auto character = std::dynamic_pointer_cast<Character>(object);
+      float x = object->position.getX();
+      float y = object->position.getY();
+      sf::Sprite sprite = object->spriteManager->getSprite();
+      sprite.setPosition(x, y);
+      window->draw(sprite);
+    }
   }
 }
 
