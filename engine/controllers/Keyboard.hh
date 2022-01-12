@@ -16,6 +16,8 @@ namespace Backdrop {
 // NOTE: Mouse buttons are stored as keyboard keys (with an offset of +100).
 
 class Keyboard final : public Observer::Subject, public Observer {
+  static shared_ptr<Keyboard> instance;
+
  public:
   struct State final : public Observer::State {
     Action action;
@@ -32,6 +34,9 @@ class Keyboard final : public Observer::Subject, public Observer {
 
  public:
   Keyboard();
+  Keyboard(Keyboard &other) = delete;              // Disallow instances of this class.
+  void operator=(const Keyboard &other) = delete;  // Disallow instances of this class.
+  static shared_ptr<Keyboard> getInstance();
   void update();
 };
 

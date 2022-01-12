@@ -28,8 +28,7 @@ Game::Game() {
   window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, WINDOW_TITLE);
   setIcon();
   drawSplashScreen();
-  Clock::makeInstance(window, FPS);
-  keyboard = std::make_shared<Keyboard>();
+  Clock::makeInstance(window, FPS);  // Needs to be made with arguments.
   eraseView = std::make_shared<EraseView>(window);
   refreshView = std::make_shared<RefreshView>(window);
   frameRateView = std::make_shared<FrameRateView>(window);
@@ -38,7 +37,7 @@ Game::Game() {
   collisionManager = std::make_shared<CollisionManager>(objects);
 
   Clock::getInstance()->attach(FrameRate::getInstance(), 300);
-  Clock::getInstance()->attach(keyboard, 200);
+  Clock::getInstance()->attach(Keyboard::getInstance(), 200);
   Clock::getInstance()->attach(eraseView, 99);
   Clock::getInstance()->attach(refreshView, 0);
   Clock::getInstance()->attach(frameRateView, 1);
@@ -52,7 +51,7 @@ Game::~Game() {
 void Game::run() {
   while (window->isOpen()) {
     handleClose();
-    keyboard->update();
+    Keyboard::getInstance()->update();
     Clock::getInstance()->update();
   }
 }
@@ -96,7 +95,7 @@ void Game::addObject(shared_ptr<Object> object) {
   objects.push_back(object);
   Clock::getInstance()->attach(object, 100);
   Clock::getInstance()->attach(object->spriteManager, 200);
-  keyboard->attach(object, 100);
+  Keyboard::getInstance()->attach(object, 100);
   object->attach(collisionManager, 200);
 }
 
@@ -105,7 +104,7 @@ void Game::removeObject(shared_ptr<Object> object) {
     if (object == objects[i]) {
       Clock::getInstance()->detach(object);
       Clock::getInstance()->detach(object->spriteManager);
-      keyboard->detach(object);
+      Keyboard::getInstance()->detach(object);
       objects.erase(objects.begin() + i);
       --i;
     }

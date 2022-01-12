@@ -15,6 +15,15 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
+shared_ptr<Keyboard> Keyboard::instance = nullptr;
+
+shared_ptr<Keyboard> Keyboard::getInstance() {
+  if (!instance) {
+    instance = std::make_shared<Keyboard>();
+  }
+  return instance;
+}
+
 Keyboard::Keyboard() {
   createActionMap();
 }
