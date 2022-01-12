@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall
 EXEC = main.out
-SOURCES = $(shell find ./ -name '*.cc')
+SOURCES = main.cc $(shell find ./engine -name '*.cc')
 OBJECTS = ${SOURCES:.cc=.o}
 DEPENDS = ${OBJECTS:.o=.d}
 
