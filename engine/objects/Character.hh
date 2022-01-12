@@ -18,7 +18,7 @@ class Character : public Object {
   string id;
   float walkSpeed = 3;
   float dashSpeed = 7;
-  void moveInDirection(Direction direction);
+  void moveInDirection(Direction direction, float speedMultiplier);
 
  public:
   bool dashing = false;
@@ -27,6 +27,10 @@ class Character : public Object {
   void moveDown();
   void moveLeft();
   void moveRight();
+  void moveUp(float speedMultiplier);
+  void moveDown(float speedMultiplier);
+  void moveLeft(float speedMultiplier);
+  void moveRight(float speedMultiplier);
   void setDash(bool _dashing);
 };
 

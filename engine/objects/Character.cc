@@ -30,9 +30,9 @@ Character::Character(string id, Position _position) : id{id} {
   moveTo(_position);
 }
 
-void Character::moveInDirection(Direction direction) {
+void Character::moveInDirection(Direction direction, float speedMultiplier) {
   Position prevPosition = position;
-  float speed = (dashing ? dashSpeed : walkSpeed) / FrameRate::getInstance()->getFrameRate() * 48;
+  float speed = (dashing ? dashSpeed : walkSpeed) / FrameRate::getInstance()->getFrameRate() * 48 * speedMultiplier;
   if (direction == Direction::Up) {
     position.y -= speed;
   } else if (direction == Direction::Down) {
@@ -48,17 +48,29 @@ void Character::moveInDirection(Direction direction) {
   notifyObservers(collideState);
 }
 
+void Character::moveUp(float speedMultiplier) {
+  moveInDirection(Direction::Up, speedMultiplier);
+}
+void Character::moveDown(float speedMultiplier) {
+  moveInDirection(Direction::Down, speedMultiplier);
+}
+void Character::moveLeft(float speedMultiplier) {
+  moveInDirection(Direction::Left, speedMultiplier);
+}
+void Character::moveRight(float speedMultiplier) {
+  moveInDirection(Direction::Right, speedMultiplier);
+}
 void Character::moveUp() {
-  moveInDirection(Direction::Up);
+  moveUp(1);
 }
 void Character::moveDown() {
-  moveInDirection(Direction::Down);
+  moveDown(1);
 }
 void Character::moveLeft() {
-  moveInDirection(Direction::Left);
+  moveLeft(1);
 }
 void Character::moveRight() {
-  moveInDirection(Direction::Right);
+  moveRight(1);
 }
 
 void Character::setDash(bool _dashing) {

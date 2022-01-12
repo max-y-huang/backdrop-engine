@@ -15,8 +15,9 @@ using std::vector;
 using std::weak_ptr;
 
 void addKeyboardControl(Game& game, shared_ptr<Character> character) {
+  bool moveUp = false, moveDown = false, moveLeft = false, moveRight = false;
   auto _character = weak_ptr<Character>(character);
-  character->onActionKey([&game, _character](shared_ptr<Keyboard::State> state) {
+  character->onActionKey([_character, &moveUp, &moveDown, &moveLeft, &moveRight](shared_ptr<Keyboard::State> state) {
     auto character = _character.lock();
     if (!character) {
       return;
@@ -24,22 +25,66 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
     // Handle move.
     if (state->active) {
       if (state->action == Action::MoveUp) {
-        character->moveUp();
+        moveUp = true;
       }
       if (state->action == Action::MoveDown) {
-        character->moveDown();
+        moveDown = true;
       }
       if (state->action == Action::MoveLeft) {
-        character->moveLeft();
+        moveLeft = true;
       }
       if (state->action == Action::MoveRight) {
-        character->moveRight();
+        moveRight = true;
       }
     }
     // Handle dash.
     if (state->action == Action::Dash) {
       character->setDash(state->active);
     }
+  });
+
+  character->onTick([_character, &moveUp, &moveDown, &moveLeft, &moveRight](shared_ptr<Clock::State> state) {
+    auto character = _character.lock();
+    if (!character) {
+      return;
+    }
+    if (moveUp && moveDown) {
+      moveUp = false;
+      moveDown = false;
+    }
+    if (moveLeft && moveRight) {
+      moveLeft = false;
+      moveRight = false;
+    }
+    if (moveUp) {
+      if (moveLeft) {
+        character->moveLeft(sqrt(2) / 2);
+        character->moveUp(sqrt(2) / 2);
+      } else if (moveRight) {
+        character->moveRight(sqrt(2) / 2);
+        character->moveUp(sqrt(2) / 2);
+      } else {
+        character->moveUp();
+      }
+    } else if (moveDown) {
+      if (moveLeft) {
+        character->moveLeft(sqrt(2) / 2);
+        character->moveDown(sqrt(2) / 2);
+      } else if (moveRight) {
+        character->moveRight(sqrt(2) / 2);
+        character->moveDown(sqrt(2) / 2);
+      } else {
+        character->moveDown();
+      }
+    } else if (moveLeft) {
+      character->moveLeft();
+    } else if (moveRight) {
+      character->moveRight();
+    }
+    moveUp = false;
+    moveDown = false;
+    moveLeft = false;
+    moveRight = false;
   });
 }
 
