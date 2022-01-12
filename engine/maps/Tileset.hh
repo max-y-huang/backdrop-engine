@@ -19,6 +19,7 @@ class Tileset final {
     string spritesheetSrc;
     int layer;
     AutoTileType autoTileType;
+    bool animated;
     vector<CollisionBox::InitializerList> collisionBoxes;
   };
 

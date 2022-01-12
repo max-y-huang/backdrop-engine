@@ -26,12 +26,13 @@ void Tileset::loadData(string name) {
     string spritesheetSrc = string(params["spritesheetSrc"]);
     int layer = int(params["layer"]);
     AutoTileType autoTileType = ConfigMap::AutoTileType::getAutoTileType(string(params["autoTileType"]));
+    bool animated = bool(params["animated"]);
     vector<CollisionBox::InitializerList> collisionBoxes;
     for (auto collisionBox : params["collisionBoxes"].items()) {
       auto params = collisionBox.value();
       collisionBoxes.push_back({float(params["x"]), float(params["y"]), float(params["width"]), float(params["height"])});
     }
-    tileData.push_back({spritesheetSrc, layer, autoTileType, collisionBoxes});
+    tileData.push_back({spritesheetSrc, layer, autoTileType, animated, collisionBoxes});
   }
 }
 

@@ -45,25 +45,26 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
 
 int main() {
   vector<pair<int, int>> lava = {
-      {4, 1},
-      {5, 1},
       {4, 2},
-      {5, 2}};
+      {5, 2},
+      {6, 2},
+      {6, 3},
+  };
   vector<pair<int, int>> floor = {
       {0, 1},
       {1, 1},
       {2, 1},
       {3, 1},
+      {4, 1},
+      {5, 1},
       {6, 1},
       {7, 1},
       {0, 2},
       {1, 2},
       {3, 2},
-      {6, 2},
       {7, 2},
       {0, 3},
       {1, 3},
-      {6, 3},
       {7, 3},
       {0, 4},
       {1, 4},
@@ -101,7 +102,8 @@ int main() {
       {10, 11},
       {11, 11},
       {12, 11},
-      {12, 12}};
+      {12, 12},
+  };
 
   Game game;
   Tileset tileset{"ground_a"};
@@ -112,14 +114,14 @@ int main() {
   for (int y = 0; y < map->getHeight(); ++y) {
     for (int x = 0; x < map->getWidth(); ++x) {
       bool temp = false;
-      for (pair<int, int> temp2 : floor) {
-        if (temp2.first == x && temp2.second == y) {
+      for (auto c : floor) {
+        if (c.first == x && c.second == y) {
           map->addTile(1, x, y);
           temp = true;
         }
       }
-      for (pair<int, int> temp2 : lava) {
-        if (temp2.first == x && temp2.second == y) {
+      for (auto c : lava) {
+        if (c.first == x && c.second == y) {
           map->addTile(2, x, y);
           temp = true;
         }
