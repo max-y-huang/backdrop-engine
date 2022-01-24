@@ -1,12 +1,15 @@
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <utility>
 
 #include "engine/engine.hh"
+#include "lib/nlohmann/json.hpp"
 
 using namespace Backdrop;
 
+using nlohmann::json;
 using std::cout;
 using std::endl;
 using std::pair;
@@ -89,92 +92,19 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
 }
 
 int main() {
-  vector<pair<int, int>> lava = {
-      {4, 2},
-      {5, 2},
-      {6, 2},
-      {6, 3},
-  };
-  vector<pair<int, int>> floor = {
-      {0, 1},
-      {1, 1},
-      {2, 1},
-      {3, 1},
-      {4, 1},
-      {5, 1},
-      {6, 1},
-      {7, 1},
-      {0, 2},
-      {1, 2},
-      {3, 2},
-      {7, 2},
-      {0, 3},
-      {1, 3},
-      {7, 3},
-      {0, 4},
-      {1, 4},
-      {3, 4},
-      {5, 4},
-      {6, 4},
-      {7, 4},
-      {0, 5},
-      {5, 5},
-      {6, 5},
-      {7, 5},
-      {0, 6},
-      {1, 6},
-      {2, 6},
-      {3, 6},
-      {5, 6},
-      {6, 6},
-      {7, 6},
-      {0, 7},
-      {1, 7},
-      {2, 7},
-      {3, 7},
-      {4, 7},
-      {5, 7},
-      {6, 7},
-      {7, 7},
-      {10, 8},
-      {10, 9},
-      {11, 9},
-      {12, 9},
-      {13, 9},
-      {10, 10},
-      {12, 10},
-      {9, 11},
-      {10, 11},
-      {11, 11},
-      {12, 11},
-      {12, 12},
-  };
-
   Game game;
-  Tileset tileset{"ground_a"};
+  Tileset tileset{"dungeon"};
 
-  auto map = std::make_shared<Map>(game, tileset, 20, 15);
+  std::ifstream file{"config/maps.json"};
+  json data;
+  file >> data;
+
+  auto map = std::make_shared<Map>(game, tileset, int(data["width"]), int(data["height"]));
   game.setMap(map);
 
-  for (int y = 0; y < map->getHeight(); ++y) {
-    for (int x = 0; x < map->getWidth(); ++x) {
-      bool temp = false;
-      for (auto c : floor) {
-        if (c.first == x && c.second == y) {
-          map->addTile(1, x, y);
-          temp = true;
-        }
-      }
-      for (auto c : lava) {
-        if (c.first == x && c.second == y) {
-          map->addTile(2, x, y);
-          temp = true;
-        }
-      }
-      if (!temp) {
-        map->addTile(0, x, y);
-      }
-    }
+  for (auto tile : data["tiles"].items()) {
+    auto params = tile.value();
+    map->addTile(params["index"], params["x"], params["y"]);
   }
 
   auto player = std::make_shared<Character>("jack", Position{1, 1, Direction::Down});

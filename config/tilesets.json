@@ -1,5 +1,5 @@
 {
-  "ground_a": [
+  "dungeon": [
     {
       "spritesheetSrc": "assets/images/tilesets/wall.png",
       "layer": 2,
