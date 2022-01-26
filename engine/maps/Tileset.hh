@@ -24,13 +24,11 @@ class Tileset final {
   };
 
  private:
-  string id;
   vector<Tileset::TileData> tileData;
-  void loadData(string id);
+  void loadData();
 
  public:
-  Tileset(string id);
-  string getId();
+  Tileset();
   vector<Tileset::TileData> getTileData();
 };
 

@@ -1,29 +1,23 @@
-{
-  "dungeon": [
-    {
-      "spritesheetSrc": "assets/images/tilesets/wall.png",
-      "layer": 2,
-      "autoTileType": "wall",
-      "animated": false,
-      "collisionBoxes": [
-        { "x": 0, "y": 0, "width": 48, "height": 78 }
-      ]
-    },
-    {
-      "spritesheetSrc": "assets/images/tilesets/floor.png",
-      "layer": 0,
-      "autoTileType": "none",
-      "animated": false,
-      "collisionBoxes": []
-    },
-    {
-      "spritesheetSrc": "assets/images/tilesets/lava.png",
-      "layer": 1,
-      "autoTileType": "normal",
-      "animated": true,
-      "collisionBoxes": [
-        { "x": 0, "y": 0, "width": 48, "height": 48 }
-      ]
-    }
-  ]
-}
+[
+  {
+    "spritesheetSrc": "assets/images/tilesets/wall.png",
+    "layer": 2,
+    "autoTileType": "wall",
+    "animated": false,
+    "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 78 }]
+  },
+  {
+    "spritesheetSrc": "assets/images/tilesets/floor.png",
+    "layer": 0,
+    "autoTileType": "none",
+    "animated": false,
+    "collisionBoxes": []
+  },
+  {
+    "spritesheetSrc": "assets/images/tilesets/lava.png",
+    "layer": 1,
+    "autoTileType": "normal",
+    "animated": true,
+    "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }]
+  }
+]

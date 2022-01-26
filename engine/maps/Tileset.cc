@@ -13,15 +13,15 @@ using std::string;
 
 namespace Backdrop {
 
-Tileset::Tileset(string id) : id{id} {
-  loadData(id);
+Tileset::Tileset() {
+  loadData();
 }
 
-void Tileset::loadData(string name) {
+void Tileset::loadData() {
   std::ifstream file{"config/tilesets.json"};
   json data;
   file >> data;
-  for (auto tile : data[id].items()) {
+  for (auto tile : data.items()) {
     auto params = tile.value();
     string spritesheetSrc = string(params["spritesheetSrc"]);
     int layer = int(params["layer"]);
@@ -34,10 +34,6 @@ void Tileset::loadData(string name) {
     }
     tileData.push_back({spritesheetSrc, layer, autoTileType, animated, collisionBoxes});
   }
-}
-
-string Tileset::getId() {
-  return id;
 }
 
 vector<Tileset::TileData> Tileset::getTileData() {

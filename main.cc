@@ -93,7 +93,7 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
 
 int main() {
   Game game;
-  Tileset tileset{"dungeon"};
+  Tileset tileset{};
 
   std::ifstream file{"config/maps.json"};
   json data;
