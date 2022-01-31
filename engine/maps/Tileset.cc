@@ -32,7 +32,9 @@ void Tileset::loadData() {
       auto params = collisionBox.value();
       collisionBoxes.push_back({float(params["x"]), float(params["y"]), float(params["width"]), float(params["height"])});
     }
-    tileData.push_back({spritesheetSrc, layer, autoTileType, animated, collisionBoxes});
+    float offsetX = float(params["offset"]["x"]);
+    float offsetY = float(params["offset"]["y"]);
+    tileData.push_back({spritesheetSrc, layer, autoTileType, animated, collisionBoxes, offsetX, offsetY});
   }
 }
 

@@ -4,20 +4,54 @@
     "layer": 2,
     "autoTileType": "wall",
     "animated": false,
-    "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 78 }]
+    "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }],
+    "offset": {
+      "x": 0,
+      "y": -30
+    }
   },
   {
     "spritesheetSrc": "assets/images/tilesets/floor.png",
     "layer": 0,
     "autoTileType": "none",
     "animated": false,
-    "collisionBoxes": []
+    "collisionBoxes": [],
+    "offset": {
+      "x": 0,
+      "y": 0
+    }
   },
   {
     "spritesheetSrc": "assets/images/tilesets/lava.png",
     "layer": 1,
     "autoTileType": "normal",
     "animated": true,
-    "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }]
+    "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }],
+    "offset": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "spritesheetSrc": "assets/images/tilesets/mold.png",
+    "layer": 1,
+    "autoTileType": "normal",
+    "animated": false,
+    "collisionBoxes": [],
+    "offset": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "spritesheetSrc": "assets/images/tilesets/sign.png",
+    "layer": 1,
+    "autoTileType": "none",
+    "animated": false,
+    "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }],
+    "offset": {
+      "x": 0,
+      "y": 0
+    }
   }
 ]

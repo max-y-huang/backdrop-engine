@@ -13,7 +13,7 @@ using std::string;
 
 namespace Backdrop {
 
-TileSpriteManager::TileSpriteManager(string spritesheetSrc, AutoTileType autoTileType, bool animated) : autoTileType{autoTileType}, animated{animated} {
+TileSpriteManager::TileSpriteManager(string spritesheetSrc, AutoTileType autoTileType, bool animated, float offsetX, float offsetY) : autoTileType{autoTileType}, animated{animated}, offsetX{offsetX}, offsetY{offsetY} {
   spritesheetImage.loadFromFile(spritesheetSrc);
   setAutoTileData();
   images.resize(animated ? 3 : 1);
@@ -87,6 +87,13 @@ sf::Image TileSpriteManager::getImage(int frame) {
     return images[frame];
   }
   return images[0];
+}
+
+float TileSpriteManager::getOffsetX() {
+  return offsetX;
+}
+float TileSpriteManager::getOffsetY() {
+  return offsetY;
 }
 
 }  // namespace Backdrop

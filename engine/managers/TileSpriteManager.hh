@@ -24,6 +24,8 @@ class TileSpriteManager final {
   int index;
   AutoTileType autoTileType;
   bool animated;
+  float offsetX;
+  float offsetY;
   map<Direction, bool> sameTileMap;
   json autoTileData;
   sf::IntRect getAutoTileCornerImageBounds(int index, string corner, Direction cornerDirection, int ox, int oy);
@@ -32,10 +34,12 @@ class TileSpriteManager final {
   void updateImageByFrame(int frame);
 
  public:
-  TileSpriteManager(string spritesheetSrc, AutoTileType autoTileType, bool animated);
+  TileSpriteManager(string spritesheetSrc, AutoTileType autoTileType, bool animated, float offsetX, float offsetY);
   virtual ~TileSpriteManager() = default;
   void updateSameTileMap(Direction direction, bool val);
   sf::Image getImage(int frame);
+  float getOffsetX();
+  float getOffsetY();
 };
 
 }  // namespace Backdrop

@@ -28,7 +28,7 @@ void MapSpriteManager::updateSprite() {
   int width = tiles[0].size();
   // Create image.
   sf::Image image;
-  image.create(48 * width, 48 * height + 48);
+  image.create(48 * width, 48 * height, sf::Color(0, 0, 0, 0));
   // Add tile images to image.
   for (int layer = 0; layer < 3; ++layer) {
     for (int y = 0; y < height; ++y) {
@@ -36,7 +36,31 @@ void MapSpriteManager::updateSprite() {
         if (tiles[y][x][layer]) {
           int frame = animationFrameColumn[animationFrame];
           sf::Image tileImage = tiles[y][x][layer]->spriteManager->getImage(frame);
-          image.copy(tileImage, x * 48, y * 48, sf::IntRect{0, 0, 48, 96}, true);
+          float offsetX = tiles[y][x][layer]->spriteManager->getOffsetX();
+          float offsetY = tiles[y][x][layer]->spriteManager->getOffsetY();
+          int cropX = 0;
+          int cropY = 0;
+          int cropWidth = tileImage.getSize().x;
+          int cropHeight = tileImage.getSize().y;
+          float drawX = x * 48 + offsetX;
+          float drawY = y * 48 + offsetY;
+          if (drawX < 0) {
+            cropX -= drawX;
+            cropWidth += drawX;
+            drawX = 0;
+          }
+          if (drawX + cropWidth >= width * 48) {
+            cropWidth = width * 48 - drawX;
+          }
+          if (drawY < 0) {
+            cropY -= drawY;
+            cropHeight += drawY;
+            drawY = 0;
+          }
+          if (drawY + cropHeight >= height * 48) {
+            cropHeight = height * 48 - drawY;
+          }
+          image.copy(tileImage, drawX, drawY, sf::IntRect{cropX, cropY, cropWidth, cropHeight}, true);
         }
       }
     }

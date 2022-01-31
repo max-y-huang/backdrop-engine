@@ -6,7 +6,7 @@
 namespace Backdrop {
 
 Tile::Tile(int index, Tileset::TileData tileData) : index{index} {
-  spriteManager = std::make_shared<TileSpriteManager>(tileData.spritesheetSrc, tileData.autoTileType, tileData.animated);
+  spriteManager = std::make_shared<TileSpriteManager>(tileData.spritesheetSrc, tileData.autoTileType, tileData.animated, tileData.offsetX, tileData.offsetY);
 }
 
 int Tile::getIndex() {

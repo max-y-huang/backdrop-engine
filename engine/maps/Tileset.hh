@@ -21,6 +21,8 @@ class Tileset final {
     AutoTileType autoTileType;
     bool animated;
     vector<CollisionBox::InitializerList> collisionBoxes;
+    float offsetX;
+    float offsetY;
   };
 
  private:
