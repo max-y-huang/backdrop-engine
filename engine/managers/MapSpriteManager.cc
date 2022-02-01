@@ -28,7 +28,9 @@ void MapSpriteManager::updateSprite() {
   int width = tiles[0].size();
   // Create image.
   sf::Image image;
+  sf::Image overheadImage;
   image.create(48 * width, 48 * height, sf::Color(0, 0, 0, 0));
+  overheadImage.create(48 * width, 48 * height, sf::Color(0, 0, 0, 0));
   // Add tile images to image.
   for (int layer = 0; layer < 3; ++layer) {
     for (int y = 0; y < height; ++y) {
@@ -36,6 +38,7 @@ void MapSpriteManager::updateSprite() {
         if (tiles[y][x][layer]) {
           int frame = animationFrameColumn[animationFrame];
           sf::Image tileImage = tiles[y][x][layer]->spriteManager->getImage(frame);
+          sf::Image overheadTileImage = tiles[y][x][layer]->spriteManager->getOverheadImage(frame);
           float offsetX = tiles[y][x][layer]->spriteManager->getOffsetX();
           float offsetY = tiles[y][x][layer]->spriteManager->getOffsetY();
           int cropX = 0;
@@ -61,16 +64,22 @@ void MapSpriteManager::updateSprite() {
             cropHeight = height * 48 - drawY;
           }
           image.copy(tileImage, drawX, drawY, sf::IntRect{cropX, cropY, cropWidth, cropHeight}, true);
+          overheadImage.copy(overheadTileImage, drawX, drawY, sf::IntRect{cropX, cropY, cropWidth, cropHeight}, true);
         }
       }
     }
   }
   // Set texture.
   texture.loadFromImage(image);
+  overheadTexture.loadFromImage(overheadImage);
 }
 
 sf::Sprite MapSpriteManager::getSprite() {
   sf::Sprite sprite{texture};
+  return sprite;
+}
+sf::Sprite MapSpriteManager::getOverheadSprite() {
+  sf::Sprite sprite{overheadTexture};
   return sprite;
 }
 

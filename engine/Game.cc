@@ -32,7 +32,8 @@ Game::Game() {
   eraseView = std::make_shared<EraseView>(window);
   refreshView = std::make_shared<RefreshView>(window);
   frameRateView = std::make_shared<FrameRateView>(window);
-  mapView = std::make_shared<MapView>(window, map);
+  mapView = std::make_shared<MapView>(window, map, false);
+  overheadMapView = std::make_shared<MapView>(window, map, true);
   objectView = std::make_shared<ObjectView>(window, objects);
   collisionManager = std::make_shared<CollisionManager>(objects);
 
@@ -41,8 +42,9 @@ Game::Game() {
   Clock::getInstance()->attach(eraseView, 99);
   Clock::getInstance()->attach(refreshView, 0);
   Clock::getInstance()->attach(frameRateView, 1);
-  Clock::getInstance()->attach(mapView, 51);
-  Clock::getInstance()->attach(objectView, 50);
+  Clock::getInstance()->attach(mapView, 52);
+  Clock::getInstance()->attach(overheadMapView, 50);
+  Clock::getInstance()->attach(objectView, 51);
 }
 
 Game::~Game() {

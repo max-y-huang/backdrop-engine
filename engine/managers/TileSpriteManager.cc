@@ -17,6 +17,7 @@ TileSpriteManager::TileSpriteManager(string spritesheetSrc, AutoTileType autoTil
   spritesheetImage.loadFromFile(spritesheetSrc);
   setAutoTileData();
   images.resize(animated ? 3 : 1);
+  overheadImages.resize(animated ? 3 : 1);
   updateImages();
 }
 
@@ -44,7 +45,8 @@ void TileSpriteManager::updateImageByFrame(int frame) {
   int ox = frame * 96;
   int oy = 0;
   // Reset image.
-  images[frame].create(48, isWall ? 96 : 48);
+  images[frame].create(48, isWall ? 96 : 48, sf::Color(0, 0, 0, 0));
+  overheadImages[frame].create(48, isWall ? 96 : 48, sf::Color(0, 0, 0, 0));
   // Add corners to image.
   if (autoTileType == AutoTileType::NoAutoTile) {
     images[frame].copy(spritesheetImage, 0, 0, sf::IntRect{ox, oy, 48, 48});
@@ -53,10 +55,17 @@ void TileSpriteManager::updateImageByFrame(int frame) {
     auto topRightBounds = getAutoTileCornerImageBounds(index, "topRight", Direction::UpRight, ox, oy);
     auto bottomLeftBounds = getAutoTileCornerImageBounds(index, "bottomLeft", Direction::DownLeft, ox, oy);
     auto bottomRightBounds = getAutoTileCornerImageBounds(index, "bottomRight", Direction::DownRight, ox, oy);
-    images[frame].copy(spritesheetImage, 0, 0, topLeftBounds);
-    images[frame].copy(spritesheetImage, 24, 0, topRightBounds);
-    images[frame].copy(spritesheetImage, 0, 24, bottomLeftBounds);
-    images[frame].copy(spritesheetImage, 24, 24, bottomRightBounds);
+    if (isWall) {
+      overheadImages[frame].copy(spritesheetImage, 0, 0, topLeftBounds);
+      overheadImages[frame].copy(spritesheetImage, 24, 0, topRightBounds);
+      overheadImages[frame].copy(spritesheetImage, 0, 24, bottomLeftBounds);
+      overheadImages[frame].copy(spritesheetImage, 24, 24, bottomRightBounds);
+    } else {
+      images[frame].copy(spritesheetImage, 0, 0, topLeftBounds);
+      images[frame].copy(spritesheetImage, 24, 0, topRightBounds);
+      images[frame].copy(spritesheetImage, 0, 24, bottomLeftBounds);
+      images[frame].copy(spritesheetImage, 24, 24, bottomRightBounds);
+    }
     if (isWall && !sameTileMap[Direction::Down]) {
       if (!sameTileMap[Direction::Left]) {
         images[frame].copy(spritesheetImage, 0, 48, sf::IntRect{ox, oy + 144, 24, 48});
@@ -87,6 +96,12 @@ sf::Image TileSpriteManager::getImage(int frame) {
     return images[frame];
   }
   return images[0];
+}
+sf::Image TileSpriteManager::getOverheadImage(int frame) {
+  if (animated) {
+    return overheadImages[frame];
+  }
+  return overheadImages[0];
 }
 
 float TileSpriteManager::getOffsetX() {

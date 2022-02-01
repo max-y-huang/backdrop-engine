@@ -11,12 +11,12 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
-MapView::MapView(shared_ptr<sf::RenderWindow> _window, shared_ptr<Map>& map) : map{map} {
+MapView::MapView(shared_ptr<sf::RenderWindow> _window, shared_ptr<Map>& map, bool overhead) : map{map}, overhead{overhead} {
   window = _window;
 }
 
 void MapView::render(shared_ptr<Clock::State> state) {
-  sf::Sprite sprite = map->spriteManager->getSprite();
+  sf::Sprite sprite = overhead ? map->spriteManager->getOverheadSprite() : map->spriteManager->getSprite();
   window->draw(sprite);
 }
 

@@ -21,6 +21,7 @@ namespace Backdrop {
 class TileSpriteManager final {
   sf::Image spritesheetImage;
   vector<sf::Image> images;
+  vector<sf::Image> overheadImages;
   int index;
   AutoTileType autoTileType;
   bool animated;
@@ -38,6 +39,7 @@ class TileSpriteManager final {
   virtual ~TileSpriteManager() = default;
   void updateSameTileMap(Direction direction, bool val);
   sf::Image getImage(int frame);
+  sf::Image getOverheadImage(int frame);
   float getOffsetX();
   float getOffsetY();
 };

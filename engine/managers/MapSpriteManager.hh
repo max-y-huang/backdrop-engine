@@ -19,6 +19,7 @@ namespace Backdrop {
 class MapSpriteManager final : public Observer {
   sf::Clock animationClock;
   sf::Texture texture;
+  sf::Texture overheadTexture;
   vector<vector<vector<shared_ptr<Tile>>>> &tiles;
   void onNotify(shared_ptr<Observer::State> state);
   int animationFrame = 0;
@@ -33,6 +34,7 @@ class MapSpriteManager final : public Observer {
  public:
   MapSpriteManager(vector<vector<vector<shared_ptr<Tile>>>> &tiles);
   sf::Sprite getSprite();
+  sf::Sprite getOverheadSprite();
   void updateSprite();
 };
 

@@ -25,6 +25,7 @@ class Game final {
   shared_ptr<RefreshView> refreshView;
   shared_ptr<FrameRateView> frameRateView;
   shared_ptr<MapView> mapView;
+  shared_ptr<MapView> overheadMapView;
   shared_ptr<ObjectView> objectView;
   shared_ptr<CollisionManager> collisionManager;
   shared_ptr<Map> map;

@@ -14,10 +14,11 @@ namespace Backdrop {
 
 class MapView final : public View {
   shared_ptr<Map>& map;
+  bool overhead;
   void render(shared_ptr<Clock::State> state);
 
  public:
-  MapView(shared_ptr<sf::RenderWindow> _window, shared_ptr<Map>& map);
+  MapView(shared_ptr<sf::RenderWindow> _window, shared_ptr<Map>& map, bool overhead);
 };
 
 }  // namespace Backdrop
