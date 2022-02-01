@@ -45,8 +45,8 @@ void TileSpriteManager::updateImageByFrame(int frame) {
   int ox = frame * 96;
   int oy = 0;
   // Reset image.
-  images[frame].create(48, isWall ? 96 : 48, sf::Color(0, 0, 0, 0));
-  overheadImages[frame].create(48, isWall ? 96 : 48, sf::Color(0, 0, 0, 0));
+  images[frame].create(48, isWall ? 144 : 48, sf::Color(0, 0, 0, 0));
+  overheadImages[frame].create(48, isWall ? 144 : 48, sf::Color(0, 0, 0, 0));
   // Add corners to image.
   if (autoTileType == AutoTileType::NoAutoTile) {
     images[frame].copy(spritesheetImage, 0, 0, sf::IntRect{ox, oy, 48, 48});
@@ -68,14 +68,14 @@ void TileSpriteManager::updateImageByFrame(int frame) {
     }
     if (isWall && !sameTileMap[Direction::Down]) {
       if (!sameTileMap[Direction::Left]) {
-        images[frame].copy(spritesheetImage, 0, 48, sf::IntRect{ox, oy + 144, 24, 48});
+        images[frame].copy(spritesheetImage, 0, 48, sf::IntRect{ox, oy + 144, 24, 96});
       } else {
-        images[frame].copy(spritesheetImage, 0, 48, sf::IntRect{ox + 48, oy + 144, 24, 48});
+        images[frame].copy(spritesheetImage, 0, 48, sf::IntRect{ox + 48, oy + 144, 24, 96});
       }
       if (!sameTileMap[Direction::Right]) {
-        images[frame].copy(spritesheetImage, 24, 48, sf::IntRect{ox + 72, oy + 144, 24, 48});
+        images[frame].copy(spritesheetImage, 24, 48, sf::IntRect{ox + 72, oy + 144, 24, 96});
       } else {
-        images[frame].copy(spritesheetImage, 24, 48, sf::IntRect{ox + 24, oy + 144, 24, 48});
+        images[frame].copy(spritesheetImage, 24, 48, sf::IntRect{ox + 24, oy + 144, 24, 96});
       }
     }
   }
