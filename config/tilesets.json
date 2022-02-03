@@ -2,7 +2,7 @@
   {
     "spritesheetSrc": "assets/images/tilesets/wall.png",
     "layer": 2,
-    "autoTileType": "wall",
+    "type": "wall",
     "animated": false,
     "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }],
     "offset": {
@@ -13,7 +13,7 @@
   {
     "spritesheetSrc": "assets/images/tilesets/floor.png",
     "layer": 0,
-    "autoTileType": "none",
+    "type": "normal",
     "animated": false,
     "collisionBoxes": [],
     "offset": {
@@ -24,7 +24,7 @@
   {
     "spritesheetSrc": "assets/images/tilesets/lava.png",
     "layer": 1,
-    "autoTileType": "normal",
+    "type": "auto",
     "animated": true,
     "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }],
     "offset": {
@@ -35,7 +35,7 @@
   {
     "spritesheetSrc": "assets/images/tilesets/mold.png",
     "layer": 1,
-    "autoTileType": "normal",
+    "type": "auto",
     "animated": false,
     "collisionBoxes": [],
     "offset": {
@@ -46,7 +46,7 @@
   {
     "spritesheetSrc": "assets/images/tilesets/sign.png",
     "layer": 1,
-    "autoTileType": "none",
+    "type": "normal",
     "animated": false,
     "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }],
     "offset": {

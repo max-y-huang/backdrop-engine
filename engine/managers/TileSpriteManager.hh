@@ -23,7 +23,7 @@ class TileSpriteManager final {
   vector<sf::Image> images;
   vector<sf::Image> overheadImages;
   int index;
-  string autoTileType;
+  string type;
   bool animated;
   float offsetX;
   float offsetY;
@@ -35,7 +35,7 @@ class TileSpriteManager final {
   void updateImageByFrame(int frame);
 
  public:
-  TileSpriteManager(string spritesheetSrc, string autoTileType, bool animated, float offsetX, float offsetY);
+  TileSpriteManager(string spritesheetSrc, string type, bool animated, float offsetX, float offsetY);
   virtual ~TileSpriteManager() = default;
   void updateSameTileMap(Direction direction, bool val);
   sf::Image getImage(int frame);

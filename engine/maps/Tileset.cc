@@ -24,7 +24,7 @@ void Tileset::loadData() {
     auto params = tile.value();
     string spritesheetSrc = string(params["spritesheetSrc"]);
     int layer = int(params["layer"]);
-    string autoTileType = string(params["autoTileType"]);
+    string type = string(params["type"]);
     bool animated = bool(params["animated"]);
     vector<CollisionBox::InitializerList> collisionBoxes;
     for (auto collisionBox : params["collisionBoxes"].items()) {
@@ -33,7 +33,7 @@ void Tileset::loadData() {
     }
     float offsetX = float(params["offset"]["x"]);
     float offsetY = float(params["offset"]["y"]);
-    tileData.push_back({spritesheetSrc, layer, autoTileType, animated, collisionBoxes, offsetX, offsetY});
+    tileData.push_back({spritesheetSrc, layer, type, animated, collisionBoxes, offsetX, offsetY});
   }
 }
 
