@@ -5,7 +5,6 @@
 #include <string>
 
 #include "../../lib/nlohmann/json.hpp"
-#include "../configMaps.hh"
 #include "../enums.hh"
 
 using nlohmann::json;
@@ -25,7 +24,7 @@ void Tileset::loadData() {
     auto params = tile.value();
     string spritesheetSrc = string(params["spritesheetSrc"]);
     int layer = int(params["layer"]);
-    AutoTileType autoTileType = ConfigMap::AutoTileType::getAutoTileType(string(params["autoTileType"]));
+    string autoTileType = string(params["autoTileType"]);
     bool animated = bool(params["animated"]);
     vector<CollisionBox::InitializerList> collisionBoxes;
     for (auto collisionBox : params["collisionBoxes"].items()) {

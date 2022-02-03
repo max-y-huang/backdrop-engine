@@ -27,21 +27,21 @@ void addKeyboardControl(Game& game, shared_ptr<Character> character) {
     }
     // Handle move.
     if (state->active) {
-      if (state->action == Action::MoveUp) {
+      if (state->action == "moveUp") {
         moveUp = true;
       }
-      if (state->action == Action::MoveDown) {
+      if (state->action == "moveDown") {
         moveDown = true;
       }
-      if (state->action == Action::MoveLeft) {
+      if (state->action == "moveLeft") {
         moveLeft = true;
       }
-      if (state->action == Action::MoveRight) {
+      if (state->action == "moveRight") {
         moveRight = true;
       }
     }
     // Handle dash.
-    if (state->action == Action::Dash) {
+    if (state->action == "dash") {
       character->setDash(state->active);
     }
   });

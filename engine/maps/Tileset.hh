@@ -18,7 +18,7 @@ class Tileset final {
   struct TileData {
     string spritesheetSrc;
     int layer;
-    AutoTileType autoTileType;
+    string autoTileType;
     bool animated;
     vector<CollisionBox::InitializerList> collisionBoxes;
     float offsetX;

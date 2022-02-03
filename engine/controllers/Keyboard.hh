@@ -20,14 +20,14 @@ class Keyboard final : public Observer::Subject, public Observer {
 
  public:
   struct State final : public Observer::State {
-    Action action;
+    string action;
     bool active;
-    State(Action action, bool active) : action{action}, active{active} {};
+    State(string action, bool active) : action{action}, active{active} {};
   };
 
  private:
   map<int, bool> keysPressed;
-  map<int, Action> actionBindings;
+  map<int, string> actionBindings;
   void onNotify(shared_ptr<Observer::State> state);
   void createActionMap();
   void notifyActions();

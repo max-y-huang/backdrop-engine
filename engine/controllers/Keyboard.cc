@@ -6,7 +6,6 @@
 #include <memory>
 
 #include "../../lib/nlohmann/json.hpp"
-#include "../configMaps.hh"
 #include "../core/Observer.hh"
 #include "Clock.hh"
 
@@ -33,7 +32,7 @@ void Keyboard::createActionMap() {
   json data;
   file >> data;
   for (auto pair : data.items()) {
-    actionBindings[pair.value()] = ConfigMap::Action::getAction(pair.key());
+    actionBindings[pair.value()] = pair.key();
   }
 }
 

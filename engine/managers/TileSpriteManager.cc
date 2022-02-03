@@ -13,7 +13,7 @@ using std::string;
 
 namespace Backdrop {
 
-TileSpriteManager::TileSpriteManager(string spritesheetSrc, AutoTileType autoTileType, bool animated, float offsetX, float offsetY) : autoTileType{autoTileType}, animated{animated}, offsetX{offsetX}, offsetY{offsetY} {
+TileSpriteManager::TileSpriteManager(string spritesheetSrc, string autoTileType, bool animated, float offsetX, float offsetY) : autoTileType{autoTileType}, animated{animated}, offsetX{offsetX}, offsetY{offsetY} {
   spritesheetImage.loadFromFile(spritesheetSrc);
   setAutoTileData();
   images.resize(animated ? 3 : 1);
@@ -41,14 +41,14 @@ sf::IntRect TileSpriteManager::getAutoTileCornerImageBounds(int index, string co
 }
 
 void TileSpriteManager::updateImageByFrame(int frame) {
-  bool isWall = (autoTileType == AutoTileType::Wall);
+  bool isWall = (autoTileType == "wall");
   int ox = frame * 96;
   int oy = 0;
   // Reset image.
   images[frame].create(48, isWall ? 144 : 48, sf::Color(0, 0, 0, 0));
   overheadImages[frame].create(48, isWall ? 144 : 48, sf::Color(0, 0, 0, 0));
   // Add corners to image.
-  if (autoTileType == AutoTileType::NoAutoTile) {
+  if (autoTileType == "none") {
     images[frame].copy(spritesheetImage, 0, 0, sf::IntRect{ox, oy, 48, 48});
   } else {
     auto topLeftBounds = getAutoTileCornerImageBounds(index, "topLeft", Direction::UpLeft, ox, oy);

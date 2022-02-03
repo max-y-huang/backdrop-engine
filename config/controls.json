@@ -1,8 +1,8 @@
 {
-  "MoveUp": 22,
-  "MoveDown": 18,
-  "MoveLeft": 0,
-  "MoveRight": 3,
-  "Dash": 38,
-  "Attack": 100
+  "moveUp": 22,
+  "moveDown": 18,
+  "moveLeft": 0,
+  "moveRight": 3,
+  "dash": 38,
+  "attack": 100
 }
