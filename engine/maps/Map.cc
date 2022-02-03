@@ -63,16 +63,18 @@ void Map::updateTileSpriteManagers(int x, int y, int layer) {
 
 void Map::addTile(int index, int x, int y) {
   Tileset::TileData data = tileset.getTileData()[index];
-  auto tile = std::make_shared<Tile>(index, data);
-  int layer = data.layer;
-  if (data.collisionBoxes.size() > 0) {
-    auto object = std::make_shared<Object>(Position{float(x), float(y)}, data.collisionBoxes);
-    object->setVisible(false);
-    game.addObject(object);
+  if (x >= 0 && x <= width - 1 && y >= 0 && y <= height - 1) {
+    auto tile = std::make_shared<Tile>(index, data);
+    int layer = data.layer;
+    if (data.collisionBoxes.size() > 0) {
+      auto object = std::make_shared<Object>(Position{float(x), float(y)}, data.collisionBoxes);
+      object->setVisible(false);
+      game.addObject(object);
+    }
+    tiles[y][x][layer] = tile;
+    updateTileSpriteManagers(x, y, layer);
+    spriteManager->updateSprite();
   }
-  tiles[y][x][layer] = tile;
-  updateTileSpriteManagers(x, y, layer);
-  spriteManager->updateSprite();
 }
 
 }  // namespace Backdrop

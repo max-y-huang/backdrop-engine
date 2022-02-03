@@ -42,16 +42,5 @@
       "x": 0,
       "y": 0
     }
-  },
-  {
-    "spritesheetSrc": "assets/images/tilesets/sign.png",
-    "layer": 1,
-    "type": "normal",
-    "animated": false,
-    "collisionBoxes": [{ "x": 0, "y": 0, "width": 48, "height": 48 }],
-    "offset": {
-      "x": 0,
-      "y": 0
-    }
   }
 ]
