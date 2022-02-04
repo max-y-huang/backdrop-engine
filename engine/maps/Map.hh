@@ -4,11 +4,13 @@
 #include <memory>
 #include <vector>
 
+#include "../../lib/nlohmann/json.hpp"
 #include "../managers/MapSpriteManager.hh"
 #include "../managers/TileSpriteManager.hh"
 #include "Tile.hh"
 #include "Tileset.hh"
 
+using nlohmann::json;
 using std::shared_ptr;
 using std::vector;
 
@@ -21,16 +23,19 @@ class Map final {
   Tileset tileset;
   int width;
   int height;
+  vector<json> tileData;
   vector<vector<vector<shared_ptr<Tile>>>> tiles;
   void updateTileSpriteManagers(int x, int y, int layer);
   void updateTileSpriteManagers_helper(int layer, int x1, int y1, Direction d1, int x2, int y2, Direction d2);
 
  public:
   shared_ptr<MapSpriteManager> spriteManager;
-  Map(Game &game, Tileset tileset, int width, int height);
+  Map(Game &game, Tileset tileset, json mapData);
+  void loadTiles();
   int getWidth();
   int getHeight();
   shared_ptr<Tile> getTile(int x, int y, int layer);
+  void addTile(int index, int x, int y, bool updateImage);
   void addTile(int index, int x, int y);
 };
 

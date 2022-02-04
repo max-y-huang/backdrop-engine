@@ -91,6 +91,7 @@ void Game::drawSplashScreen() {
 
 void Game::setMap(shared_ptr<Map> _map) {
   map = _map;
+  map->loadTiles();
 }
 
 void Game::addObject(shared_ptr<Object> object) {

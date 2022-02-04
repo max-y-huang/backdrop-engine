@@ -1,5 +1,6 @@
 #include "Map.hh"
 
+#include "../../lib/nlohmann/json.hpp"
 #include "../Game.hh"
 #include "../controllers/Clock.hh"
 #include "../core/CollisionBox.hh"
@@ -11,9 +12,14 @@
 #include "Tile.hh"
 #include "Tileset.hh"
 
+using nlohmann::json;
+
 namespace Backdrop {
 
-Map::Map(Game &game, Tileset tileset, int width, int height) : game{game}, tileset{tileset}, width{width}, height{height} {
+Map::Map(Game &game, Tileset tileset, json mapData) : game{game}, tileset{tileset}, width{mapData["width"]}, height{mapData["height"]} {
+  for (auto tile : mapData["tiles"].items()) {
+    tileData.push_back(tile.value());
+  }
   spriteManager = std::make_shared<MapSpriteManager>(tiles);
   Clock::getInstance()->attach(spriteManager, 200);
   tiles.resize(height);
@@ -23,6 +29,13 @@ Map::Map(Game &game, Tileset tileset, int width, int height) : game{game}, tiles
       tiles[y][x].resize(3);
     }
   }
+}
+
+void Map::loadTiles() {
+  for (auto tile : tileData) {
+    addTile(tile["index"], tile["x"], tile["y"], false);
+  }
+  spriteManager->updateSprite();
 }
 
 int Map::getWidth() {
@@ -61,7 +74,7 @@ void Map::updateTileSpriteManagers(int x, int y, int layer) {
   updateTileSpriteManagers_helper(layer, x, y, Direction::DownRight, x + 1, y + 1, Direction::UpLeft);
 }
 
-void Map::addTile(int index, int x, int y) {
+void Map::addTile(int index, int x, int y, bool updateImage) {
   Tileset::TileData data = tileset.getTileData()[index];
   if (x >= 0 && x <= width - 1 && y >= 0 && y <= height - 1) {
     auto tile = std::make_shared<Tile>(index, data);
@@ -73,8 +86,13 @@ void Map::addTile(int index, int x, int y) {
     }
     tiles[y][x][layer] = tile;
     updateTileSpriteManagers(x, y, layer);
-    spriteManager->updateSprite();
+    if (updateImage) {
+      spriteManager->updateSprite();
+    }
   }
+}
+void Map::addTile(int index, int x, int y) {
+  addTile(index, x, y, true);
 }
 
 }  // namespace Backdrop

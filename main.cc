@@ -99,13 +99,8 @@ int main() {
   json data;
   file >> data;
 
-  auto map = std::make_shared<Map>(game, tileset, int(data["width"]), int(data["height"]));
+  auto map = std::make_shared<Map>(game, tileset, data);
   game.setMap(map);
-
-  for (auto tile : data["tiles"].items()) {
-    auto params = tile.value();
-    map->addTile(params["index"], params["x"], params["y"]);
-  }
 
   auto player = std::make_shared<Character>("jack", Position{1, 1, Direction::Down});
   addKeyboardControl(game, player);
