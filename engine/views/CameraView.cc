@@ -18,8 +18,8 @@ void CameraView::bindToObject(shared_ptr<Object> object) {
 }
 
 void CameraView::render(shared_ptr<Clock::State> state) {
-  float screenWidth = 1344;
   float screenHeight = 960;
+  float screenWidth = screenHeight * window->getSize().x / window->getSize().y;
   sf::View view(sf::FloatRect{0, 0, screenWidth, screenHeight});
   if (boundedObject) {
     float objectX = boundedObject->position.getX();
