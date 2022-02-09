@@ -19,13 +19,14 @@
 #include "views/RefreshView.hh"
 
 #define FPS 1000  // Set unreasonably high to test maximum FPS.
-#define WINDOW_WIDTH 1344
+#define WINDOW_WIDTH 1440
 #define WINDOW_HEIGHT 960
 #define WINDOW_TITLE "Game window"
 
 namespace Backdrop {
 
 Game::Game() {
+  // window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, WINDOW_TITLE, sf::Style::Fullscreen);
   window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, WINDOW_TITLE);
   setIcon();
   drawSplashScreen();

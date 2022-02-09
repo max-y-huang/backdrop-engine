@@ -45,22 +45,20 @@ int Map::getHeight() {
   return height;
 }
 shared_ptr<Tile> Map::getTile(int x, int y, int layer) {
-  if (x < 0 || x >= width) {
-    return nullptr;
-  }
-  if (y < 0 || y >= height) {
+  if (x < 0 || x >= width || y < 0 || y >= height) {
     return nullptr;
   }
   return tiles[y][x][layer];
 }
 
 void Map::updateTileSpriteManagers_helper(int layer, int x1, int y1, Direction d1, int x2, int y2, Direction d2) {
-  if (!getTile(x1, y1, layer) || !getTile(x2, y2, layer)) {
-    return;
+  if (x2 < 0 || x2 >= width || y2 < 0 || y2 >= height) {
+    getTile(x1, y1, layer)->spriteManager->updateSameTileMap(d1, true);
+  } else if (getTile(x2, y2, layer)) {
+    auto sameTile = (getTile(x1, y1, layer)->getIndex() == getTile(x2, y2, layer)->getIndex());
+    getTile(x1, y1, layer)->spriteManager->updateSameTileMap(d1, sameTile);
+    getTile(x2, y2, layer)->spriteManager->updateSameTileMap(d2, sameTile);
   }
-  auto sameTile = (getTile(x1, y1, layer)->getIndex() == getTile(x2, y2, layer)->getIndex());
-  getTile(x1, y1, layer)->spriteManager->updateSameTileMap(d1, sameTile);
-  getTile(x2, y2, layer)->spriteManager->updateSameTileMap(d2, sameTile);
 }
 
 void Map::updateTileSpriteManagers(int x, int y, int layer) {

@@ -22,9 +22,7 @@ void CameraView::render(shared_ptr<Clock::State> state) {
   float screenWidth = screenHeight * window->getSize().x / window->getSize().y;
   sf::View view(sf::FloatRect{0, 0, screenWidth, screenHeight});
   if (boundedObject) {
-    float objectX = boundedObject->position.getX();
-    float objectY = boundedObject->position.getY();
-    view.move(objectX - screenWidth / 2 + 24, objectY - screenHeight / 2 + 24);
+    view.setCenter(boundedObject->position.getX() + 24, boundedObject->position.getY() + 24);
   }
   window->setView(view);
 }
