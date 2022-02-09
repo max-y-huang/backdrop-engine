@@ -11,6 +11,7 @@
 #include "maps/Map.hh"
 #include "objects/Character.hh"
 #include "objects/Object.hh"
+#include "views/CameraView.hh"
 #include "views/EraseView.hh"
 #include "views/FrameRateView.hh"
 #include "views/MapView.hh"
@@ -32,6 +33,7 @@ Game::Game() {
   eraseView = std::make_shared<EraseView>(window);
   refreshView = std::make_shared<RefreshView>(window);
   frameRateView = std::make_shared<FrameRateView>(window);
+  cameraView = std::make_shared<CameraView>(window);
   mapView = std::make_shared<MapView>(window, map, false);
   overheadMapView = std::make_shared<MapView>(window, map, true);
   objectView = std::make_shared<ObjectView>(window, objects);
@@ -41,7 +43,8 @@ Game::Game() {
   Clock::getInstance()->attach(Keyboard::getInstance(), 200);
   Clock::getInstance()->attach(eraseView, 99);
   Clock::getInstance()->attach(refreshView, 0);
-  Clock::getInstance()->attach(frameRateView, 1);
+  Clock::getInstance()->attach(cameraView, 1);
+  Clock::getInstance()->attach(frameRateView, 2);
   Clock::getInstance()->attach(mapView, 52);
   Clock::getInstance()->attach(overheadMapView, 50);
   Clock::getInstance()->attach(objectView, 51);
@@ -112,6 +115,10 @@ void Game::removeObject(shared_ptr<Object> object) {
       --i;
     }
   }
+}
+
+void Game::bindCameraToObject(shared_ptr<Object> object) {
+  cameraView->bindToObject(object);
 }
 
 }  // namespace Backdrop

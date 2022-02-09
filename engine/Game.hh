@@ -8,6 +8,7 @@
 #include "managers/CollisionManager.hh"
 #include "maps/Map.hh"
 #include "objects/Object.hh"
+#include "views/CameraView.hh"
 #include "views/EraseView.hh"
 #include "views/FrameRateView.hh"
 #include "views/MapView.hh"
@@ -23,6 +24,7 @@ class Game final {
   shared_ptr<sf::RenderWindow> window;  // Leaks 5,475 + 56 bytes from graphics driver(?).
   shared_ptr<EraseView> eraseView;
   shared_ptr<RefreshView> refreshView;
+  shared_ptr<CameraView> cameraView;
   shared_ptr<FrameRateView> frameRateView;
   shared_ptr<MapView> mapView;
   shared_ptr<MapView> overheadMapView;
@@ -41,6 +43,7 @@ class Game final {
   void setMap(shared_ptr<Map> _map);
   void addObject(shared_ptr<Object> object);
   void removeObject(shared_ptr<Object> object);
+  void bindCameraToObject(shared_ptr<Object> object);
 };
 
 }  // namespace Backdrop

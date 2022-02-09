@@ -105,6 +105,7 @@ int main() {
   auto player = std::make_shared<Character>("jack", Position{1, 1, Direction::Down});
   addKeyboardControl(game, player);
   game.addObject(player);
+  game.bindCameraToObject(player);
 
   game.run();
 
