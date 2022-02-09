@@ -18,10 +18,11 @@ namespace Backdrop {
 
 class MapSpriteManager final : public Observer {
   sf::Clock animationClock;
-  sf::Texture texture;
-  sf::Texture overheadTexture;
+  vector<sf::Texture> textures;
+  vector<sf::Texture> overheadTextures;
   vector<vector<vector<shared_ptr<Tile>>>> &tiles;
   void onNotify(shared_ptr<Observer::State> state);
+  void updateSpriteByFrame(int frame);
   int animationFrame = 0;
   int animationSpeed = 3;
   map<int, int> animationFrameColumn{
@@ -35,7 +36,7 @@ class MapSpriteManager final : public Observer {
   MapSpriteManager(vector<vector<vector<shared_ptr<Tile>>>> &tiles);
   sf::Sprite getSprite();
   sf::Sprite getOverheadSprite();
-  void updateSprite();
+  void updateSprites();
 };
 
 }  // namespace Backdrop

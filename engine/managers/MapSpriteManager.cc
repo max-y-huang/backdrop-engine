@@ -10,7 +10,10 @@ using std::shared_ptr;
 
 namespace Backdrop {
 
-MapSpriteManager::MapSpriteManager(vector<vector<vector<shared_ptr<Tile>>>> &tiles) : tiles{tiles} {};
+MapSpriteManager::MapSpriteManager(vector<vector<vector<shared_ptr<Tile>>>> &tiles) : tiles{tiles} {
+  textures.resize(3);
+  overheadTextures.resize(3);
+};
 
 void MapSpriteManager::onNotify(shared_ptr<Observer::State> state) {
   auto clockState = std::dynamic_pointer_cast<Clock::State>(state);
@@ -18,12 +21,17 @@ void MapSpriteManager::onNotify(shared_ptr<Observer::State> state) {
     if (animationClock.getElapsedTime().asMicroseconds() >= 1000000.0 / animationSpeed) {
       animationFrame = (animationFrame + 1) % 4;
       animationClock.restart();
-      updateSprite();
     }
   }
 }
 
-void MapSpriteManager::updateSprite() {
+void MapSpriteManager::updateSprites() {
+  for (int i = 0; i < 3; ++i) {
+    updateSpriteByFrame(i);
+  }
+}
+
+void MapSpriteManager::updateSpriteByFrame(int frame) {
   int height = tiles.size();
   int width = tiles[0].size();
   // Create image.
@@ -36,7 +44,7 @@ void MapSpriteManager::updateSprite() {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
         if (tiles[y][x][layer]) {
-          int frame = animationFrameColumn[animationFrame];
+          // int frame = animationFrameColumn[animationFrame];
           sf::Image tileImage = tiles[y][x][layer]->spriteManager->getImage(frame);
           sf::Image overheadTileImage = tiles[y][x][layer]->spriteManager->getOverheadImage(frame);
           float offsetX = tiles[y][x][layer]->spriteManager->getOffsetX();
@@ -70,16 +78,16 @@ void MapSpriteManager::updateSprite() {
     }
   }
   // Set texture.
-  texture.loadFromImage(image);
-  overheadTexture.loadFromImage(overheadImage);
+  textures[frame].loadFromImage(image);
+  overheadTextures[frame].loadFromImage(overheadImage);
 }
 
 sf::Sprite MapSpriteManager::getSprite() {
-  sf::Sprite sprite{texture};
+  sf::Sprite sprite{textures[animationFrameColumn[animationFrame]]};
   return sprite;
 }
 sf::Sprite MapSpriteManager::getOverheadSprite() {
-  sf::Sprite sprite{overheadTexture};
+  sf::Sprite sprite{overheadTextures[animationFrameColumn[animationFrame]]};
   return sprite;
 }
 

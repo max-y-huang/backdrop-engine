@@ -83,7 +83,7 @@ void TileSpriteManager::updateImageByFrame(int frame) {
 
 void TileSpriteManager::updateImages() {
   if (animated) {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; ++i) {
       updateImageByFrame(i);
     }
   } else {

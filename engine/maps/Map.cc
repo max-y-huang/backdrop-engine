@@ -35,7 +35,7 @@ void Map::loadTiles() {
   for (auto tile : tileData) {
     addTile(tile["index"], tile["x"], tile["y"], false);
   }
-  spriteManager->updateSprite();
+  spriteManager->updateSprites();
 }
 
 int Map::getWidth() {
@@ -87,7 +87,7 @@ void Map::addTile(int index, int x, int y, bool updateImage) {
     tiles[y][x][layer] = tile;
     updateTileSpriteManagers(x, y, layer);
     if (updateImage) {
-      spriteManager->updateSprite();
+      spriteManager->updateSprites();
     }
   }
 }
