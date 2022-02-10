@@ -63,9 +63,9 @@ void ObjectView::renderObjects() {
 void ObjectView::render(shared_ptr<Clock::State> state) {
   renderShadows();
   renderObjects();
-  if (Debugger::getInstance()->isDebugMode()) {
-    renderCollisionBoxes();
-  }
+  // if (Debugger::getInstance()->isDebugMode()) {
+  //   renderCollisionBoxes();
+  // }
 }
 
 }  // namespace Backdrop
