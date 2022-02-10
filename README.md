@@ -1,3 +1,5 @@
+<img src="https://backdrop-engine.github.io/assets/logo.svg" alt="Backdrop logo" style="width: 160px; border-radius: 8px;" />
+
 # Backdrop
 
 Backdrop is a game-making tool designed for creating top-down action games similar to earlier entries of The Legend of Zelda series and the Ys series.
@@ -11,39 +13,20 @@ Install the following dependencies:
 * g++ (for C++14)
 * [SFML (2.5.1)](https://www.sfml-dev.org/index.php) (for graphics)
 
-In Ubuntu, this can be done with:
-
-```sh
-sudo apt-get install build-essential gdb libsfml-dev
-```
-
 ## Development
 
-Run the following command to build the project:
+To make a **development** build of the program, run the following command:
 
 ```sh
-make
+make dev
 ```
 
-This creates the executable `main.out`, which can be opened with:
+This will build the program to `./dev.exe`.
+
+To make a **production** build of the program, run the following command:
 
 ```sh
-./main.out
+make prod
 ```
 
-**Note:** WSL2 (Windows 10) doesn't have a native X11 display. To run a build on WSL2, download [Xming](http://www.straightrunning.com/XmingNotes/) and follow the steps in **Setting up X11 for WSL2 (Windows 10)** once per terminal.
-
-### X11 Setup for WSL2 (Windows 10)
-
-#### Step 1
-
-Run the following commands in WSL2:
-
-```sh
-export DISPLAY=$(ip route | awk '/^default/ {print $3}'):0.0
-sudo service ssh start
-```
-
-#### Step 2
-
-Open XLaunch with the default settings + no access control.
+This will build the program to `./game.exe`.

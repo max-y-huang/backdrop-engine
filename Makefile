@@ -4,8 +4,8 @@ SOURCES = $(wildcard *.cc */*.cc */*/*.cc)  # TODO: make better
 OBJECTS = ${SOURCES:.cc=.o}
 DEPENDS = ${OBJECTS:.o=.d}
 
-test: ${OBJECTS}
-	${CXX} ${OBJECTS} -o test.exe -L D:/sfml/lib -lsfml-graphics -lsfml-window -lsfml-system
+dev: ${OBJECTS}
+	${CXX} ${OBJECTS} -o dev.exe -L D:/sfml/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 prod:
 	${CXX} ${OBJECTS} -o game.exe -L D:/sfml/lib -mwindows -lsfml-graphics -lsfml-window -lsfml-system
