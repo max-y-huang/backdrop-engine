@@ -1,5 +1,6 @@
 #include "CameraView.hh"
 
+#include <SFML/Graphics.hpp>
 #include <memory>
 
 #include "../controllers/Clock.hh"
@@ -18,13 +19,15 @@ void CameraView::bindToObject(shared_ptr<Object> object) {
 }
 
 void CameraView::render(shared_ptr<Clock::State> state) {
-  float screenHeight = 960;
-  float screenWidth = screenHeight * window->getSize().x / window->getSize().y;
-  sf::View view(sf::FloatRect{0, 0, screenWidth, screenHeight});
   if (boundedObject) {
-    view.setCenter(boundedObject->position.getX() + 24, boundedObject->position.getY() + 24);
+    float screenHeight = 960;
+    float screenWidth = screenHeight * window->getSize().x / window->getSize().y;
+    float objectX = boundedObject->position.getX();
+    float objectY = boundedObject->position.getY();
+    sf::View view{sf::FloatRect{0, 0, screenWidth, screenHeight}};
+    view.setCenter(objectX + 24, objectY + 24);
+    window->setView(view);
   }
-  window->setView(view);
 }
 
 }  // namespace Backdrop

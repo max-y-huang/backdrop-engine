@@ -44,7 +44,7 @@ Game::Game() {
   Clock::getInstance()->attach(Keyboard::getInstance(), 200);
   Clock::getInstance()->attach(eraseView, 99);
   Clock::getInstance()->attach(refreshView, 0);
-  Clock::getInstance()->attach(cameraView, 1);
+  Clock::getInstance()->attach(cameraView, 98);
   Clock::getInstance()->attach(frameRateView, 2);
   Clock::getInstance()->attach(mapView, 52);
   Clock::getInstance()->attach(overheadMapView, 50);
