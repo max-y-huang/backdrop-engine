@@ -1,6 +1,6 @@
 <img src="https://backdrop-engine.github.io/assets/logo.svg" alt="Backdrop logo" style="width: 160px; border-radius: 8px;" />
 
-# Backdrop
+# Backdrop (Engine)
 
 Backdrop is a game-making tool designed for creating top-down action games similar to earlier entries of The Legend of Zelda series and the Ys series.
 
