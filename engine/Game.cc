@@ -2,11 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <string>
 
 #include "controllers/Clock.hh"
 #include "controllers/Keyboard.hh"
 #include "core/FrameRate.hh"
 #include "core/Observer.hh"
+#include "core/WindowConfig.hh"
 #include "managers/CollisionManager.hh"
 #include "maps/Map.hh"
 #include "objects/Character.hh"
@@ -18,19 +20,15 @@
 #include "views/ObjectView.hh"
 #include "views/RefreshView.hh"
 
-#define FPS 1000  // Set unreasonably high to test maximum FPS.
-#define WINDOW_WIDTH 1440
-#define WINDOW_HEIGHT 960
-#define WINDOW_TITLE "Game window"
+using std::string;
 
 namespace Backdrop {
 
 Game::Game() {
-  // window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, WINDOW_TITLE, sf::Style::Fullscreen);
-  window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, WINDOW_TITLE);
+  createWindow();
   setIcon();
   drawSplashScreen();
-  Clock::makeInstance(window, FPS);  // Needs to be made with arguments.
+  Clock::makeInstance(window, WindowConfig::getInstance()->getFPS());  // Needs to be made with arguments.
   eraseView = std::make_shared<EraseView>(window);
   refreshView = std::make_shared<RefreshView>(window);
   frameRateView = std::make_shared<FrameRateView>(window);
@@ -71,6 +69,15 @@ void Game::handleClose() {
   }
 }
 
+void Game::createWindow() {
+  unsigned int width = WindowConfig::getInstance()->getWidth();
+  unsigned int height = WindowConfig::getInstance()->getHeight();
+  string title = WindowConfig::getInstance()->getTitle();
+  auto mode = WindowConfig::getInstance()->getFullscreen() ? sf::Style::Fullscreen : sf::Style::Default;
+  window = std::make_shared<sf::RenderWindow>(sf::VideoMode{width, height}, title, mode);
+  window->setVerticalSyncEnabled(true);
+}
+
 void Game::setIcon() {
   sf::Image image;
   image.loadFromFile("assets/images/system/icon.png");
@@ -81,7 +88,7 @@ void Game::drawSplashScreen() {
   sf::Image logoImage;
   logoImage.loadFromFile("assets/images/system/splashScreen.png");
   sf::Image image;
-  image.create(WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color::Black);
+  image.create(WindowConfig::getInstance()->getWidth(), WindowConfig::getInstance()->getHeight(), sf::Color::Black);
   int logoX = (window->getSize().x - logoImage.getSize().x) / 2;
   int logoY = (window->getSize().y - logoImage.getSize().y) / 2;
   image.copy(logoImage, logoX, logoY);

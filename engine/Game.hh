@@ -33,6 +33,7 @@ class Game final {
   shared_ptr<Map> map;
   vector<shared_ptr<Object>> objects;
   void handleClose();
+  void createWindow();
   void setIcon();
   void drawSplashScreen();
 
