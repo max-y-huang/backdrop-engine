@@ -8,11 +8,12 @@ dev: ${OBJECTS}
 	${CXX} ${OBJECTS} -o dev.exe -L D:/sfml/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 prod:
-	${CXX} ${OBJECTS} -o game.exe -L D:/sfml/lib -mwindows -lsfml-graphics -lsfml-window -lsfml-system
+	windres icon.rc icon.o
+	${CXX} icon.o ${OBJECTS} -o game.exe -L D:/sfml/lib -mwindows -lsfml-graphics -lsfml-window -lsfml-system
 
 -include ${DEPENDS}
 
 .PHONY: clean
 
 clean:
-	rm ${OBJECTS} ${DEPENDS} game.exe test.exe
+	rm ${OBJECTS} ${DEPENDS} main.o icon.o game.exe dev.exe
