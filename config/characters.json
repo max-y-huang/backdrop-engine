@@ -9,5 +9,16 @@
         "height": 12
       }
     ]
+  },
+  "ogre": {
+    "spritesheetSrc": "assets/images/spritesheets/ogre.png",
+    "collisionBoxes": [
+      {
+        "x": 6,
+        "y": 40,
+        "width": 36,
+        "height": 12
+      }
+    ]
   }
 }

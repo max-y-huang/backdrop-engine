@@ -1,6 +1,7 @@
 #include "ObjectView.hh"
 
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <vector>
 
 #include "../controllers/Clock.hh"
@@ -48,6 +49,9 @@ void ObjectView::renderShadows() {
 }
 
 void ObjectView::renderObjects() {
+  std::sort(objects.begin(), objects.end(), [](auto a, auto b) {
+    return a->position.getY() < b->position.getY();
+  });
   for (auto object : objects) {
     if (object->isVisible()) {
       auto character = std::dynamic_pointer_cast<Character>(object);

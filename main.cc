@@ -107,6 +107,9 @@ int main() {
   game.addObject(player);
   game.bindCameraToObject(player);
 
+  auto enemy1 = std::make_shared<Character>("ogre", Position{3, 3, Direction::Left});
+  game.addObject(enemy1);
+
   game.run();
 
   return 0;
